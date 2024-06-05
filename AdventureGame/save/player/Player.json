@@ -1,0 +1,33 @@
+{
+  "Name": "Sean",
+  "CurrentHealth": 100,
+  "MaximumHealth": 100,
+  "ArmorClass": 15,
+  "AttackDamage": 15,
+  "CurrentCarryWeight": 13,
+  "MaximumCarryWeight": 25,
+  "Inventory": [
+    "Dr. Pepper",
+    "Cardboard boxes",
+    "Cardboard boxes",
+    "Cardboard boxes",
+    "Cardboard boxes",
+    "Water Bottle",
+    "GFuel Powder"
+  ],
+  "RoomIsIn": "Kitchen",
+  "EquippedArmor": "Plastic Armor",
+  "HasEquippedArmor": true,
+  "EquippedWeapon": "Stabby Thingies",
+  "HasEquippedWeapon": true,
+  "KnownRecipes": [
+    "Cardboard Armor",
+    "Stabby Thingies",
+    "Plastic Armor",
+    "GFuel"
+  ],
+  "CurrentQuest": "",
+  "AvailableQuests": [],
+  "CompletedQuests": [],
+  "FailedeQuests": []
+}

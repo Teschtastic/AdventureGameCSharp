@@ -1,0 +1,192 @@
+{
+  "Sean's bedroom": {
+    "Name": "Sean's bedroom",
+    "StartMessage": "You start in Sean's bedroom",
+    "EnterMessage": "You've entered Sean's bedroom",
+    "LeaveMessage": "You've left Sean's bedroom",
+    "InMessage": "\nYou're in Sean's bedroom",
+    "ConnRooms": {
+      "N": "",
+      "E": "Inner hallway",
+      "S": "Sean's bathroom",
+      "W": ""
+    },
+    "HasItem": true,
+    "ItemInRoom": "Desktop PC",
+    "HasNPC": true,
+    "NPCInRoom": "Claudia",
+    "HasFurniture": true,
+    "FurnitureInRoom": "Bed"
+  },
+  "Sean's bathroom": {
+    "Name": "Sean's bathroom",
+    "StartMessage": "You start in Sean's bathroom",
+    "EnterMessage": "You've entered Sean's bathroom",
+    "LeaveMessage": "You've left Sean's bathroom",
+    "InMessage": "\nYou're in Sean's bathroom",
+    "ConnRooms": {
+      "N": "Sean's bedroom",
+      "E": "",
+      "S": "",
+      "W": ""
+    },
+    "HasItem": true,
+    "ItemInRoom": "Sean's Toothbrush",
+    "HasNPC": false,
+    "NPCInRoom": "",
+    "HasFurniture": true,
+    "FurnitureInRoom": "Sink"
+  },
+  "Inner hallway": {
+    "Name": "Inner hallway",
+    "StartMessage": "You start in Inner hallway",
+    "EnterMessage": "You've entered Inner hallway",
+    "LeaveMessage": "You've left Inner hallway",
+    "InMessage": "\nYou're in Inner hallway",
+    "ConnRooms": {
+      "N": "Outer hallway",
+      "E": "Jeff's bedroom",
+      "S": "Jeff's bathroom",
+      "W": "Sean's bedroom"
+    },
+    "HasItem": false,
+    "ItemInRoom": "",
+    "HasNPC": false,
+    "NPCInRoom": "",
+    "HasFurniture": true,
+    "FurnitureInRoom": "Closet"
+  },
+  "Jeff's bathroom": {
+    "Name": "Jeff's bathroom",
+    "StartMessage": "You start in Jeff's bathroom",
+    "EnterMessage": "You've entered Jeff's bathroom",
+    "LeaveMessage": "You've left Jeff's bathroom",
+    "InMessage": "\nYou're in Jeff's bathroom",
+    "ConnRooms": {
+      "N": "Inner hallway",
+      "E": "",
+      "S": "",
+      "W": ""
+    },
+    "HasItem": true,
+    "ItemInRoom": "Jeff's Toothbrush",
+    "HasNPC": false,
+    "NPCInRoom": "",
+    "HasFurniture": true,
+    "FurnitureInRoom": "Chest"
+  },
+  "Jeff's bedroom": {
+    "Name": "Jeff's bedroom",
+    "StartMessage": "You start in Jeff's bedroom",
+    "EnterMessage": "You've entered Jeff's bedroom",
+    "LeaveMessage": "You've left Jeff's bedroom",
+    "InMessage": "\nYou're in Jeff's bedroom",
+    "ConnRooms": {
+      "N": "",
+      "E": "",
+      "S": "",
+      "W": "Inner hallway"
+    },
+    "HasItem": false,
+    "ItemInRoom": "",
+    "HasNPC": true,
+    "NPCInRoom": "Jeff",
+    "HasFurniture": true,
+    "FurnitureInRoom": "Bed"
+  },
+  "Outer hallway": {
+    "Name": "Outer hallway",
+    "StartMessage": "You start in Outer hallway",
+    "EnterMessage": "You've entered Outer hallway",
+    "LeaveMessage": "You've left Outer hallway",
+    "InMessage": "\nYou're in Outer hallway",
+    "ConnRooms": {
+      "N": "Kitchen",
+      "E": "Dining room",
+      "S": "Inner hallway",
+      "W": "Living room"
+    },
+    "HasItem": false,
+    "ItemInRoom": "",
+    "HasNPC": false,
+    "NPCInRoom": "",
+    "HasFurniture": true,
+    "FurnitureInRoom": "Trash"
+  },
+  "Dining room": {
+    "Name": "Dining room",
+    "StartMessage": "You start in Dining room",
+    "EnterMessage": "You've entered Dining room",
+    "LeaveMessage": "You've left Dining room",
+    "InMessage": "\nYou're in Dining room",
+    "ConnRooms": {
+      "N": "",
+      "E": "",
+      "S": "",
+      "W": "Outer hallway"
+    },
+    "HasItem": true,
+    "ItemInRoom": "Cardboard boxes",
+    "HasNPC": false,
+    "NPCInRoom": "",
+    "HasFurniture": true,
+    "FurnitureInRoom": "Crafting Table"
+  },
+  "Kitchen": {
+    "Name": "Kitchen",
+    "StartMessage": "You start in Kitchen",
+    "EnterMessage": "You've entered Kitchen",
+    "LeaveMessage": "You've left Kitchen",
+    "InMessage": "\nYou're in Kitchen",
+    "ConnRooms": {
+      "N": "",
+      "E": "",
+      "S": "Outer hallway",
+      "W": ""
+    },
+    "HasItem": true,
+    "ItemInRoom": "Steak Knife",
+    "HasNPC": false,
+    "NPCInRoom": "",
+    "HasFurniture": true,
+    "FurnitureInRoom": "Refrigerator"
+  },
+  "Living room": {
+    "Name": "Living room",
+    "StartMessage": "You start in Living room",
+    "EnterMessage": "You've entered Living room",
+    "LeaveMessage": "You've left Living room",
+    "InMessage": "\nYou're in Living room",
+    "ConnRooms": {
+      "N": "",
+      "E": "Outer hallway",
+      "S": "",
+      "W": "Porch"
+    },
+    "HasItem": false,
+    "ItemInRoom": "",
+    "HasNPC": false,
+    "NPCInRoom": "",
+    "HasFurniture": true,
+    "FurnitureInRoom": "Camping chair"
+  },
+  "Porch": {
+    "Name": "Porch",
+    "StartMessage": "You start in Porch",
+    "EnterMessage": "You've entered Porch",
+    "LeaveMessage": "You've left Porch",
+    "InMessage": "\nYou're in Porch",
+    "ConnRooms": {
+      "N": "",
+      "E": "Living room",
+      "S": "",
+      "W": ""
+    },
+    "HasItem": false,
+    "ItemInRoom": "",
+    "HasNPC": true,
+    "NPCInRoom": "Michaela",
+    "HasFurniture": false,
+    "FurnitureInRoom": ""
+  }
+}

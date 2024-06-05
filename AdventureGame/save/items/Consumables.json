@@ -1,0 +1,41 @@
+﻿{
+  "Dr. Pepper": {
+    "Name": "Dr. Pepper",
+    "Description": "Yummy, delicious nectar of the gods.",
+    "UseMessage": "\nYou drink your Dr. Pepper.\nYou feel powerful!",
+    "ItemWeight": 2,
+    "CanPickup": true,
+    "CanUse": true,
+    "CanCraft": false,
+    "IsArmor": false,
+    "IsWeapon": false,
+    "IsConsumable": true,
+    "StatusModifier": 5
+  },
+  "Water Bottle": {
+    "Name": "Water Bottle",
+    "Description": "Bottle full of water.",
+    "UseMessage": "\nYou drink your water.\nYou don't'feel different.",
+    "ItemWeight": 2,
+    "CanPickup": true,
+    "CanUse": true,
+    "CanCraft": true,
+    "IsArmor": false,
+    "IsWeapon": false,
+    "IsConsumable": true,
+    "StatusModifier": 0
+  },
+  "GFuel": {
+    "Name": "GFuel",
+    "Description": "Made out of raw energy.",
+    "UseMessage": "\nYou drink your GFuel.\nYou feel energy course through you!",
+    "ItemWeight": 2,
+    "CanPickup": true,
+    "CanUse": true,
+    "CanCraft": true,
+    "IsArmor": false,
+    "IsWeapon": false,
+    "IsConsumable": true,
+    "StatusModifier": 10
+  }
+}

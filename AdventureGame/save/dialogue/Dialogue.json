@@ -1,0 +1,282 @@
+﻿{
+  "Claudia": {
+    "Dialogues": [
+      {
+        "Nodes": [
+          {
+            "Options": [
+              {
+                "Text": "Hi Claudi!",
+                "DestinationNodeID": 1
+              },
+              {
+                "Text": "Goodbye Claudi!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 0,
+            "Text": "\nHi Seanie!",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          },
+          {
+            "Options": [
+              {
+                "Text": "Quest available?",
+                "DestinationNodeID": 4
+              },
+              {
+                "Text": "Trade.",
+                "DestinationNodeID": 5
+              },
+              {
+                "Text": "Take.",
+                "DestinationNodeID": 7
+              },
+              {
+                "Text": "Give.",
+                "DestinationNodeID": 8
+              },
+              {
+                "Text": "Chat.",
+                "DestinationNodeID": 6
+              },
+              {
+                "Text": "Goodbye Claudi!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 1,
+            "Text": "\nHow can I help you?",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          },
+          {
+            "Options": [
+              {
+                "Text": "Keep talking.",
+                "DestinationNodeID": 1
+              },
+              {
+                "Text": "Goodbye Claudi!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 2,
+            "Text": "\nThat's good to hear.",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          },
+          {
+            "Options": [
+              {
+                "Text": "Keep talking.",
+                "DestinationNodeID": 1
+              },
+              {
+                "Text": "Goodbye Claudi!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 3,
+            "Text": "\nI'm sorry to hear that.",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          },
+          {
+            "Options": [
+              {
+                "Text": "Keep talking.",
+                "DestinationNodeID": 1
+              },
+              {
+                "Text": "Goodbye Claudi!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 4,
+            "Text": "\nUnfortunately not.\nCheck again later.",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          },
+          {
+            "Options": [
+              {
+                "Text": "Keep talking.",
+                "DestinationNodeID": 1
+              },
+              {
+                "Text": "Goodbye Claudi!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 5,
+            "Text": "\nLet's trade.",
+            "HasMethod": true,
+            "Method": "TradeItem",
+            "Params": [ "player" ]
+          },
+          {
+            "Options": [
+              {
+                "Text": "Good.",
+                "DestinationNodeID": 2
+              },
+              {
+                "Text": "Bad.",
+                "DestinationNodeID": 3
+              }
+            ],
+            "NodeID": 6,
+            "Text": "\nHow are you?",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          },
+          {
+            "Options": [
+              {
+                "Text": "Keep talking.",
+                "DestinationNodeID": 1
+              },
+              {
+                "Text": "Goodbye Claudi!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 7,
+            "Text": "\nWhat would you like?",
+            "HasMethod": true,
+            "Method": "TakeItem",
+            "Params": [ "player" ]
+          },
+          {
+            "Options": [
+              {
+                "Text": "Keep talking.",
+                "DestinationNodeID": 1
+              },
+              {
+                "Text": "Goodbye Claudi!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 8,
+            "Text": "\nWhat are you giving me?",
+            "HasMethod": true,
+            "Method": "GiveItem",
+            "Params": [ "player" ]
+          },
+          {
+            "Options": [],
+            "NodeID": -1,
+            "Text": "\nGoodbye Seanie!",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          }
+        ]
+      }
+    ],
+    "Name": "Claudia dialogue"
+  },
+  "Jeff": {
+    "Dialogues": [
+      {
+        "Nodes": [
+          {
+            "Options": [
+              {
+                "Text": "Hey Gennick!",
+                "DestinationNodeID": 1
+              },
+              {
+                "Text": "Goodbye Gennick!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 0,
+            "Text": "\nHey Tesch!\n",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          },
+          {
+            "Options": [
+              {
+                "Text": "Goodbye Gennick!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 1,
+            "Text": "\nTalk to you later.\n",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          },
+          {
+            "Options": [],
+            "NodeID": -1,
+            "Text": "\nGoodbye Tesch!",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          }
+        ]
+      }
+    ],
+    "Name": "Jeff dialogue"
+  },
+  "Michaela": {
+    "Dialogues": [
+      {
+        "Nodes": [
+          {
+            "Options": [
+              {
+                "Text": "My man!",
+                "DestinationNodeID": 1
+              },
+              {
+                "Text": "Goodbye Michaela!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 0,
+            "Text": "\nHey Tesch!\n",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          },
+          {
+            "Options": [
+              {
+                "Text": "Goodbye Michaela!",
+                "DestinationNodeID": -1
+              }
+            ],
+            "NodeID": 1,
+            "Text": "\nMy man!\n",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          },
+          {
+            "Options": [],
+            "NodeID": -1,
+            "Text": "\nGoodbye Tesch!",
+            "HasMethod": false,
+            "Method": "",
+            "Params": []
+          }
+        ]
+      }
+    ],
+    "Name": "Michaela dialogue"
+  }
+}

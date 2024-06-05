@@ -1,0 +1,47 @@
+{
+  "Chest in Sean's bathroom": {
+    "InventoryNames": [],
+    "FirstOpen": true,
+    "Lut": "",
+    "Name": "Chest",
+    "Description": "A run-of-the-mill chest.",
+    "UseMessage": "\nYou open the chest to see what's inside.",
+    "CanUse": true
+  },
+  "Chest in Jeff's bathroom": {
+    "InventoryNames": [],
+    "FirstOpen": true,
+    "Lut": "",
+    "Name": "Chest",
+    "Description": "A run-of-the-mill chest.",
+    "UseMessage": "\nYou open the chest to see what's inside.",
+    "CanUse": true
+  },
+  "Refrigerator in Kitchen": {
+    "InventoryNames": [],
+    "FirstOpen": false,
+    "Lut": "basic fridge",
+    "Name": "Refrigerator",
+    "Description": "Used to keep things cold.",
+    "UseMessage": "\nYou check for something cold inside.",
+    "CanUse": true
+  },
+  "Trash in Outer hallway": {
+    "InventoryNames": [],
+    "FirstOpen": false,
+    "Lut": "basic trash",
+    "Name": "Trash",
+    "Description": "Used to throw things away.",
+    "UseMessage": "\nYou dig in the trash.",
+    "CanUse": true
+  },
+  "Closet in Inner hallway": {
+    "InventoryNames": [],
+    "FirstOpen": false,
+    "Lut": "basic closet",
+    "Name": "Closet",
+    "Description": "Used to store clothes.",
+    "UseMessage": "\nYou open the closet.",
+    "CanUse": true
+  }
+}

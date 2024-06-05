@@ -1,0 +1,32 @@
+﻿{
+  "Camping chair in Living room": {
+    "Name": "Camping chair",
+    "Description": "The only furniture in the living room",
+    "UseMessage": "\nThe chair's magical properties seem\nto have healed you to full health",
+    "CanUse": true
+  },
+  "Crafting Table in Dining room": {
+    "Name": "Crafting Table",
+    "Description": "Used to craft things.\nPresumably.",
+    "UseMessage": "\nYou attempt to craft an item.",
+    "CanUse": true
+  },
+  "Bed in Sean's bedroom'": {
+    "Name": "Bed",
+    "Description": "Used for sleeping and other things.",
+    "UseMessage": "\nYou lay in the bed.",
+    "CanUse": true
+  },
+  "Bed in Jeff's bedroom": {
+    "Name": "Bed",
+    "Description": "Used for sleeping and other things.",
+    "UseMessage": "\nYou lay in the bed.",
+    "CanUse": true
+  },
+  "Sink in Sean's bathroom": {
+    "Name": "Sink",
+    "Description": "Water comes from here.",
+    "UseMessage": "\nYou use the sink.",
+    "CanUse": true
+  }
+}

@@ -1,0 +1,28 @@
+﻿{
+  "Cardboard Armor": {
+    "Name": "Cardboard Armor",
+    "Description": "Protects from pointy sharp things.",
+    "UseMessage": "\nYou put on the cardboard armor.\nYou feel more protected.",
+    "ItemWeight": 2,
+    "CanPickup": true,
+    "CanUse": false,
+    "CanCraft": true,
+    "IsArmor": true,
+    "IsWeapon": false,
+    "IsConsumable": false,
+    "ArmorClass": 10
+  },
+  "Plastic Armor": {
+    "Name": "Plastic Armor",
+    "Description": "Protects from slicy sharp things.",
+    "UseMessage": "\nYou put on the plastic armor.\nYou feel more protected.",
+    "ItemWeight": 4,
+    "CanPickup": true,
+    "CanUse": false,
+    "CanCraft": true,
+    "IsArmor": true,
+    "IsWeapon": false,
+    "IsConsumable": false,
+    "ArmorClass": 15
+  }
+}

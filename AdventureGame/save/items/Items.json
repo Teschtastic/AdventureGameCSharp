@@ -1,0 +1,74 @@
+﻿{
+  "Cardboard boxes": {
+    "Name": "Cardboard boxes",
+    "Description": "What can I say?\nI like ordering from Amazon",
+    "UseMessage": "\nYou fashion the boxes into\na makeshift set of armor.",
+    "ItemWeight": 2,
+    "CanPickup": true,
+    "CanUse": false,
+    "CanCraft": false,
+    "IsArmor": false,
+    "IsWeapon": false,
+    "IsConsumable": false
+  },
+  "Desktop PC": {
+    "Name": "Desktop PC",
+    "Description": "My AMD beast",
+    "UseMessage": "\nYou use the PC to play some games.",
+    "ItemWeight": 50,
+    "CanPickup": false,
+    "CanUse": true,
+    "CanCraft": false,
+    "IsArmor": false,
+    "IsWeapon": false,
+    "IsConsumable": false
+  },
+  "Sean's Toothbrush": {
+    "Name": "Sean's Toothbrush",
+    "Description": "This might be useful.",
+    "UseMessage": "\nYou take the two toothbrushes.",
+    "ItemWeight": 1,
+    "CanPickup": true,
+    "CanUse": false,
+    "CanCraft": false,
+    "IsArmor": false,
+    "IsWeapon": false,
+    "IsConsumable": false
+  },
+  "Jeff's Toothbrush": {
+    "Name": "Jeff's Toothbrush",
+    "Description": "Is this useful?",
+    "UseMessage": "And craft them into some stabbies.",
+    "ItemWeight": 1,
+    "CanPickup": true,
+    "CanUse": false,
+    "CanCraft": false,
+    "IsArmor": false,
+    "IsWeapon": false,
+    "IsConsumable": false
+  },
+  "Empty Bottle": {
+    "Name": "Empty Bottle",
+    "Description": "An empty plastic bottle.",
+    "UseMessage": "\nYou used the empty bottle.",
+    "ItemWeight": 1,
+    "CanPickup": true,
+    "CanUse": false,
+    "CanCraft": false,
+    "IsArmor": false,
+    "IsWeapon": false,
+    "IsConsumable": false
+  },
+  "GFuel Powder": {
+    "Name": "GFuel Powder",
+    "Description": "A dust coursing with energy.",
+    "UseMessage": "\nYou used the empty bottle.",
+    "ItemWeight": 1,
+    "CanPickup": true,
+    "CanUse": false,
+    "CanCraft": false,
+    "IsArmor": false,
+    "IsWeapon": false,
+    "IsConsumable": false
+  }
+}

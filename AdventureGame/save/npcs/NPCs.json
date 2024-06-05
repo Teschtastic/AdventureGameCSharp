@@ -1,0 +1,35 @@
+{
+  "Claudia": {
+    "Name": "Claudia",
+    "Dialogue": "Claudia dialogue",
+    "CurrentHealth": 100,
+    "MaximumHealth": 100,
+    "ArmorClass": 0,
+    "AttackDamage": 5,
+    "IsFriendly": true,
+    "EquippedArmor": "Clothes",
+    "HasEquippedArmor": false,
+    "EquippedWeapon": "Fists",
+    "HasEquippedWeapon": false,
+    "Inventory": [
+      "Dr. Pepper",
+      "Dr. Pepper"
+    ]
+  },
+  "Michaela": {
+    "Name": "Michaela",
+    "Dialogue": "Michaela dialogue",
+    "CurrentHealth": 100,
+    "MaximumHealth": 100,
+    "ArmorClass": 0,
+    "AttackDamage": 5,
+    "IsFriendly": true,
+    "EquippedArmor": "Clothes",
+    "HasEquippedArmor": false,
+    "EquippedWeapon": "Fists",
+    "HasEquippedWeapon": false,
+    "Inventory": [
+      "Cardboard Armor"
+    ]
+  }
+}

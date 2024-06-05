@@ -1,0 +1,33 @@
+﻿{
+  "Cardboard Armor": {
+    "InputItems": [
+      "Cardboard boxes",
+      "Cardboard boxes"
+    ],
+    "OutputItem": "Cardboard Armor"
+  },
+  "Stabby Thingies": {
+    "InputItems": [
+      "Sean's Toothbrush",
+      "Jeff's Toothbrush"
+    ],
+    "OutputItem": "Stabby Thingies"
+  },
+  "Plastic Armor": {
+    "InputItems": [
+      "Empty Bottle",
+      "Empty Bottle",
+      "Empty Bottle",
+      "Empty Bottle",
+      "Empty Bottle"
+    ],
+    "OutputItem": "Plastic Armor"
+  },
+  "GFuel": {
+    "InputItems": [
+      "Water Bottle",
+      "GFuel Powder"
+    ],
+    "OutputItem": "GFuel"
+  }
+}

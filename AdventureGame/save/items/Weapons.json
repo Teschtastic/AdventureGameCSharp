@@ -1,0 +1,28 @@
+﻿{
+  "Stabby Thingies": {
+    "Name": "Stabby Thingies",
+    "Description": "Pointy and sharp.",
+    "UseMessage": "\nOne pointy 'brush' for each hand",
+    "ItemWeight": 1,
+    "CanPickup": true,
+    "CanUse": false,
+    "CanCraft": true,
+    "IsArmor": false,
+    "IsWeapon": true,
+    "IsConsumable": false,
+    "AttackDamage": 10
+  },
+  "Steak Knife": {
+    "Name": "Steak Knife",
+    "Description": "Sharp for cutting meat.",
+    "UseMessage": "\nSlicey slice.",
+    "ItemWeight": 2,
+    "CanPickup": true,
+    "CanUse": false,
+    "CanCraft": false,
+    "IsArmor": false,
+    "IsWeapon": true,
+    "IsConsumable": false,
+    "AttackDamage": 15
+  }
+}
