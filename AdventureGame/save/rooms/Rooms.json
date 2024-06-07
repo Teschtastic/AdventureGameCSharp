@@ -144,8 +144,8 @@
       "S": "Outer hallway",
       "W": ""
     },
-    "HasItem": true,
-    "ItemInRoom": "Steak Knife",
+    "HasItem": false,
+    "ItemInRoom": "",
     "HasNPC": false,
     "NPCInRoom": "",
     "HasFurniture": true,
