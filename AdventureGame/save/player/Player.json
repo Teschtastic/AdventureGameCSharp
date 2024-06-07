@@ -3,8 +3,8 @@
   "CurrentHealth": 100,
   "MaximumHealth": 100,
   "ArmorClass": 15,
-  "AttackDamage": 15,
-  "CurrentCarryWeight": 13,
+  "AttackDamage": 20,
+  "CurrentCarryWeight": 14,
   "MaximumCarryWeight": 25,
   "Inventory": [
     "Dr. Pepper",
@@ -13,12 +13,13 @@
     "Cardboard boxes",
     "Cardboard boxes",
     "Water Bottle",
-    "GFuel Powder"
+    "GFuel Powder",
+    "Stabby Thingies"
   ],
   "RoomIsIn": "Kitchen",
   "EquippedArmor": "Plastic Armor",
   "HasEquippedArmor": true,
-  "EquippedWeapon": "Stabby Thingies",
+  "EquippedWeapon": "Steak Knife",
   "HasEquippedWeapon": true,
   "KnownRecipes": [
     "Cardboard Armor",

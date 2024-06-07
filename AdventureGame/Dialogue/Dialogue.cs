@@ -7,46 +7,46 @@
 
         public partial class DialogueList
         {
-            [JsonProperty("Dialogues", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonProperty(nameof(Dialogues), NullValueHandling = NullValueHandling.Ignore)]
             public List<DialogueElement> Dialogues { get; set; }
 
-            [JsonProperty("Name", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonProperty(nameof(Name), NullValueHandling = NullValueHandling.Ignore)]
             public string Name { get; set; }
         }
 
         public partial class DialogueElement
         {
-            [JsonProperty("Nodes", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonProperty(nameof(Nodes), NullValueHandling = NullValueHandling.Ignore)]
             public List<Node> Nodes { get; set; }
         }
 
         public partial class Node
         {
-            [JsonProperty("Options", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonProperty(nameof(Options), NullValueHandling = NullValueHandling.Ignore)]
             public List<Option> Options { get; set; }
 
-            [JsonProperty("NodeID", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonProperty(nameof(NodeId), NullValueHandling = NullValueHandling.Ignore)]
             public int NodeId { get; set; }
 
-            [JsonProperty("Text", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonProperty(nameof(Text), NullValueHandling = NullValueHandling.Ignore)]
             public string Text { get; set; }
 
-            [JsonProperty("HasMethod", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonProperty(nameof(HasMethod), NullValueHandling = NullValueHandling.Ignore)]
             public bool HasMethod { get; set; }
 
-            [JsonProperty("Method")]
+            [JsonProperty(nameof(Method))]
             public string Method { get; set; }
 
-            [JsonProperty("Params")]
+            [JsonProperty(nameof(Params))]
             public List<string> Params { get; set; }
         }
 
         public partial class Option
         {
-            [JsonProperty("Text", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonProperty(nameof(Text), NullValueHandling = NullValueHandling.Ignore)]
             public string Text { get; set; }
 
-            [JsonProperty("DestinationNodeID", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonProperty(nameof(DestinationNodeId), NullValueHandling = NullValueHandling.Ignore)]
             public int DestinationNodeId { get; set; }
         }
 
@@ -67,9 +67,9 @@
                 MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
                 DateParseHandling = DateParseHandling.None,
                 Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
-            },
+                {
+                    new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
+                },
             };
         }
 }
