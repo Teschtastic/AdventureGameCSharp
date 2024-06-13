@@ -4,12 +4,14 @@
     {
         // Different NPC maps
         private readonly Dictionary<string, NPC> npcs = new NPCs().npcMap;
+        private readonly Dictionary<string, NPC> enemies = new NPCs().enemyMap;
 
         public Dictionary<string, NPC> allNPCs = new();
 
         public AllNPCs()
         {
             npcs.ToList().ForEach(x => allNPCs.Add(x.Key, x.Value));
+            enemies.ToList().ForEach(x => allNPCs.Add(x.Key, x.Value));
         }
 
         public NPC GetNPC(string npcName)

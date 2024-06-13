@@ -2,7 +2,7 @@
 {
     public class NPC
     {
-        public NPC(string n, string d, int cH, int mH, int aC, int aD, bool isF, string eA, bool hEA, string eW, bool hEW, List<string> inv)
+        public NPC(string n, string d, int cH, int mH, int aC, int aD, bool isF, bool isA, string eA, bool hEA, string eW, bool hEW, List<string> inv)
         {
             Name                = n;
             Dialogue            = d;
@@ -11,6 +11,7 @@
             ArmorClass          = aC;
             AttackDamage        = aD;
             IsFriendly          = isF;
+            IsAlive             = isA;
             EquippedArmor       = eA;
             HasEquippedArmor    = hEA;
             EquippedWeapon      = eW;
@@ -25,6 +26,7 @@
         public int          ArmorClass          { get; set; }
         public int          AttackDamage        { get; set; }
         public bool         IsFriendly          { get; set; }
+        public bool         IsAlive             { get; set; }
         public string       EquippedArmor       { get; set; }
         public bool         HasEquippedArmor    { get; set; }
         public string       EquippedWeapon      { get; set; }

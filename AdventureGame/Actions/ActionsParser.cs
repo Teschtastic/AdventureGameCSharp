@@ -1,4 +1,8 @@
-﻿namespace AdventureGame.Actions
+﻿using AdventureGame.Globals;
+using AdventureGame.NPCs;
+using AdventureGame.Rooms;
+
+namespace AdventureGame.Actions
 {
     public class ActionsParser
     {
@@ -45,6 +49,14 @@
                     case 4:
                         string move = playerAction != null ? playerAction.ToUpper() : "";
                         RoomActions.Move(player, move);             // Moves into a new room
+
+                        Room room = AllObjects.allRooms.GetRoom(player.RoomIsIn);
+                        NPC npc = AllObjects.allNPCs.GetNPC(room.NPCInRoom);
+
+                        if (NPCActions.IsAliveNPCInRoom(room, npc) && NPCActions.IsNPCAnEnemy(npc))
+                        {
+                            NPCActions.BattleNPC(player, room, npc);
+                        }
                         break;
 
                     case 5:

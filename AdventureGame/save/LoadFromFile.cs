@@ -322,6 +322,7 @@ namespace AdventureGame.save
                             npc.Value.ArmorClass,
                             npc.Value.AttackDamage,
                             npc.Value.IsFriendly,
+                            npc.Value.IsAlive,
                             npc.Value.EquippedArmor,
                             npc.Value.HasEquippedArmor,
                             npc.Value.EquippedWeapon,
@@ -333,6 +334,41 @@ namespace AdventureGame.save
             else
             {
                 Console.WriteLine("An error occurred loading the npcs from file.");
+            }
+        }
+
+        internal static void LoadEnemiesFromFile(Dictionary<string, NPC> enemies)
+        {
+            string enemyFilePathJSON = projectDirectory + "/save/npcs/Enemies.json";
+
+            string nenemyFile = File.ReadAllText(enemyFilePathJSON);
+            var enemyJSONObject = JsonConvert.DeserializeObject<Dictionary<string, NPC>>(nenemyFile);
+
+            if (enemyJSONObject != null)
+            {
+                foreach (var enemy in enemyJSONObject)
+                {
+                    enemies.Add(enemy.Key,
+                        new(
+                            enemy.Value.Name,
+                            enemy.Value.Dialogue,
+                            enemy.Value.CurrentHealth,
+                            enemy.Value.MaximumHealth,
+                            enemy.Value.ArmorClass,
+                            enemy.Value.AttackDamage,
+                            enemy.Value.IsFriendly,
+                            enemy.Value.IsAlive,
+                            enemy.Value.EquippedArmor,
+                            enemy.Value.HasEquippedArmor,
+                            enemy.Value.EquippedWeapon,
+                            enemy.Value.HasEquippedWeapon,
+                            enemy.Value.Inventory
+                            ));
+                }
+            }
+            else
+            {
+                Console.WriteLine("An error occurred loading the enemies from file.");
             }
         }
 

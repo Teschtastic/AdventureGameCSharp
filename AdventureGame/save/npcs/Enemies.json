@@ -7,6 +7,7 @@
     "ArmorClass": 10,
     "AttackDamage": 15,
     "IsFriendly": false,
+    "IsAlive":  true,
     "EquippedArmor": "Cardboard Armor",
     "HasEquippedArmor": true,
     "EquippedWeapon": "Stabby Thingies",

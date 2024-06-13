@@ -50,6 +50,11 @@
             Console.Write("\n**************************************\nType your container choice:\n> ");
         }
 
+        public static void BattleChoice()
+        {
+            Console.Write("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\nType your battle choice:\n> ");
+        }
+
         /* Various messages that will print to the user based oin their choices */
         public static void WelcomeMessage()
         {
@@ -85,6 +90,14 @@
             Console.WriteLine("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
                                 "*    You have saved your progress    *\n" +
                                 "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        }
+
+        public static void BattleMessage()
+        {
+
+            Console.WriteLine("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n" +
+                                ">        Battle has initiated        <\n" +
+                                "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         }
 
         /* Method used to display user input error */
