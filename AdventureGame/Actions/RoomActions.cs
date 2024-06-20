@@ -1,5 +1,6 @@
-﻿using AdventureGame.Globals;
+﻿using AdventureGame.Game;
 using AdventureGame.Items;
+using AdventureGame.NPCs;
 using AdventureGame.Rooms;
 
 namespace AdventureGame.Actions
@@ -7,40 +8,66 @@ namespace AdventureGame.Actions
     public class RoomActions
     {
         /* Method to display which room you're in */
-        public static void PrintLocation(Player.Player player)
+        public static void PrintLocation(GameObject game)
         {
-            Room room = AllObjects.allRooms.GetRoom(player.RoomIsIn);
+            Room room = game.GetRoomPlayerIsIn();
             Console.WriteLine(room.InMessage);
             Console.WriteLine(room.GetMoves());
         }
 
         /* Method used to change rooms */
-        public static void Move(Player.Player player, string move)
+        public static void Move(GameObject game)
         {
-            Room currentRoom = AllObjects.allRooms.GetRoom(player.RoomIsIn);
+            string move = game.GetPlayerMove();
+
+            Room currentRoom = game.GetRoomPlayerIsIn();
             Room newRoom;
 
-            foreach (var room in currentRoom.ConnRooms)
+            var room = currentRoom.ConnRooms.Single(x => x.Value != "" && x.Key.Equals(move));
+            newRoom = game.GetRoom(room.Value);
+            Console.WriteLine("\nYou went " + room.Key + "\n");
+            Console.WriteLine(currentRoom.LeaveMessage);
+            Console.WriteLine(newRoom.EnterMessage);
+            game.SetRoomPlayerIsIn(newRoom.Name);
+
+            //Room room = AllObjects.allRooms.GetRoom(game.GamePlayer.RoomIsIn);
+            NPC npc = game.GetNPCInRoom();
+
+            if (newRoom.IsAliveNPCInRoom(npc) && npc.IsNPCAnEnemy())
             {
-                if (room.Value != "" && room.Key.Equals(move))
-                {
-                    newRoom = AllObjects.allRooms.GetRoom(room.Value);
-                    Console.WriteLine("\nYou went " + room.Key + "\n");
-                    Console.WriteLine(currentRoom.LeaveMessage);
-                    Console.WriteLine(newRoom.EnterMessage);
-                    player.RoomIsIn = newRoom.Name;
-                    return;
-                }
+                NPCActions.BattleNPC(game);
             }
+            return;
+
+            //foreach (var room in currentRoom.ConnRooms)
+            //{
+            //    if (room.Value != "" && room.Key.Equals(move))
+            //    {
+            //        newRoom = AllObjects.allRooms.GetRoom(room.Value);
+            //        Console.WriteLine("\nYou went " + room.Key + "\n");
+            //        Console.WriteLine(currentRoom.LeaveMessage);
+            //        Console.WriteLine(newRoom.EnterMessage);
+            //        game.GamePlayer.RoomIsIn = newRoom.Name;
+
+            //        //Room room = AllObjects.allRooms.GetRoom(game.GamePlayer.RoomIsIn);
+            //        NPC npc = AllObjects.allNPCs.GetNPC(newRoom.NPCInRoom);
+
+            //        if (newRoom.IsAliveNPCInRoom(npc) && npc.IsNPCAnEnemy())
+            //        {
+            //            NPCActions.BattleNPC(game.GamePlayer, newRoom, npc);
+            //        }
+            //        return;
+            //    }
+            //}
 
             // If you can't move, tells you so
             Console.WriteLine("\nCouldn't move that way.");
         }
 
         /* Method used to look in the room you're in */
-        public static void LookAround(Player.Player player)
+        public static void LookAround(GameObject game)
         {
-            Room room = AllObjects.allRooms.GetRoom(player.RoomIsIn);
+            Room room = game.GetRoomPlayerIsIn();
             Console.WriteLine(room.InMessage);
 
             if (!room.HasItem)
@@ -71,17 +98,17 @@ namespace AdventureGame.Actions
             }
         }
 
-        public static void UseItemInRoom(Player.Player player)
+        public static void UseItemInRoom(GameObject game)
         {
-            Room room = AllObjects.allRooms.GetRoom(player.RoomIsIn);
-            Item item = AllObjects.allItems.GetItem(room.ItemInRoom);
+            Room room = game.GetRoomPlayerIsIn();
+            Item item = game.GetItemInRoom();
 
             if (room.HasItem)
             {
                 if (item.CanUse)
                 {
                     Console.WriteLine(item.UseMessage);
-                    UsedItemOnPlayer.UseItem(player, item);
+                    UsedItemOnPlayer.UseItem(game, item);
                 }
                 else
                 {

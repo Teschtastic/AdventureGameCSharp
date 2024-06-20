@@ -1,5 +1,4 @@
-﻿using AdventureGame.Globals;
-using AdventureGame.Items;
+﻿using AdventureGame.Items;
 
 namespace AdventureGame.Furnitures
 {
@@ -24,11 +23,7 @@ namespace AdventureGame.Furnitures
 
         public void AddToInventory(string itemName)
         {
-            var item = AllObjects.allItems.GetItem(itemName);
-            if (item != null)
-            {
-                AddToInventory(item);
-            }
+            InventoryNames.Add(itemName);
         }
 
         public void AddToInventory(List<Item> items)
@@ -54,11 +49,7 @@ namespace AdventureGame.Furnitures
 
         public void RemoveFromInventory(string itemName)
         {
-            var item = AllObjects.allItems.GetItem(itemName);
-            if (item != null)
-            {
-                RemoveFromInventory(item);
-            }
+            InventoryNames.Remove(itemName);
         }
 
 

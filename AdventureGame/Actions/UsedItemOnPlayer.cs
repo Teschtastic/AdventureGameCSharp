@@ -1,10 +1,12 @@
-﻿using AdventureGame.Items;
+﻿using AdventureGame.Game;
+using AdventureGame.Items;
+using AdventureGame.Player;
 
 namespace AdventureGame.Actions
 {
     internal class UsedItemOnPlayer
     {
-        public static void UseItem(Player.Player player, Item item)
+        public static void UseItem(GameObject game, Item item)
         {
             switch (item.Name)
             {
@@ -13,11 +15,11 @@ namespace AdventureGame.Actions
                 case "GFuel":
 
                 case "Dr. Pepper":
-                    UsedConsumable(player, (Consumable)item);
+                    UsedConsumable(game, (Consumable)item);
                     break;
 
                 case "Desktop PC":
-                    UsedPC(player, item);
+                    UsedPC(game, item);
                     break;
 
                 default:
@@ -26,16 +28,18 @@ namespace AdventureGame.Actions
             }
         }
 
-        private static void UsedConsumable(Player.Player player, Consumable item)
+        private static void UsedConsumable(GameObject game, Consumable item)
         {
+            Player.Player player = game.GetPlayer();
             Console.WriteLine("\nYour carry weight increased by " + item.StatusModifier + ".");
             player.MaximumCarryWeight += item.StatusModifier;
             player.RemoveFromInventory(item);
-            player.AddToInventory("Empty Bottle");
+            player.AddToInventory(game.GetItem("Empty Bottle"));
         }
 
-        private static void UsedPC(Player.Player player, Item item)
+        private static void UsedPC(GameObject game, Item item)
         {
+            Player.Player player = game.GetPlayer();
             Console.WriteLine(
                     "\nYou look up fighting techniques\non the internet." +
                     "\nYour attack damage goes up by 10.");

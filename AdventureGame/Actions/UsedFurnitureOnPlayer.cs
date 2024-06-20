@@ -1,6 +1,6 @@
 ﻿using AdventureGame.Crafting;
 using AdventureGame.Furnitures;
-using AdventureGame.Globals;
+using AdventureGame.Game;
 using AdventureGame.Items;
 using AdventureGame.NPCs;
 using AdventureGame.Rooms;
@@ -10,27 +10,27 @@ namespace AdventureGame.Actions
     internal class UsedFurnitureOnPlayer
     {
         // Use furniture method with a switch case for the different furnitures with uses
-        public static void UseFurniture(Player.Player player)
+        public static void UseFurniture(GameObject game)
         {
-            Room room = AllObjects.allRooms.GetRoom(player.RoomIsIn);
+            Room room = game.GetRoom(game.GetPlayer().RoomIsIn);
             string furniture = room.FurnitureInRoom;
 
             switch (furniture)
             {
                 case "Camping chair":
-                    UsedCampingChair(player);
+                    UsedCampingChair(game.GetPlayer());
                     break;
 
                 case "Bed":
-                    UsedBed(player);
+                    UsedBed(game, room);
                     break;
 
                 case "Crafting Table":
-                    UseCraftingTable(player);
+                    UseCraftingTable(game);
                     break;
 
                 case "Sink":
-                    UseSink(player);
+                    UseSink(game);
                     break;
 
                 case "Chest":
@@ -40,7 +40,7 @@ namespace AdventureGame.Actions
                 case "Closet":
 
                 case "Refrigerator":
-                    UseContainer(player, furniture + " in " + room.Name);
+                    UseContainer(game);
                     break;
 
                 default:
@@ -58,14 +58,14 @@ namespace AdventureGame.Actions
         }
 
         // Method for using Sean's bed
-        private static void UsedBed(Player.Player player)
+        private static void UsedBed(GameObject game, Room room)
         {
+            Player.Player player = game.GetPlayer();
             NPC npc;
-            Room room = AllObjects.allRooms.GetRoom(player.RoomIsIn);
 
             if (room.HasNPC)
             {
-                npc = AllObjects.allNPCs.GetNPC(room.NPCInRoom);
+                npc = game.GetNPC(room.NPCInRoom);
 
                 if (npc.IsFriendly == true)
                 {
@@ -98,11 +98,12 @@ namespace AdventureGame.Actions
         }
 
         // Method for using the crafting table
-        private static void UseCraftingTable(Player.Player player)
+        private static void UseCraftingTable(GameObject game)
         {
-            string craftedItem;
+            Item craftedItem;
+            Player.Player player = game.GetPlayer();
             List<string> inventory = player.Inventory;
-            List<Recipe> recipes = AllObjects.allRecipes.GetRecipes(player.KnownRecipes);
+            List<Recipe> recipes = game.GetRecipes(player.KnownRecipes);
 
             // Checks if the player has an empty inventory and has recipes to craft
             if (inventory.Count > 0 && recipes.Count > 0)
@@ -130,17 +131,17 @@ namespace AdventureGame.Actions
                     {
                         // Checks if the players inventory contains the necessary items
                         // to craft the chosen recipe, then crafts
-                        Recipe? recipe = AllObjects.allRecipes.GetRecipe(recipes[int.Parse(craftChoice) - 1].OutputItem);
+                        Recipe? recipe = game.GetRecipe(recipes[int.Parse(craftChoice) - 1].OutputItem);
 
                         if (recipe != null)
                         {
                             if (recipe.CanCraft(inventory))
                             {
 
-                                List<string> craftingItems = recipe.InputItems;
-                                craftedItem = recipe.OutputItem;
+                                List<Item> craftingItems = game.GetItems(recipe.InputItems);
+                                craftedItem = game.GetItem(recipe.OutputItem);
 
-                                foreach (Item it in AllObjects.allItems.GetItems(craftingItems))
+                                foreach (Item it in craftingItems)
                                 {
                                     Console.WriteLine(it.UseMessage);
                                 }
@@ -162,15 +163,17 @@ namespace AdventureGame.Actions
             }
         }
 
-        private static void UseSink(Player.Player player)
+        private static void UseSink(GameObject game)
         {
+            Player.Player player = game.GetPlayer();
             var inv = player.Inventory;
 
             if (inv.Contains("Empty Bottle"))
             {
+                Item item = game.GetItem("Empty Bottle");
                 Console.WriteLine("\nYou fill up a bottle with water.");
-                player.RemoveFromInventory("Empty Bottle");
-                player.AddToInventory("Water Bottle");
+                player.RemoveFromInventory(item);
+                player.AddToInventory(item);
             }
             else
             {
@@ -179,13 +182,14 @@ namespace AdventureGame.Actions
         }
 
         // Method for using a container
-        private static void UseContainer(Player.Player player, string furniture)
+        private static void UseContainer(GameObject game)
         {
-            Container container = (Container)AllObjects.allFurnitures.GetFurniture(furniture);
+            Player.Player player = game.GetPlayer();
+            Container container = (Container)game.GetFurnitureInRoom();
 
             if (container.FirstOpen == false && container.Lut != "")
             {
-                LUTActions.ProcessLUT(container);
+                LUTActions.ProcessLUT(game, container);
             }
 
             // Prints an options menu
@@ -199,7 +203,7 @@ namespace AdventureGame.Actions
             Console.WriteLine("\n *************************************");
             Actions.ContainerChoice();
 
-            List<string> containerInventory = container.InventoryNames;
+            List<Item> containerInventory = game.GetItems(container.InventoryNames);
             string? containerChoice = Console.ReadLine();
 
             // This either shows the container's inventory or that it is empty
@@ -213,9 +217,9 @@ namespace AdventureGame.Actions
                     {
                         Console.WriteLine("\n *************************************");
                         Console.WriteLine("\n Inside the " + container.Name + " you see:\n");
-                        foreach (string it in containerInventory)
+                        foreach (Item it in containerInventory)
                         {
-                            Console.WriteLine(" - " + it);
+                            Console.WriteLine(" - " + it.Name);
                         }
                         Console.WriteLine("\n *************************************");
                     }
@@ -230,9 +234,9 @@ namespace AdventureGame.Actions
                     Item item;
 
                     // Choice for which item to take: one, all, or none
-                    foreach (string it in containerInventory)
+                    foreach (Item it in containerInventory)
                     {
-                        Console.WriteLine(" " + i++ + " - " + it);
+                        Console.WriteLine(" " + i++ + " - " + it.Name);
                     }
                     Console.WriteLine(" 0 - Take all\n -1 - Take nothing");
                     Console.WriteLine("\n *************************************");
@@ -245,9 +249,9 @@ namespace AdventureGame.Actions
                         // Takes all the items from the container
                         if (itemIndex == "0")
                         {
-                            foreach (string it in containerInventory)
+                            foreach (Item it in containerInventory)
                             {
-                                totalWeight += AllObjects.allItems.GetItem(it).ItemWeight;
+                                totalWeight += it.ItemWeight;
                             }
                             if ((player.CurrentCarryWeight + totalWeight) < player.MaximumCarryWeight)
                             {
@@ -268,7 +272,7 @@ namespace AdventureGame.Actions
                         // Takes the item the player chose from the inventory
                         else
                         {
-                            item = AllObjects.allItems.GetItem(containerInventory[int.Parse(itemIndex) - 1]);
+                            item = game.GetItem(containerInventory[int.Parse(itemIndex) - 1].Name);
                             if ((player.CurrentCarryWeight + item.ItemWeight) < player.MaximumCarryWeight)
                             {
                                 Console.WriteLine("\n You take the " + item.Name);
@@ -286,7 +290,7 @@ namespace AdventureGame.Actions
                 else if (containerChoice == "3")
                 {
                     Item item;
-                    List<string> playerInventory = player.Inventory;
+                    List<Item> playerInventory = game.GetItems(player.Inventory);
 
                     Console.WriteLine("\n *************************************");
                     Console.WriteLine("\n What would you like to place: \n");
@@ -304,7 +308,7 @@ namespace AdventureGame.Actions
                     {
                         if (itemIndex == "1")
                         {
-                            item = AllObjects.allItems.GetItem(PlayerActions.TakeItemFromInventory(player.Inventory));
+                            item = game.GetItem(PlayerActions.TakeItemFromInventory(player.Inventory));
 
                             if (item != null)
                             {

@@ -1,4 +1,6 @@
-﻿using AdventureGame.Globals;
+﻿using AdventureGame.Furnitures;
+using AdventureGame.NPCs;
+using AdventureGame.Rooms;
 using Newtonsoft.Json;
 
 namespace AdventureGame.save
@@ -16,31 +18,45 @@ namespace AdventureGame.save
             File.WriteAllText(saveFilePathJSON, playerJSONObject);
         }
 
-        public static void SaveRoomsToFile()
+        public static void SaveRoomsToFile(Dictionary<string, Room> rooms)
         {
             string saveFilePathJSON = projectDirectory + "/save/rooms/Rooms.json";
 
-            var roomsJSONObject = JsonConvert.SerializeObject(AllObjects.allRooms.allRooms, Formatting.Indented);
+            var roomsJSONObject = JsonConvert.SerializeObject(rooms, Formatting.Indented);
 
             File.WriteAllText(saveFilePathJSON, roomsJSONObject);
         }
 
-        public static void SaveContainersToFile()
+        public static void SaveContainersToFile(Dictionary<string, Container> containers)
         {
             string saveFilePathJSON = projectDirectory + "/save/furniture/Containers.json";
 
-            var containersJSONObject = JsonConvert.SerializeObject(AllObjects.allFurnitures.ReturnContainers(), Formatting.Indented);
+            var containersJSONObject = JsonConvert.SerializeObject(containers, Formatting.Indented);
 
             File.WriteAllText(saveFilePathJSON, containersJSONObject);
         }
 
-        public static void SaveNPCsToFile()
+        public static void SaveNPCsToFile(Dictionary<string, NPC> allNPCs)
         {
-            string saveFilePathJSON = projectDirectory + "/save/npcs/NPCs.json";
+            string saveFilePathJSONnpcs = projectDirectory + "/save/npcs/NPCs.json";
+            string saveFilePathJSONenemies = projectDirectory + "/save/npcs/Enemies.json";
 
-            var npcsJSONObject = JsonConvert.SerializeObject(AllObjects.allNPCs.allNPCs, Formatting.Indented);
+            Dictionary<string, NPC> npcs = new();
+            Dictionary<string, NPC> enemies = new();
 
-            File.WriteAllText(saveFilePathJSON, npcsJSONObject);
+            foreach (var npc in allNPCs)
+            {
+                if (npc.Value.IsNPCAnEnemy())
+                    enemies.Add(npc.Key, npc.Value);
+                else
+                    npcs.Add(npc.Key, npc.Value);
+            }
+
+            var npcsJSONObject = JsonConvert.SerializeObject(npcs, Formatting.Indented);
+            var enemiesJSONObject = JsonConvert.SerializeObject(enemies, Formatting.Indented);
+
+            File.WriteAllText(saveFilePathJSONnpcs, npcsJSONObject);
+            File.WriteAllText(saveFilePathJSONenemies, enemiesJSONObject);
         }
     }
 }

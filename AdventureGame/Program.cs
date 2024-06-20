@@ -1,12 +1,5 @@
 ﻿using AdventureGame.Actions;
-using AdventureGame.Player;
-using AdventureGame.save;
+using AdventureGame.Game;
 
-Dictionary<int, List<string>> userActions = new Actions().actionsMap;
-    
-LoadFromFile.LoadPlayerFromFile(out Player? player);
-
-if (player != null)
-{
-    ActionsParser.GameLoop(player, userActions);
-}
+GameObject game = new();
+ActionsParser.GameLoop(game);

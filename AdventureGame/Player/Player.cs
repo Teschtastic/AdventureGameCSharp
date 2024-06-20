@@ -1,5 +1,4 @@
-﻿using AdventureGame.Globals;
-using AdventureGame.Items;
+﻿using AdventureGame.Items;
 using AdventureGame.Rooms;
 
 namespace AdventureGame.Player
@@ -46,28 +45,11 @@ namespace AdventureGame.Player
             CurrentCarryWeight += item.ItemWeight;
         }
 
-        public void AddToInventory(string itemName)
-        {
-            var item = AllObjects.allItems.GetItem(itemName);
-            if (item != null)
-            {
-                AddToInventory(item);
-            }
-        }
-
         public void AddToInventory(List<Item> items)
         {
             foreach (Item item in items)
             {
                 AddToInventory(item);
-            }
-        }
-
-        public void AddToInventory(List<string> itemNames)
-        {
-            foreach (string itemName in itemNames)
-            {
-                AddToInventory(itemName);
             }
         }
 
@@ -77,28 +59,11 @@ namespace AdventureGame.Player
             CurrentCarryWeight -= item.ItemWeight;
         }
 
-        public void RemoveFromInventory(string itemName)
-        {
-            var item = AllObjects.allItems.GetItem(itemName);
-            if (item != null)
-            {
-                RemoveFromInventory(item);
-            }
-        }
-
         public void RemoveFromInventory(List<Item> items)
         {
             foreach (Item item in items)
             {
                 RemoveFromInventory(item);
-            }
-        }
-
-        public void RemoveFromInventory(List<string> itemNames)
-        {
-            foreach (string itemName in itemNames)
-            {
-                RemoveFromInventory(itemName);
             }
         }
 

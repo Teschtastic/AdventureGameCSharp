@@ -1,14 +1,14 @@
 ﻿using AdventureGame.Furnitures;
-using AdventureGame.Globals;
+using AdventureGame.Game;
 using AdventureGame.LUTs;
 
 namespace AdventureGame.Actions
 {
     public class LUTActions
     {
-        public static void ProcessLUT(Container container)
+        public static void ProcessLUT(GameObject game, Container container)
         {
-            LUT lut = AllObjects.allLUTs.GetLUT(container.Lut);
+            LUT lut = game.GetLUT(container.Lut);
 
             foreach (var pool in lut.Pools)
             {

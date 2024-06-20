@@ -21,7 +21,7 @@ namespace AdventureGame.Actions
             player.EquippedWeapon = "Fists";
             player.HasEquippedWeapon = false;
             player.AttackDamage -= weapon.AttackDamage;
-            player.AddToInventory(weapon.Name);
+            player.AddToInventory(weapon);
         }
     }
 }

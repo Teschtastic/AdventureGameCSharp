@@ -1,4 +1,6 @@
-﻿namespace AdventureGame.Rooms
+﻿using AdventureGame.NPCs;
+
+namespace AdventureGame.Rooms
 {
     public class Room
     {
@@ -39,6 +41,11 @@
         public string NPCInRoom                     { get; set; }
         public bool HasFurniture                    { get; set; }
         public string FurnitureInRoom               { get; set; }
+
+        public bool IsAliveNPCInRoom(NPC npc)
+        {
+            return HasNPC && npc.IsAlive && npc != null;
+        }
 
         public string GetMoves()
         {

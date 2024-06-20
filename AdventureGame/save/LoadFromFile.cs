@@ -1,7 +1,7 @@
 ﻿using AdventureGame.Crafting;
 using AdventureGame.Dialogue;
 using AdventureGame.Furnitures;
-using AdventureGame.Globals;
+using AdventureGame.Game;
 using AdventureGame.Items;
 using AdventureGame.LUTs;
 using AdventureGame.NPCs;
@@ -12,21 +12,22 @@ namespace AdventureGame.save
 {
     public class LoadFromFile
 	{
-        static string workingDirectory = Environment.CurrentDirectory;
-        static string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+        private static readonly string workingDirectory = Environment.CurrentDirectory;
+        private static readonly string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
 
-        public static void LoadPlayerFromFile(out Player.Player? player)
+        public static Player.Player LoadPlayerFromFile(AllObjects allObjects)
 		{
             string saveFilePathJSON = projectDirectory + "/save/player/Player.json";
 
             string playerStatsFile = File.ReadAllText(saveFilePathJSON);
             var playerJSONObject = JsonConvert.DeserializeObject<Player.Player>(playerStatsFile);
+            Player.Player player;
 
             if (playerJSONObject != null)
 			{
                 player = playerJSONObject;
 
-                var items = AllObjects.allItems.GetItems(playerJSONObject.Inventory);
+                var items = allObjects.allItems.GetItems(playerJSONObject.Inventory);
                 int weight = 0;
 
                 foreach (var item in items)
@@ -39,8 +40,9 @@ namespace AdventureGame.save
 			else
 			{
 				Console.WriteLine("An error occurred loading the player from file.");
-                player = null;
+                player = new();
 			}
+            return player;
 		}
 
         public static void LoadItemsFromFile(Dictionary<string, Item> itemsMap)

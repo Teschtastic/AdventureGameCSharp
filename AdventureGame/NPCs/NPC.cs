@@ -1,4 +1,8 @@
-﻿namespace AdventureGame.NPCs
+﻿using AdventureGame.Actions;
+using AdventureGame.Dialogue;
+using AdventureGame.Game;
+
+namespace AdventureGame.NPCs
 {
     public class NPC
     {
@@ -32,6 +36,91 @@
         public string       EquippedWeapon      { get; set; }
         public bool         HasEquippedWeapon   { get; set; }
         public List<string> Inventory           { get; set; }
+
+        public bool IsNPCAnEnemy()
+        {
+            return !IsFriendly;
+        }
+
+        public void ProcessDialogue(Player.Player player, DialogueList list)
+        {
+            if (list != null)
+            {
+                int nodeID = 0;
+
+                while (nodeID != -1)
+                {
+                    Node node = new();
+                    foreach (var n in list.Dialogues[0].Nodes)
+                    {
+                        if (nodeID == n.NodeId)
+                        {
+                            node = n;
+                        }
+                    }
+
+                    Console.WriteLine(node.Text);
+
+                    if (node.HasMethod == true)
+                    {
+                        if (node.Params != null)
+                        {
+                            if (node.Params.Contains("player"))
+                            {
+                                GlobalMethods.CallByName(new NPCActions(), node.Method, new object[] { player });
+                            }
+                        }
+                        else
+                        {
+                            GlobalMethods.CallByName(new NPCActions(), node.Method, Array.Empty<object>());
+                        }
+                    }
+
+                    int i = 1;
+                    char[] slashes = { '\\', '/' };
+
+                    Console.WriteLine("\n >>>>>>>>>>>>>>>>>>>>>>>>>");
+                    foreach (var option in node.Options)
+                    {
+                        Console.WriteLine(" " + slashes[i % 2 == 0 ? 0 : 1] + " " + i++ + " - " + option.Text);
+                    }
+                    Console.WriteLine(" >>>>>>>>>>>>>>>>>>>>>>>>>");
+
+                    Actions.Actions.DialogueChoice();
+
+                    string? optionString = Console.ReadLine();
+
+                    if (int.TryParse(optionString, out int optionChoice))
+                    {
+                        if (optionChoice > 0 && optionChoice <= node.Options.Count)
+                        {
+                            Option option = node.Options[optionChoice - 1];
+                            nodeID = option.DestinationNodeId;
+
+                            foreach (var n in list.Dialogues[0].Nodes)
+                            {
+                                if (nodeID == -1 && n.NodeId == -1)
+                                {
+                                    Console.WriteLine(n.Text);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nInvalid choice.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nInvalid option.");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("\n" + Name + " has nothing to say.");
+            }
+        }
 
         public override string ToString()
         {

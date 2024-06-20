@@ -14,9 +14,14 @@
             enemies.ToList().ForEach(x => allNPCs.Add(x.Key, x.Value));
         }
 
-        public NPC GetNPC(string npcName)
+        public NPC? GetNPC(string npcName)
         {
             return allNPCs.ContainsKey(npcName) ? allNPCs[npcName] : null;
+        }
+
+        public List<NPC> GetNPCs()
+        {
+            return allNPCs.Values.ToList();
         }
 
         public List<NPC> GetNPCs(List<string> npcNames)
