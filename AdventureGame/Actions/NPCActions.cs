@@ -156,10 +156,10 @@ namespace AdventureGame.Actions
                 Console.WriteLine("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 Actions.BattleChoice();
 
-                string? battleChoice = Console.ReadLine();
+                string battleChoice = Console.ReadLine() ?? "";
 
                 // This either shows the container's inventory or that it is empty
-                if (battleChoice != null)
+                if (battleChoice != "")
                 {
                     int damageYouDealt = Math.Clamp(player.AttackDamage - npc.ArmorClass, 0, player.AttackDamage);
 

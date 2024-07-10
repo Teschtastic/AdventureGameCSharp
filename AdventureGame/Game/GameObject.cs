@@ -37,13 +37,13 @@ namespace AdventureGame.Game
         {
             Actions.Actions.CommandChoice();
 
-            string? action = Console.ReadLine();  // Reads the next line into the player's action
+            string action = Console.ReadLine() ?? "";  // Reads the next line into the player's action
 
             // Checks to see if the user choice is defined in the actions scope,
             // then assigns it to an int
             foreach (var entry in UserActions)
             {
-                if (action != null && entry.Value.Contains(action.ToLower()))
+                if (action != "" && entry.Value.Contains(action.ToLower()))
                 {
                     choice = entry.Key;
                     PlayerChoice = action;
@@ -56,7 +56,7 @@ namespace AdventureGame.Game
            return PlayerChoice != null ? PlayerChoice.ToUpper() : "";
         }
 
-        public Room? GetRoom(string roomName)
+        public Room GetRoom(string roomName)
         {
             return AllObjects.allRooms.GetRoom(roomName);
         }
@@ -76,7 +76,7 @@ namespace AdventureGame.Game
             return AllObjects.allRooms.allRooms;
         }
 
-        public Room? GetRoomPlayerIsIn()
+        public Room GetRoomPlayerIsIn()
         {
             return GetRoom(GamePlayer.RoomIsIn);
         }
@@ -86,12 +86,12 @@ namespace AdventureGame.Game
             GamePlayer.RoomIsIn = roomName;
         }
 
-        public NPC? GetNPC(string npcName)
+        public NPC GetNPC(string npcName)
         {
             return AllObjects.allNPCs.GetNPC(npcName);
         }
 
-        public NPC? GetNPCInRoom()
+        public NPC GetNPCInRoom()
         {
             return GetNPC(GetRoomPlayerIsIn().NPCInRoom);
         }
@@ -111,7 +111,7 @@ namespace AdventureGame.Game
             return AllObjects.allNPCs.allNPCs;
         }
 
-        public Furniture? GetFurniture(string furnitureName)
+        public Furniture GetFurniture(string furnitureName)
         {
             return AllObjects.allFurnitures.GetFurniture(furnitureName);
         }
@@ -121,7 +121,7 @@ namespace AdventureGame.Game
             return AllObjects.allFurnitures.GetFurnitures(furnitureNames);
         }
 
-        public Furniture? GetFurnitureInRoom()
+        public Furniture GetFurnitureInRoom()
         {
             return GetFurniture(GetRoomPlayerIsIn().FurnitureInRoom);
         }
@@ -136,12 +136,12 @@ namespace AdventureGame.Game
             return AllObjects.allFurnitures.ReturnContainers();
         }
 
-        public Item GetItem(string itemName)
+        public Item? GetItem(string itemName)
         {
             return AllObjects.allItems.GetItem(itemName);
         }
 
-        public Item GetItemInRoom()
+        public Item? GetItemInRoom()
         {
             return GetItem(GetRoomPlayerIsIn().ItemInRoom);
         }
@@ -155,7 +155,10 @@ namespace AdventureGame.Game
         {
             List<string> items = new();
             foreach (Item i in inventory)
-                items.Append(i.Name);
+            {  
+                items.Add(i.Name); 
+            }
+
 
             return GetItem(PlayerActions.TakeItemFromInventory(items));
         }
@@ -170,7 +173,7 @@ namespace AdventureGame.Game
             return AllObjects.allItems.GetItems(itemNames);
         }
 
-        public Recipe? GetRecipe(string recipeName)
+        public Recipe GetRecipe(string recipeName)
         {
             return AllObjects.allRecipes.GetRecipe(recipeName);
         }

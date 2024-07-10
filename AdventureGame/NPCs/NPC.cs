@@ -88,7 +88,7 @@ namespace AdventureGame.NPCs
 
                     Actions.Actions.DialogueChoice();
 
-                    string? optionString = Console.ReadLine();
+                    string optionString = Console.ReadLine() ?? "";
 
                     if (int.TryParse(optionString, out int optionChoice))
                     {

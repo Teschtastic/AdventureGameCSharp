@@ -7,9 +7,7 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": true,
-    "IsArmor": true,
-    "IsWeapon": false,
-    "IsConsumable": false,
+    "Type": "Armor",
     "ArmorClass": 10
   },
   "Plastic Armor": {
@@ -20,9 +18,7 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": true,
-    "IsArmor": true,
-    "IsWeapon": false,
-    "IsConsumable": false,
+    "Type": "Armor",
     "ArmorClass": 15
   }
 }

@@ -119,9 +119,9 @@ namespace AdventureGame.Actions
                 Console.WriteLine("0 - Exit crafting");
                 Actions.CommandChoice();
 
-                string? craftChoice = Console.ReadLine();
+                string craftChoice = Console.ReadLine() ?? "";
 
-                if (craftChoice != null)
+                if (craftChoice != "")
                 {
                     if (craftChoice == "0")
                     {
@@ -204,10 +204,10 @@ namespace AdventureGame.Actions
             Actions.ContainerChoice();
 
             List<Item> containerInventory = game.GetItems(container.InventoryNames);
-            string? containerChoice = Console.ReadLine();
+            string containerChoice = Console.ReadLine() ?? "";
 
             // This either shows the container's inventory or that it is empty
-            if (containerChoice != null)
+            if (containerChoice != "")
             {
                 if (containerChoice == "1")
                 {
@@ -242,9 +242,9 @@ namespace AdventureGame.Actions
                     Console.WriteLine("\n *************************************");
                     Actions.ContainerChoice();
 
-                    string? itemIndex = Console.ReadLine();
+                    string itemIndex = Console.ReadLine() ?? "";
 
-                    if (itemIndex != null)
+                    if (itemIndex != "")
                     {
                         // Takes all the items from the container
                         if (itemIndex == "0")
@@ -302,9 +302,9 @@ namespace AdventureGame.Actions
                     Console.WriteLine("\n *************************************");
                     Actions.ContainerChoice();
 
-                    string? itemIndex = Console.ReadLine();
+                    string itemIndex = Console.ReadLine() ?? "";
 
-                    if (itemIndex != null)
+                    if (itemIndex != "")
                     {
                         if (itemIndex == "1")
                         {

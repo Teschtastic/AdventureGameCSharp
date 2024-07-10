@@ -7,9 +7,7 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": false,
-    "IsArmor": false,
-    "IsWeapon": false,
-    "IsConsumable": false
+    "Type":  "Default"
   },
   "Desktop PC": {
     "Name": "Desktop PC",
@@ -19,9 +17,7 @@
     "CanPickup": false,
     "CanUse": true,
     "CanCraft": false,
-    "IsArmor": false,
-    "IsWeapon": false,
-    "IsConsumable": false
+    "Type": "Default"
   },
   "Sean's Toothbrush": {
     "Name": "Sean's Toothbrush",
@@ -31,9 +27,7 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": false,
-    "IsArmor": false,
-    "IsWeapon": false,
-    "IsConsumable": false
+    "Type": "Default"
   },
   "Jeff's Toothbrush": {
     "Name": "Jeff's Toothbrush",
@@ -43,9 +37,7 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": false,
-    "IsArmor": false,
-    "IsWeapon": false,
-    "IsConsumable": false
+    "Type": "Default"
   },
   "Empty Bottle": {
     "Name": "Empty Bottle",
@@ -55,9 +47,7 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": false,
-    "IsArmor": false,
-    "IsWeapon": false,
-    "IsConsumable": false
+    "Type": "Default"
   },
   "GFuel Powder": {
     "Name": "GFuel Powder",
@@ -67,8 +57,6 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": false,
-    "IsArmor": false,
-    "IsWeapon": false,
-    "IsConsumable": false
+    "Type": "Default"
   }
 }

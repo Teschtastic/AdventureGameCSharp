@@ -1,6 +1,4 @@
 ﻿using AdventureGame.Game;
-using AdventureGame.NPCs;
-using AdventureGame.Rooms;
 
 namespace AdventureGame.Actions
 {
@@ -9,10 +7,18 @@ namespace AdventureGame.Actions
         public static void GameLoop(GameObject game)
         {
             Actions.WelcomeMessage();                       // Welcome message
-            Console.WriteLine(game.GetRoomPlayerIsIn().Name);             // Tells you which room you're in
+            //bool clearScreen = false;
 
             while (game.IsRunning)                           // Main game loop
             {
+                //if (clearScreen)
+                //{
+                //    Console.Clear();
+                //}
+
+                //clearScreen = true;
+                
+                Console.WriteLine("\nYou are currently in: {0}", game.GetRoomPlayerIsIn().Name);             // Tells you which room you're in
                 int choiceIndex = -1;
                 game.GetUserChoice(ref choiceIndex);
 
@@ -35,14 +41,6 @@ namespace AdventureGame.Actions
 
                     case 4:
                         RoomActions.Move(game);             // Moves into a new room
-
-                        //Room room = game.GetRoomPlayerIsIn();
-                        //NPC npc = game.GetNPCInRoom();
-
-                        //if (room.IsAliveNPCInRoom(npc) && npc.IsNPCAnEnemy())
-                        //{
-                        //    NPCActions.BattleNPC(game);
-                        //}
                         break;
 
                     case 5:

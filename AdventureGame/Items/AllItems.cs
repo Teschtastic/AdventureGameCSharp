@@ -18,7 +18,7 @@
             consumables.ToList().ForEach(   x => allItems.Add(x.Key, x.Value));
         }
 
-        public Item GetItem(string itemName)
+        public Item? GetItem(string itemName)
         {
             return allItems.ContainsKey(itemName) ? allItems[itemName] : null;
         }

@@ -19,49 +19,41 @@ namespace AdventureGame.Actions
         public static void Move(GameObject game)
         {
             string move = game.GetPlayerMove();
+            string moveRoom = "";
 
             Room currentRoom = game.GetRoomPlayerIsIn();
-            Room newRoom;
 
-            var room = currentRoom.ConnRooms.Single(x => x.Value != "" && x.Key.Equals(move));
-            newRoom = game.GetRoom(room.Value);
-            Console.WriteLine("\nYou went " + room.Key + "\n");
-            Console.WriteLine(currentRoom.LeaveMessage);
-            Console.WriteLine(newRoom.EnterMessage);
-            game.SetRoomPlayerIsIn(newRoom.Name);
-
-            //Room room = AllObjects.allRooms.GetRoom(game.GamePlayer.RoomIsIn);
-            NPC npc = game.GetNPCInRoom();
-
-            if (newRoom.IsAliveNPCInRoom(npc) && npc.IsNPCAnEnemy())
+            if (!currentRoom.ConnRooms.TryGetValue(move, out moveRoom!))
             {
-                NPCActions.BattleNPC(game);
+                Console.WriteLine("\nInvalid direction.");
             }
-            return;
+            else
+            {
+                if (moveRoom == "")
+                {
+                    Console.WriteLine("\nCouldn't move that way.");
+                }
+                else
+                {
+                    Room newRoom = game.GetRoom(moveRoom);
 
-            //foreach (var room in currentRoom.ConnRooms)
-            //{
-            //    if (room.Value != "" && room.Key.Equals(move))
-            //    {
-            //        newRoom = AllObjects.allRooms.GetRoom(room.Value);
-            //        Console.WriteLine("\nYou went " + room.Key + "\n");
-            //        Console.WriteLine(currentRoom.LeaveMessage);
-            //        Console.WriteLine(newRoom.EnterMessage);
-            //        game.GamePlayer.RoomIsIn = newRoom.Name;
+                    Console.WriteLine("\nYou went " + move + "\n");
+                    Console.WriteLine(currentRoom.LeaveMessage);
+                    Console.WriteLine(newRoom.EnterMessage);
+                    game.SetRoomPlayerIsIn(newRoom.Name);
 
-            //        //Room room = AllObjects.allRooms.GetRoom(game.GamePlayer.RoomIsIn);
-            //        NPC npc = AllObjects.allNPCs.GetNPC(newRoom.NPCInRoom);
+                    if (newRoom.HasNPC)
+                    {
 
-            //        if (newRoom.IsAliveNPCInRoom(npc) && npc.IsNPCAnEnemy())
-            //        {
-            //            NPCActions.BattleNPC(game.GamePlayer, newRoom, npc);
-            //        }
-            //        return;
-            //    }
-            //}
+                        NPC npc = game.GetNPCInRoom();
 
-            // If you can't move, tells you so
-            Console.WriteLine("\nCouldn't move that way.");
+                        if (newRoom.IsAliveNPCInRoom(npc) && npc.IsNPCAnEnemy())
+                        {
+                            NPCActions.BattleNPC(game);
+                        }
+                    }
+                }
+            }
         }
 
         /* Method used to look in the room you're in */

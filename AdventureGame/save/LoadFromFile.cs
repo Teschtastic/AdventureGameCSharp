@@ -13,7 +13,7 @@ namespace AdventureGame.save
     public class LoadFromFile
 	{
         private static readonly string workingDirectory = Environment.CurrentDirectory;
-        private static readonly string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+        private static readonly string projectDirectory = Directory.GetParent(workingDirectory)!.Parent!.Parent!.FullName;
 
         public static Player.Player LoadPlayerFromFile(AllObjects allObjects)
 		{
@@ -65,9 +65,7 @@ namespace AdventureGame.save
                             item.Value.CanPickup,
                             item.Value.CanUse,
                             item.Value.CanCraft,
-                            item.Value.IsArmor,
-                            item.Value.IsWeapon,
-                            item.Value.IsConsumable
+                            item.Value.Type
                             ));
                 }
             }
@@ -97,9 +95,7 @@ namespace AdventureGame.save
                             consumable.Value.CanPickup,
                             consumable.Value.CanUse,
                             consumable.Value.CanCraft,
-                            consumable.Value.IsArmor,
-                            consumable.Value.IsWeapon,
-                            consumable.Value.IsConsumable,
+                            consumable.Value.Type,
                             consumable.Value.StatusModifier
                             ));
                 }
@@ -130,9 +126,7 @@ namespace AdventureGame.save
                             armor.Value.CanPickup,
                             armor.Value.CanUse,
                             armor.Value.CanCraft,
-                            armor.Value.IsArmor,
-                            armor.Value.IsWeapon,
-                            armor.Value.IsConsumable,
+                            armor.Value.Type,
                             armor.Value.ArmorClass
                             ));
                 }
@@ -163,9 +157,7 @@ namespace AdventureGame.save
                             weapon.Value.CanPickup,
                             weapon.Value.CanUse,
                             weapon.Value.CanCraft,
-                            weapon.Value.IsArmor,
-                            weapon.Value.IsWeapon,
-                            weapon.Value.IsConsumable,
+                            weapon.Value.Type,
                             weapon.Value.AttackDamage
                             ));
                 }

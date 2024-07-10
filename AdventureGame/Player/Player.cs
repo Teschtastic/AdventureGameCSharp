@@ -106,6 +106,45 @@ namespace AdventureGame.Player
             }
         }
 
+        public void EquipArmor(Armor armor)
+        {
+            Console.WriteLine(armor.UseMessage);
+            Console.WriteLine("\nYour armor class increased by " + armor.ArmorClass + ".");
+            EquippedArmor = armor.Name;
+            HasEquippedArmor = true;
+            ArmorClass += armor.ArmorClass;
+            RemoveFromInventory(armor);
+        }
+
+        public void EquipWeapon(Weapon weapon)
+        {
+            Console.WriteLine(weapon.UseMessage);
+            Console.WriteLine("\nYour attack damage increased by " + weapon.AttackDamage + ".");
+            EquippedWeapon = weapon.Name;
+            HasEquippedWeapon = true;
+            AttackDamage += weapon.AttackDamage;
+            RemoveFromInventory(weapon);
+        }
+        public void UnEquipArmor(Armor armor)
+        {
+            Console.WriteLine("\nYou un equip your " + armor.Name);
+            Console.WriteLine("Your armor class decreases by " + armor.ArmorClass + ".");
+            EquippedArmor = "Clothes";
+            HasEquippedArmor = false;
+            ArmorClass -= armor.ArmorClass;
+            AddToInventory(armor);
+        }
+
+        public void UnEquipWeapon(Weapon weapon)
+        {
+            Console.WriteLine("\nYou un equip your " + weapon.Name);
+            Console.WriteLine("Your attack damage decreases by " + weapon.AttackDamage + ".");
+            EquippedWeapon = "Fists";
+            HasEquippedWeapon = false;
+            AttackDamage -= weapon.AttackDamage;
+            AddToInventory(weapon);
+        }
+
         public void AddToRecipes(string recipe)
         {
             KnownRecipes.Add(recipe);

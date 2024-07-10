@@ -63,7 +63,7 @@
                               "| This is still a WIP.               |\n" +
                               "| You can move N, E, S, or W         |\n" +
                               "| (Type 'h' or 'help' for help menu) |\n" +
-                              "+------------------------------------+\n");
+                              "+------------------------------------+");
         }
 
         /* Method used to display exit message */

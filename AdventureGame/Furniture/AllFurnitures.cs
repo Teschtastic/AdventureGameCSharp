@@ -14,9 +14,9 @@
             containers.ToList().ForEach(x => allFurnitures.Add(x.Key, x.Value));
         }
 
-        public Furniture? GetFurniture(string furnitureName)
+        public Furniture GetFurniture(string furnitureName)
         {
-            return allFurnitures.ContainsKey(furnitureName) ? allFurnitures[furnitureName] : null;
+            return allFurnitures[furnitureName];
         }
 
         public List<Furniture> GetFurnitures(List<string> furnitureNames)

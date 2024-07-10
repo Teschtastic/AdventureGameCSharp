@@ -12,9 +12,9 @@
             rooms.ToList().ForEach(x => allRooms.Add(x.Key, x.Value));
         }
 
-        public Room? GetRoom(string roomName)
+        public Room GetRoom(string roomName)
         {
-            return allRooms.ContainsKey(roomName) ? allRooms[roomName] : null;
+            return allRooms[roomName];
         }
 
         public List<Room> GetRooms()

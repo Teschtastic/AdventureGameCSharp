@@ -2,8 +2,8 @@
 {
     public class Consumable : Item, IEquatable<Consumable?>
     {
-        public Consumable( string n, string d, string uMessage, int itW, bool cPickup, bool cUse,  bool cC, bool iA,  bool iW, bool iC, int sM)
-            : base(n, d, uMessage, itW, cPickup, cUse, cC, iA, iW, iC)
+        public Consumable( string n, string d, string uMessage, int itW, bool cPickup, bool cUse,  bool cC, ItemType type, int sM)
+            : base(n, d, uMessage, itW, cPickup, cUse, cC, type)
         {
             StatusModifier = sM;
         }
@@ -26,9 +26,7 @@
                    CanPickup == other.CanPickup &&
                    CanUse == other.CanUse &&
                    CanCraft == other.CanCraft &&
-                   IsArmor == other.IsArmor &&
-                   IsWeapon == other.IsWeapon &&
-                   IsConsumable == other.IsConsumable &&
+                   Type == other.Type &&
                    StatusModifier == other.StatusModifier;
         }
 
@@ -43,9 +41,7 @@
             hash.Add(CanPickup);
             hash.Add(CanUse);
             hash.Add(CanCraft);
-            hash.Add(IsArmor);
-            hash.Add(IsWeapon);
-            hash.Add(IsConsumable);
+            hash.Add(Type);
             hash.Add(StatusModifier);
             return hash.ToHashCode();
         }

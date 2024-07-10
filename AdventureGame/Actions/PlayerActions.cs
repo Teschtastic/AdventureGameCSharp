@@ -47,9 +47,9 @@ namespace AdventureGame.Actions
 
             Actions.CommandChoice();
 
-            string? useChoice = Console.ReadLine();
+            string useChoice = Console.ReadLine() ?? "";
 
-            if (useChoice != null)
+            if (useChoice != "")
             {
                 if (useChoice == "1")
                 {
@@ -89,9 +89,9 @@ namespace AdventureGame.Actions
                     "\n0 - Exit describing\n");
             Actions.CommandChoice();
 
-            string? describeChoice = Console.ReadLine();
+            string describeChoice = Console.ReadLine() ?? "";
 
-            if (describeChoice != null)
+            if (describeChoice != "")
             {
 
                 if (describeChoice == "1")
@@ -155,7 +155,7 @@ namespace AdventureGame.Actions
 
                 try
                 {
-                    string? itemDesc = Console.ReadLine();
+                    string itemDesc = Console.ReadLine() ?? "";
                     int itemChoice = -1;
 
                     if (int.TryParse(itemDesc, out itemChoice))

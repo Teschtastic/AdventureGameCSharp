@@ -12,7 +12,7 @@ namespace AdventureGame.Actions
             Room room = game.GetRoomPlayerIsIn();
             if (room.HasFurniture)
             {
-                Furniture? furniture = game.GetFurnitureInRoom();
+                Furniture furniture = game.GetFurnitureInRoom();
 
                 if (furniture != null && furniture.CanUse)
                 {
@@ -32,7 +32,7 @@ namespace AdventureGame.Actions
         public static void DescribeFurniture(GameObject game)
         {
             Room room = game.GetRoomPlayerIsIn();
-            Furniture? furniture = game.GetFurnitureInRoom();
+            Furniture furniture = game.GetFurnitureInRoom();
 
             if (furniture != null && room.HasFurniture)
             {

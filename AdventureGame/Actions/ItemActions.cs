@@ -10,7 +10,7 @@ namespace AdventureGame.Actions
         public static void DescribeItem(GameObject game)
         {
             List<string> itemsToDescribe = new();
-            List<Item>? inventory = game.GetItemsInInventory();
+            List<Item> inventory = game.GetItemsInInventory();
 
             Item? itemInRoom = game.GetItemInRoom();
 
@@ -118,9 +118,9 @@ namespace AdventureGame.Actions
                 Console.WriteLine("\n1 - Yes\n0 - No");
                 Actions.CommandChoice();
 
-                string? dropChoice = Console.ReadLine();
+                string dropChoice = Console.ReadLine() ?? "";
 
-                if (dropChoice != null && dropChoice == "1")
+                if (dropChoice == "1")
                 {
                     PickupItem(game);
                     DropItem(game);
@@ -162,7 +162,7 @@ namespace AdventureGame.Actions
 
             foreach (Item i in playerInventory)
             {
-                if (i.IsArmor || i.IsWeapon)
+                if (i.Type == Item.ItemType.Armor || i.Type == Item.ItemType.Weapon)
                 {
                     weaponArmorInventory.Add(i.Name);
                 }
@@ -182,7 +182,7 @@ namespace AdventureGame.Actions
                 Console.WriteLine("\n1 - Armor\n2 - Weapon\n0 - Nothing");
                 Actions.CommandChoice();
 
-                string? equipChoice = Console.ReadLine();
+                string equipChoice = Console.ReadLine() ?? "";
 
                 item = game.GetItemInInventory(weaponArmorInventory);
 
@@ -190,7 +190,7 @@ namespace AdventureGame.Actions
                 {
                     if (equipChoice == "1")
                     {
-                        if (item.IsArmor)
+                        if (item.Type == Item.ItemType.Armor)
                         {
                             if (game.GetPlayer().HasEquippedArmor)
                             {
@@ -198,7 +198,8 @@ namespace AdventureGame.Actions
                             }
                             else
                             {
-                                EquipItemToPlayer.EquipArmor(game.GetPlayer(), (Armor)item);
+                                game.GetPlayer().EquipArmor((Armor)item);
+                                //EquipItemToPlayer.EquipArmor(game.GetPlayer(), (Armor)item);
                             }
                         }
                         else
@@ -208,7 +209,7 @@ namespace AdventureGame.Actions
                     }
                     else if (equipChoice == "2")
                     {
-                        if (item.IsWeapon)
+                        if (item.Type == Item.ItemType.Weapon)
                         {
                             if (game.GetPlayer().HasEquippedWeapon)
                             {
@@ -216,7 +217,8 @@ namespace AdventureGame.Actions
                             }
                             else
                             {
-                                EquipItemToPlayer.EquipWeapon(game.GetPlayer(), (Weapon)item);
+                                game.GetPlayer().EquipWeapon((Weapon)item);
+                                //EquipItemToPlayer.EquipWeapon(game.GetPlayer(), (Weapon)item);
                             }
                         }
                         else
@@ -248,14 +250,15 @@ namespace AdventureGame.Actions
                 Console.WriteLine("\n1 - Armor\n2 - Weapon\n0 - Nothing");
                 Actions.CommandChoice();
 
-                string? unequipChoice = Console.ReadLine();
+                string unequipChoice = Console.ReadLine() ?? "";
 
                 if (unequipChoice == "1")
                 {
                     if (game.GetPlayer().HasEquippedArmor)
                     {
                         Armor armor = (Armor)game.GetItem(game.GetPlayer().EquippedArmor);
-                        UnEquipItemFromPlayer.UnEquipArmor(game.GetPlayer(), armor);
+                        game.GetPlayer().UnEquipArmor(armor);
+                        //UnEquipItemFromPlayer.UnEquipArmor(game.GetPlayer(), armor);
                     }
                     else
                     {
@@ -267,7 +270,8 @@ namespace AdventureGame.Actions
                     if (game.GetPlayer().HasEquippedWeapon)
                     {
                         Weapon weapon = (Weapon)game.GetItem(game.GetPlayer().EquippedWeapon);
-                        UnEquipItemFromPlayer.UnEquipWeapon(game.GetPlayer(), weapon);
+                        game.GetPlayer().UnEquipWeapon(weapon);
+                        //UnEquipItemFromPlayer.UnEquipWeapon(game.GetPlayer(), weapon);
                     }
                     else
                     {

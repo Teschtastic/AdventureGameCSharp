@@ -8,7 +8,7 @@ namespace AdventureGame.save
     public class SaveToFile
     {
         static string workingDirectory = Environment.CurrentDirectory;
-        static string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+        static string projectDirectory = Directory.GetParent(workingDirectory)!.Parent!.Parent!.FullName;
         public static void SavePlayerToFile(Player.Player player)
         {
             string saveFilePathJSON = projectDirectory + "/save/player/Player.json";
