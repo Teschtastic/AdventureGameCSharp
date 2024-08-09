@@ -65,13 +65,46 @@ namespace AdventureGame.save
                             item.Value.CanPickup,
                             item.Value.CanUse,
                             item.Value.CanCraft,
-                            item.Value.Type
+                            item.Value.KindOfItem,
+                            item.Value.StatusModified
                             ));
                 }
             }
             else
             {
                 Console.WriteLine("An error occurred loading the items from file.");
+            }
+        }
+
+        public static void LoadTrainersFromFile(Dictionary<string, Trainer> trainersMap)
+        {
+            string trainerFilePathJSON = projectDirectory + "/save/items/Trainers.json";
+
+            string trainerFile = File.ReadAllText(trainerFilePathJSON);
+            var trainerJSONObject = JsonConvert.DeserializeObject<Dictionary<string, Trainer>>(trainerFile);
+
+            if (trainerJSONObject != null)
+            {
+                foreach (var trainer in trainerJSONObject)
+                {
+                    trainersMap.Add(trainer.Key,
+                        new(
+                            trainer.Value.Name,
+                            trainer.Value.Description,
+                            trainer.Value.UseMessage,
+                            trainer.Value.ItemWeight,
+                            trainer.Value.CanPickup,
+                            trainer.Value.CanUse,
+                            trainer.Value.CanCraft,
+                            trainer.Value.KindOfItem,
+                            trainer.Value.StatusModified,
+                            trainer.Value.StatusModifier
+                            ));
+                }
+            }
+            else
+            {
+                Console.WriteLine("An error occurred loading the consumables from file.");
             }
         }
 
@@ -95,7 +128,8 @@ namespace AdventureGame.save
                             consumable.Value.CanPickup,
                             consumable.Value.CanUse,
                             consumable.Value.CanCraft,
-                            consumable.Value.Type,
+                            consumable.Value.KindOfItem,
+                            consumable.Value.StatusModified,
                             consumable.Value.StatusModifier
                             ));
                 }
@@ -126,8 +160,9 @@ namespace AdventureGame.save
                             armor.Value.CanPickup,
                             armor.Value.CanUse,
                             armor.Value.CanCraft,
-                            armor.Value.Type,
-                            armor.Value.ArmorClass
+                            armor.Value.KindOfItem,
+                            armor.Value.StatusModified,
+                            armor.Value.StatusModifer
                             ));
                 }
             }
@@ -157,8 +192,9 @@ namespace AdventureGame.save
                             weapon.Value.CanPickup,
                             weapon.Value.CanUse,
                             weapon.Value.CanCraft,
-                            weapon.Value.Type,
-                            weapon.Value.AttackDamage
+                            weapon.Value.KindOfItem,
+                            weapon.Value.StatusModified,
+                            weapon.Value.StatusModifer
                             ));
                 }
             }

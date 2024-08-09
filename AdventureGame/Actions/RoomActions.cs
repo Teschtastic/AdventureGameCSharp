@@ -93,11 +93,11 @@ namespace AdventureGame.Actions
         public static void UseItemInRoom(GameObject game)
         {
             Room room = game.GetRoomPlayerIsIn();
-            Item item = game.GetItemInRoom();
+            Item? item = game.GetItemInRoom();
 
             if (room.HasItem)
             {
-                if (item.CanUse)
+                if (item!.CanUse)
                 {
                     Console.WriteLine(item.UseMessage);
                     UsedItemOnPlayer.UseItem(game, item);

@@ -32,7 +32,7 @@ namespace AdventureGame.Actions
             }
             else
             {
-                Item item = game.GetItemInInventory(itemsToDescribe);
+                Item? item = game.GetItemInInventory(itemsToDescribe);
 
                 if (item != null)
                 {
@@ -59,7 +59,7 @@ namespace AdventureGame.Actions
                 // This means there is something in the room
                 else if (room.HasItem)
                 {
-                    Item item = game.GetItemInRoom();
+                    Item? item = game.GetItemInRoom();
 
                     if (item != null)
                     {
@@ -67,7 +67,7 @@ namespace AdventureGame.Actions
                         // then add the item to the players inventory
                         if (item.CanPickup)
                         {
-                            if ((game.GetPlayer().CurrentCarryWeight + item.ItemWeight) > game.GetPlayer().MaximumCarryWeight)
+                            if ((game.Player.CurrentCarryWeight + item.ItemWeight) > game.Player.MaximumCarryWeight)
                             {
                                 Console.WriteLine("\nYour inventory is too full to pickup\nthe " + item.Name);
                             }
@@ -76,7 +76,7 @@ namespace AdventureGame.Actions
                                 Console.WriteLine("\nYou pickup the " + item.Name);
                                 room.HasItem = false;
                                 room.ItemInRoom = "";
-                                game.GetPlayer().AddToInventory(item);
+                                game.Player.AddToInventory(item);
                             }
 
                         }
@@ -97,7 +97,7 @@ namespace AdventureGame.Actions
 
             if (room != null && !room.HasItem)
             {
-                Item item = game.GetItemInInventory(game.GetPlayer().Inventory);
+                Item? item = game.GetItemInInventory(game.Player.Inventory);
 
                 if (item != null)
                 {
@@ -105,7 +105,7 @@ namespace AdventureGame.Actions
 
                     room.HasItem = true;
                     room.ItemInRoom = item.Name;
-                    game.GetPlayer().RemoveFromInventory(item);
+                    game.Player.RemoveFromInventory(item);
                 }
                 else
                 {
@@ -135,7 +135,7 @@ namespace AdventureGame.Actions
         /* Method used to use an item in either your inventory or in the world */
         public static void UseInventoryItem(GameObject game)
         {
-            Item item = game.GetItemInInventory(game.GetItemsInInventory());
+            Item? item = game.GetItemInInventory(game.GetItemsInInventory());
 
             // If the item has the can use flag, use it and remove
             // it from the player's inventory
@@ -158,11 +158,11 @@ namespace AdventureGame.Actions
         {
             List<Item> playerInventory = game.GetItemsInInventory();
             List<string> weaponArmorInventory = new();
-            Item item;
+            Item? item;
 
             foreach (Item i in playerInventory)
             {
-                if (i.Type == Item.ItemType.Armor || i.Type == Item.ItemType.Weapon)
+                if (i.KindOfItem == Item.ItemType.Armor || i.KindOfItem == Item.ItemType.Weapon)
                 {
                     weaponArmorInventory.Add(i.Name);
                 }
@@ -190,15 +190,15 @@ namespace AdventureGame.Actions
                 {
                     if (equipChoice == "1")
                     {
-                        if (item.Type == Item.ItemType.Armor)
+                        if (item.KindOfItem == Item.ItemType.Armor)
                         {
-                            if (game.GetPlayer().HasEquippedArmor)
+                            if (game.Player.HasEquippedArmor)
                             {
                                 Console.WriteLine("\nYou already have equipped armor.");
                             }
                             else
                             {
-                                game.GetPlayer().EquipArmor((Armor)item);
+                                game.Player.EquipArmor((Armor)item);
                                 //EquipItemToPlayer.EquipArmor(game.GetPlayer(), (Armor)item);
                             }
                         }
@@ -209,15 +209,15 @@ namespace AdventureGame.Actions
                     }
                     else if (equipChoice == "2")
                     {
-                        if (item.Type == Item.ItemType.Weapon)
+                        if (item.KindOfItem == Item.ItemType.Weapon)
                         {
-                            if (game.GetPlayer().HasEquippedWeapon)
+                            if (game.Player.HasEquippedWeapon)
                             {
                                 Console.WriteLine("\nYou already have an equipped weapon.");
                             }
                             else
                             {
-                                game.GetPlayer().EquipWeapon((Weapon)item);
+                                game.Player.EquipWeapon((Weapon)item);
                                 //EquipItemToPlayer.EquipWeapon(game.GetPlayer(), (Weapon)item);
                             }
                         }
@@ -240,7 +240,7 @@ namespace AdventureGame.Actions
 
         public static void UnEquipItem(GameObject game)
         {
-            if (!game.GetPlayer().HasEquippedArmor && !game.GetPlayer().HasEquippedWeapon)
+            if (!game.Player.HasEquippedArmor && !game.Player.HasEquippedWeapon)
             {
                 Console.WriteLine("\nYou don't have anything equipped.");
             }
@@ -254,10 +254,10 @@ namespace AdventureGame.Actions
 
                 if (unequipChoice == "1")
                 {
-                    if (game.GetPlayer().HasEquippedArmor)
+                    if (game.Player.HasEquippedArmor)
                     {
-                        Armor armor = (Armor)game.GetItem(game.GetPlayer().EquippedArmor);
-                        game.GetPlayer().UnEquipArmor(armor);
+                        Armor armor = (Armor)game.GetItem(game.Player.EquippedArmor)!;
+                        game.Player.UnEquipArmor(armor);
                         //UnEquipItemFromPlayer.UnEquipArmor(game.GetPlayer(), armor);
                     }
                     else
@@ -267,10 +267,10 @@ namespace AdventureGame.Actions
                 }
                 else if (unequipChoice == "2")
                 {
-                    if (game.GetPlayer().HasEquippedWeapon)
+                    if (game.Player.HasEquippedWeapon)
                     {
-                        Weapon weapon = (Weapon)game.GetItem(game.GetPlayer().EquippedWeapon);
-                        game.GetPlayer().UnEquipWeapon(weapon);
+                        Weapon weapon = (Weapon)game.GetItem(game.Player.EquippedWeapon)!;
+                        game.Player.UnEquipWeapon(weapon);
                         //UnEquipItemFromPlayer.UnEquipWeapon(game.GetPlayer(), weapon);
                     }
                     else

@@ -7,9 +7,11 @@ using AdventureGame.Furnitures;
 using AdventureGame.Dialogue;
 using AdventureGame.Actions;
 using AdventureGame.LUTs;
+using System.Runtime.Serialization;
 
 namespace AdventureGame.Game
 {
+    [DataContract]
     public class GameObject
     {
 
@@ -23,14 +25,23 @@ namespace AdventureGame.Game
         }
 
         public Dictionary<int, List<string>> UserActions { get; set; }
-        private Player.Player GamePlayer { get; set; } 
+        private Player.Player GamePlayer {  get; set; }
         public bool IsRunning { get; set; }
         public string PlayerChoice { get; set; }
         private AllObjects AllObjects { get; set; }
 
-        public Player.Player GetPlayer()
+        [DataMember]
+        public Player.Player Player
+        { 
+            get { return GamePlayer; }
+            set { GamePlayer = value; }
+        }
+
+        [DataMember]
+        public AllObjects Objects
         {
-            return GamePlayer; 
+            get { return AllObjects; }
+            set { AllObjects = value; }
         }
 
         public void GetUserChoice(ref int choice)
@@ -78,7 +89,7 @@ namespace AdventureGame.Game
 
         public Room GetRoomPlayerIsIn()
         {
-            return GetRoom(GamePlayer.RoomIsIn);
+            return GetRoom(Player.RoomIsIn);
         }
 
         public void SetRoomPlayerIsIn(string roomName)
@@ -123,7 +134,7 @@ namespace AdventureGame.Game
 
         public Furniture GetFurnitureInRoom()
         {
-            return GetFurniture(GetRoomPlayerIsIn().FurnitureInRoom);
+            return GetFurniture(GetRoomPlayerIsIn().FurnitureInRoom + " in " + GetRoomPlayerIsIn().Name);
         }
 
         public List<Container> GetContainersList()
@@ -146,19 +157,18 @@ namespace AdventureGame.Game
             return GetItem(GetRoomPlayerIsIn().ItemInRoom);
         }
 
-        public Item GetItemInInventory(List<string> inventory)
+        public Item? GetItemInInventory(List<string> inventory)
         {
             return GetItem(PlayerActions.TakeItemFromInventory(inventory));
         }
 
-        public Item GetItemInInventory(List<Item> inventory)
+        public Item? GetItemInInventory(List<Item> inventory)
         {
             List<string> items = new();
             foreach (Item i in inventory)
             {  
                 items.Add(i.Name); 
             }
-
 
             return GetItem(PlayerActions.TakeItemFromInventory(items));
         }

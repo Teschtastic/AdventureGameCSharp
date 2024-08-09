@@ -1,14 +1,8 @@
 ﻿namespace AdventureGame.Items
 {
-    public class Weapon : Item, IEquatable<Weapon?>
+    public class Weapon(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType, int sM) : Item(n, d, uMessage, itW, cPickup, cUse, cC, iType, sType), IEquatable<Weapon?>
     {
-        public Weapon(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, ItemType type, int aD)
-            : base(n, d, uMessage, itW, cPickup, cUse, cC, type)
-        {
-            AttackDamage = aD;
-        }
-
-        public int AttackDamage { get; set; }
+        public int StatusModifer { get; set; } = sM;
 
         public override bool Equals(object? obj)
         {
@@ -26,8 +20,9 @@
                    CanPickup == other.CanPickup &&
                    CanUse == other.CanUse &&
                    CanCraft == other.CanCraft &&
-                   Type == other.Type &&
-                   AttackDamage == other.AttackDamage;
+                   KindOfItem == other.KindOfItem &&
+                   StatusModified == other.StatusModified &&
+                   StatusModifer == other.StatusModifer;
         }
 
         public override int GetHashCode()
@@ -41,8 +36,9 @@
             hash.Add(CanPickup);
             hash.Add(CanUse);
             hash.Add(CanCraft);
-            hash.Add(Type);
-            hash.Add(AttackDamage);
+            hash.Add(KindOfItem);
+            hash.Add(StatusModified);
+            hash.Add(StatusModifer);
             return hash.ToHashCode();
         }
     }

@@ -76,7 +76,7 @@ namespace AdventureGame.Actions
                         break;
 
                     case 13:
-                        PlayerActions.DescribePlayer(game.GetPlayer());       // Describes the player character
+                        PlayerActions.DescribePlayer(game.Player);       // Describes the player character
                         break;
 
                     case 14:
@@ -105,7 +105,7 @@ namespace AdventureGame.Actions
                         break;
                 }
 
-                if (game.GetPlayer().CurrentHealth <= 0)                      // Checks if player is dead, and ends game
+                if (game.Player.CurrentHealth <= 0)                      // Checks if player is dead, and ends game
                 {
                     Actions.DeathMessage();
                     game.IsRunning = false;

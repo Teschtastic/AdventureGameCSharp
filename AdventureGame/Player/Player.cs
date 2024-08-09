@@ -12,12 +12,12 @@ namespace AdventureGame.Player
             RoomIsIn = "";
             EquippedArmor = "";
             EquippedWeapon = "";
-            Inventory = new();
-            KnownRecipes = new();
+            Inventory = [];
+            KnownRecipes = [];
             CurrentQuest = "";
-            AvailableQuests = new();
-            CompletedQuests = new();
-            FailedeQuests = new();
+            AvailableQuests = [];
+            CompletedQuests = [];
+            FailedeQuests = [];
         }
 
         public string       Name                { get; set; }
@@ -38,6 +38,39 @@ namespace AdventureGame.Player
         public List<string> AvailableQuests     { get; set; }
         public List<string> CompletedQuests     { get; set; }
         public List<string> FailedeQuests       { get; set; }
+
+        public void UpdatePlayerStatus(Item.StatusType sType, object sModifier)
+        {
+            switch (sType)
+            {
+                case Item.StatusType.Default:
+                    throw new NotImplementedException();
+                case Item.StatusType.Name:
+                    Name = (string)sModifier;
+                    break;
+                case Item.StatusType.CurrentHealth: 
+                    CurrentHealth += (int)sModifier;
+                    break;
+                case Item.StatusType.MaximumHealth:
+                    MaximumHealth += (int)sModifier;
+                    break;
+                case Item.StatusType.ArmorClass:
+                    ArmorClass += (int)sModifier;
+                    break;
+                case Item.StatusType.AttackDamage:
+                    AttackDamage += (int)sModifier;
+                    break;
+                case Item.StatusType.CurrentCarryWeight:
+                    CurrentCarryWeight += (int)sModifier;
+                    break;
+                case Item.StatusType.MaximumCarryWeight:
+                    MaximumCarryWeight -= (int)sModifier;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            };
+        }
+            
 
         public void AddToInventory(Item item)
         {
@@ -109,39 +142,39 @@ namespace AdventureGame.Player
         public void EquipArmor(Armor armor)
         {
             Console.WriteLine(armor.UseMessage);
-            Console.WriteLine("\nYour armor class increased by " + armor.ArmorClass + ".");
+            Console.WriteLine("\nYour armor class increased by " + armor.StatusModifer + ".");
             EquippedArmor = armor.Name;
             HasEquippedArmor = true;
-            ArmorClass += armor.ArmorClass;
+            ArmorClass += armor.StatusModifer;
             RemoveFromInventory(armor);
         }
 
         public void EquipWeapon(Weapon weapon)
         {
             Console.WriteLine(weapon.UseMessage);
-            Console.WriteLine("\nYour attack damage increased by " + weapon.AttackDamage + ".");
+            Console.WriteLine("\nYour attack damage increased by " + weapon.StatusModifer + ".");
             EquippedWeapon = weapon.Name;
             HasEquippedWeapon = true;
-            AttackDamage += weapon.AttackDamage;
+            AttackDamage += weapon.StatusModifer;
             RemoveFromInventory(weapon);
         }
         public void UnEquipArmor(Armor armor)
         {
             Console.WriteLine("\nYou un equip your " + armor.Name);
-            Console.WriteLine("Your armor class decreases by " + armor.ArmorClass + ".");
+            Console.WriteLine("Your armor class decreases by " + armor.StatusModifer + ".");
             EquippedArmor = "Clothes";
             HasEquippedArmor = false;
-            ArmorClass -= armor.ArmorClass;
+            ArmorClass -= armor.StatusModifer;
             AddToInventory(armor);
         }
 
         public void UnEquipWeapon(Weapon weapon)
         {
             Console.WriteLine("\nYou un equip your " + weapon.Name);
-            Console.WriteLine("Your attack damage decreases by " + weapon.AttackDamage + ".");
+            Console.WriteLine("Your attack damage decreases by " + weapon.StatusModifer + ".");
             EquippedWeapon = "Fists";
             HasEquippedWeapon = false;
-            AttackDamage -= weapon.AttackDamage;
+            AttackDamage -= weapon.StatusModifer;
             AddToInventory(weapon);
         }
 

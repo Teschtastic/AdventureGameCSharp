@@ -11,7 +11,7 @@
     "UseMessage": "\nYou attempt to craft an item.",
     "CanUse": true
   },
-  "Bed in Sean's bedroom'": {
+  "Bed in Sean's bedroom": {
     "Name": "Bed",
     "Description": "Used for sleeping and other things.",
     "UseMessage": "\nYou lay in the bed.",

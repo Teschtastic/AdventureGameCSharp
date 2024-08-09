@@ -1,0 +1,13 @@
+﻿{
+  "Desktop PC": {
+    "Name": "Desktop PC",
+    "Description": "My AMD beast",
+    "UseMessage": "\nYou use the PC to play some games.",
+    "ItemWeight": 50,
+    "CanPickup": false,
+    "CanUse": true,
+    "CanCraft": false,
+    "KindOfItem": "Trainer",
+    "StatusModified": "AttackDamage"
+  }
+}

@@ -1,15 +1,28 @@
-﻿namespace AdventureGame.Items
+﻿using AdventureGame.Game;
+
+namespace AdventureGame.Items
 {
-    public class Armor(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType, int sM) : Item(n, d, uMessage, itW, cPickup, cUse, cC, iType, sType), IEquatable<Armor?>
+    public class Trainer(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType, int sM) : Item(n, d, uMessage, itW, cPickup, cUse, cC, iType, sType), IEquatable<Trainer?>
     {
-        public int StatusModifer { get; set; } = sM;
+        public int StatusModifier { get; set; } = sM;
+
+        public void UseTrainer(GameObject game)
+        {
+            Player.Player player = game.Player;
+            Console.WriteLine(
+                    "\nYou look up fighting techniques\non the internet." +
+                    $"\nYour {sType} goes up by {StatusModifier}.");
+
+            player.UpdatePlayerStatus(sType, StatusModifier);
+            CanUse = false;
+        }
 
         public override bool Equals(object? obj)
         {
-            return Equals(obj as Armor);
+            return Equals(obj as Trainer);
         }
 
-        public bool Equals(Armor? other)
+        public bool Equals(Trainer? other)
         {
             return other is not null &&
                    base.Equals(other) &&
@@ -22,7 +35,7 @@
                    CanCraft == other.CanCraft &&
                    KindOfItem == other.KindOfItem &&
                    StatusModified == other.StatusModified &&
-                   StatusModifer == other.StatusModifer;
+                   StatusModifier == other.StatusModifier;
         }
 
         public override int GetHashCode()
@@ -38,8 +51,9 @@
             hash.Add(CanCraft);
             hash.Add(KindOfItem);
             hash.Add(StatusModified);
-            hash.Add(StatusModifer);
+            hash.Add(StatusModifier);
             return hash.ToHashCode();
         }
+
     }
 }

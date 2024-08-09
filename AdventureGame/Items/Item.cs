@@ -1,35 +1,37 @@
 ﻿namespace AdventureGame.Items
 {
-    public class Item : IEquatable<Item?>
+    public class Item(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType) : IEquatable<Item?>
     {
         public enum ItemType
         {
             Default,
             Armor,
             Weapon,
-            Consumable
+            Consumable,
+            Trainer
         }
 
-        public Item(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, ItemType type)
+        public enum StatusType
         {
-            Name = n;
-            Description = d;
-            UseMessage = uMessage;
-            ItemWeight = itW;
-            CanPickup = cPickup;
-            CanUse = cUse;
-            CanCraft = cC;
-            Type = type;
+            Default,
+            Name,
+            CurrentHealth,
+            MaximumHealth,
+            ArmorClass,
+            AttackDamage,
+            CurrentCarryWeight,
+            MaximumCarryWeight
         }
 
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string UseMessage { get; set; }
-        public int ItemWeight { get; set; }
-        public bool CanPickup { get; set; }
-        public bool CanUse { get; set; }
-        public bool CanCraft { get; set; }
-        public ItemType Type { get; set; }
+        public string Name { get; set; } = n;
+        public string Description { get; set; } = d;
+        public string UseMessage { get; set; } = uMessage;
+        public int ItemWeight { get; set; } = itW;
+        public bool CanPickup { get; set; } = cPickup;
+        public bool CanUse { get; set; } = cUse;
+        public bool CanCraft { get; set; } = cC;
+        public ItemType KindOfItem { get; set; } = iType;
+        public StatusType StatusModified { get; set; } = sType;
 
         public override bool Equals(object? obj)
         {
@@ -46,7 +48,8 @@
                    CanPickup == other.CanPickup &&
                    CanUse == other.CanUse &&
                    CanCraft == other.CanCraft &&
-                   Type == other.Type;
+                   KindOfItem == other.KindOfItem &&
+                   StatusModified == other.StatusModified;
         }
 
         public override int GetHashCode()
@@ -59,7 +62,8 @@
             hash.Add(CanPickup);
             hash.Add(CanUse);
             hash.Add(CanCraft);
-            hash.Add(Type);
+            hash.Add(KindOfItem);
+            hash.Add(StatusModified);
             return hash.ToHashCode();
         }
     }

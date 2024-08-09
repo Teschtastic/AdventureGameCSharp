@@ -7,8 +7,9 @@
         private readonly Dictionary<string, Armor> armors           = new Armors().armorMap;
         private readonly Dictionary<string, Weapon> weapons         = new Weapons().weaponMap;
         private readonly Dictionary<string, Consumable> consumables = new Consumables().consumablesMap;
+        private readonly Dictionary<string, Trainer> trainers       = new Trainers().trainersMap;
 
-        public Dictionary<string, Item> allItems = new();
+        public Dictionary<string, Item> allItems = [];
 
         public AllItems()
         {
@@ -16,6 +17,7 @@
             armors.ToList().ForEach(        x => allItems.Add(x.Key, x.Value));
             weapons.ToList().ForEach(       x => allItems.Add(x.Key, x.Value));
             consumables.ToList().ForEach(   x => allItems.Add(x.Key, x.Value));
+            trainers.ToList().ForEach(      x => allItems.Add(x.Key, x.Value));
         }
 
         public Item? GetItem(string itemName)

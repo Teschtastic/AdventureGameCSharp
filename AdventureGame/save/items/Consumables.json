@@ -7,7 +7,8 @@
     "CanPickup": true,
     "CanUse": true,
     "CanCraft": false,
-    "Type": "Consumable",
+    "KindOfItem": "Consumable",
+    "StatusModified": "MaximumCarryWeight",
     "StatusModifier": 5
   },
   "Water Bottle": {
@@ -18,7 +19,8 @@
     "CanPickup": true,
     "CanUse": true,
     "CanCraft": true,
-    "Type": "Consumable",
+    "KindOfItem": "Consumable",
+    "StatusModified": "MaximumCarryWeight",
     "StatusModifier": 0
   },
   "GFuel": {
@@ -29,7 +31,8 @@
     "CanPickup": true,
     "CanUse": true,
     "CanCraft": true,
-    "Type": "Consumable",
+    "KindOfItem": "Consumable",
+    "StatusModified": "MaximumCarryWeight",
     "StatusModifier": 10
   }
 }

@@ -27,7 +27,7 @@ namespace AdventureGame.Actions
                 //Console.WriteLine("\n" + npc.Name + " says \"" + npc.Message + "\"");
                 DialogueList list = game.GetNPCDialogue(npc.Name);
 
-                npc.ProcessDialogue(game.GetPlayer(), list);
+                npc.ProcessDialogue(game.Player, list);
             }
         }
 
@@ -54,9 +54,8 @@ namespace AdventureGame.Actions
         /* Method used to give an item in your inventory to an NPC */
         public static void GiveItem(GameObject game)
         {
-            Player.Player player  = game.GetPlayer();
+            Player.Player player  = game.Player;
             List<string> inventory = player.Inventory;
-            Room room = game.GetRoomPlayerIsIn();
             NPC npc = game.GetNPCInRoom();
             Item? item = null;
 
@@ -88,7 +87,7 @@ namespace AdventureGame.Actions
         public static void TakeItem(GameObject game)
         {
             NPC npc = game.GetNPCInRoom();
-            Item item;
+            Item? item;
 
             // If there isn't an item in the NPCs inventory, nothing to take
             if (npc.Inventory.Count == 0)
@@ -103,7 +102,7 @@ namespace AdventureGame.Actions
                 if (item != null)
                 {
                     npc.Inventory.Remove(item.Name);
-                    game.GetPlayer().AddToInventory(item);
+                    game.Player.AddToInventory(item);
                     Console.WriteLine("\nYou take the " + item.Name +
                             "\nfrom " + npc.Name);
                 }
@@ -114,7 +113,6 @@ namespace AdventureGame.Actions
         // TODO: Implement
         public static void TradeItem(GameObject game)
         {
-            Room room = game.GetRoomPlayerIsIn();
             NPC npc = game.GetNPCInRoom();
             //Item item;
 
@@ -134,7 +132,7 @@ namespace AdventureGame.Actions
 
         public static void BattleNPC(GameObject game)
         {
-            Player.Player player = game.GetPlayer();
+            Player.Player player = game.Player;
             Room room = game.GetRoomPlayerIsIn();
             NPC npc = game.GetNPCInRoom();
 

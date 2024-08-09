@@ -1,14 +1,19 @@
-﻿namespace AdventureGame.Items
-{
-    public class Consumable : Item, IEquatable<Consumable?>
-    {
-        public Consumable( string n, string d, string uMessage, int itW, bool cPickup, bool cUse,  bool cC, ItemType type, int sM)
-            : base(n, d, uMessage, itW, cPickup, cUse, cC, type)
-        {
-            StatusModifier = sM;
-        }
+﻿using AdventureGame.Game;
 
-        public int StatusModifier { get; set; }
+namespace AdventureGame.Items
+{
+    public class Consumable(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType, int sM) : Item(n, d, uMessage, itW, cPickup, cUse, cC, iType, sType), IEquatable<Consumable?>
+    {
+        public int StatusModifier { get; set; } = sM;
+
+        public void UseConsumable(GameObject game)
+        {
+            Player.Player player = game.Player;
+            Console.WriteLine($"\nYour {sType} increased by {StatusModifier}.");
+            player.UpdatePlayerStatus(sType,StatusModifier);
+            player.RemoveFromInventory(this);
+            player.AddToInventory(game.GetItem("Empty Bottle")!);
+        }
 
         public override bool Equals(object? obj)
         {
@@ -26,7 +31,8 @@
                    CanPickup == other.CanPickup &&
                    CanUse == other.CanUse &&
                    CanCraft == other.CanCraft &&
-                   Type == other.Type &&
+                   KindOfItem == other.KindOfItem &&
+                   StatusModified == other.StatusModified &&
                    StatusModifier == other.StatusModifier;
         }
 
@@ -41,7 +47,8 @@
             hash.Add(CanPickup);
             hash.Add(CanUse);
             hash.Add(CanCraft);
-            hash.Add(Type);
+            hash.Add(KindOfItem);
+            hash.Add(StatusModified);
             hash.Add(StatusModifier);
             return hash.ToHashCode();
         }

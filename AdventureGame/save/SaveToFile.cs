@@ -1,4 +1,5 @@
 ﻿using AdventureGame.Furnitures;
+using AdventureGame.Game;
 using AdventureGame.NPCs;
 using AdventureGame.Rooms;
 using Newtonsoft.Json;
@@ -7,8 +8,8 @@ namespace AdventureGame.save
 {
     public class SaveToFile
     {
-        static string workingDirectory = Environment.CurrentDirectory;
-        static string projectDirectory = Directory.GetParent(workingDirectory)!.Parent!.Parent!.FullName;
+        static readonly string workingDirectory = Environment.CurrentDirectory;
+        static readonly string projectDirectory = Directory.GetParent(workingDirectory)!.Parent!.Parent!.FullName;
         public static void SavePlayerToFile(Player.Player player)
         {
             string saveFilePathJSON = projectDirectory + "/save/player/Player.json";
@@ -57,6 +58,15 @@ namespace AdventureGame.save
 
             File.WriteAllText(saveFilePathJSONnpcs, npcsJSONObject);
             File.WriteAllText(saveFilePathJSONenemies, enemiesJSONObject);
+        }
+
+        public static void SaveGameObjectToFile(GameObject game)
+        {
+            string saveFilePathJSON = projectDirectory + "/save/game/Game.json";
+
+            var gameJSONObject = JsonConvert.SerializeObject(game, Formatting.Indented);
+
+            File.WriteAllText(saveFilePathJSON, gameJSONObject);
         }
     }
 }

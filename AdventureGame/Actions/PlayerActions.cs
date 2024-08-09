@@ -184,10 +184,11 @@ namespace AdventureGame.Actions
 
         public static void SaveGame(GameObject game)
         {
-            SaveToFile.SavePlayerToFile(game.GetPlayer());
+            SaveToFile.SavePlayerToFile(game.Player);
             SaveToFile.SaveRoomsToFile(game.GetRoomsDictionary());
             SaveToFile.SaveContainersToFile(game.GetContainersDictionary());
             SaveToFile.SaveNPCsToFile(game.GetNPCDictionary());
+            SaveToFile.SaveGameObjectToFile(game);
 
             Actions.SaveMessage();
         }

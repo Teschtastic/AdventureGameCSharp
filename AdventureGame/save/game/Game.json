@@ -1,0 +1,951 @@
+{
+  "Player": {
+    "Name": "Sean",
+    "CurrentHealth": 100,
+    "MaximumHealth": 100,
+    "ArmorClass": 15,
+    "AttackDamage": 20,
+    "CurrentCarryWeight": 14,
+    "MaximumCarryWeight": 25,
+    "Inventory": [
+      "Dr. Pepper",
+      "Cardboard boxes",
+      "Cardboard boxes",
+      "Cardboard boxes",
+      "Cardboard boxes",
+      "Water Bottle",
+      "GFuel Powder",
+      "Stabby Thingies"
+    ],
+    "RoomIsIn": "Jeff's bedroom",
+    "EquippedArmor": "Plastic Armor",
+    "HasEquippedArmor": true,
+    "EquippedWeapon": "Steak Knife",
+    "HasEquippedWeapon": true,
+    "KnownRecipes": [
+      "Cardboard Armor",
+      "Stabby Thingies",
+      "Plastic Armor",
+      "GFuel"
+    ],
+    "CurrentQuest": "",
+    "AvailableQuests": [],
+    "CompletedQuests": [],
+    "FailedeQuests": []
+  },
+  "Objects": {
+    "allItems": {
+      "allItems": {
+        "Cardboard boxes": {
+          "Name": "Cardboard boxes",
+          "Description": "What can I say?\nI like ordering from Amazon",
+          "UseMessage": "\nYou fashion the boxes into\na makeshift set of armor.",
+          "ItemWeight": 2,
+          "CanPickup": true,
+          "CanUse": false,
+          "CanCraft": false,
+          "KindOfItem": 0,
+          "StatusModified": 0
+        },
+        "Sean's Toothbrush": {
+          "Name": "Sean's Toothbrush",
+          "Description": "This might be useful.",
+          "UseMessage": "\nYou take the two toothbrushes.",
+          "ItemWeight": 1,
+          "CanPickup": true,
+          "CanUse": false,
+          "CanCraft": false,
+          "KindOfItem": 0,
+          "StatusModified": 0
+        },
+        "Jeff's Toothbrush": {
+          "Name": "Jeff's Toothbrush",
+          "Description": "Is this useful?",
+          "UseMessage": "And craft them into some stabbies.",
+          "ItemWeight": 1,
+          "CanPickup": true,
+          "CanUse": false,
+          "CanCraft": false,
+          "KindOfItem": 0,
+          "StatusModified": 0
+        },
+        "Empty Bottle": {
+          "Name": "Empty Bottle",
+          "Description": "An empty plastic bottle.",
+          "UseMessage": "\nYou used the empty bottle.",
+          "ItemWeight": 1,
+          "CanPickup": true,
+          "CanUse": false,
+          "CanCraft": false,
+          "KindOfItem": 0,
+          "StatusModified": 0
+        },
+        "GFuel Powder": {
+          "Name": "GFuel Powder",
+          "Description": "A dust coursing with energy.",
+          "UseMessage": "\nYou used the empty bottle.",
+          "ItemWeight": 1,
+          "CanPickup": true,
+          "CanUse": false,
+          "CanCraft": false,
+          "KindOfItem": 0,
+          "StatusModified": 0
+        },
+        "Cardboard Armor": {
+          "StatusModifer": 0,
+          "Name": "Cardboard Armor",
+          "Description": "Protects from pointy sharp things.",
+          "UseMessage": "\nYou put on the cardboard armor.\nYou feel more protected.",
+          "ItemWeight": 2,
+          "CanPickup": true,
+          "CanUse": false,
+          "CanCraft": true,
+          "KindOfItem": 1,
+          "StatusModified": 4
+        },
+        "Plastic Armor": {
+          "StatusModifer": 0,
+          "Name": "Plastic Armor",
+          "Description": "Protects from slicy sharp things.",
+          "UseMessage": "\nYou put on the plastic armor.\nYou feel more protected.",
+          "ItemWeight": 4,
+          "CanPickup": true,
+          "CanUse": false,
+          "CanCraft": true,
+          "KindOfItem": 1,
+          "StatusModified": 4
+        },
+        "Stabby Thingies": {
+          "StatusModifer": 0,
+          "Name": "Stabby Thingies",
+          "Description": "Pointy and sharp.",
+          "UseMessage": "\nOne pointy 'brush' for each hand",
+          "ItemWeight": 1,
+          "CanPickup": true,
+          "CanUse": false,
+          "CanCraft": true,
+          "KindOfItem": 2,
+          "StatusModified": 5
+        },
+        "Steak Knife": {
+          "StatusModifer": 0,
+          "Name": "Steak Knife",
+          "Description": "Sharp for cutting meat.",
+          "UseMessage": "\nSlicey slice.",
+          "ItemWeight": 2,
+          "CanPickup": true,
+          "CanUse": false,
+          "CanCraft": false,
+          "KindOfItem": 2,
+          "StatusModified": 5
+        },
+        "Dr. Pepper": {
+          "StatusModifier": 5,
+          "Name": "Dr. Pepper",
+          "Description": "Yummy, delicious nectar of the gods.",
+          "UseMessage": "\nYou drink your Dr. Pepper.\nYou feel powerful!",
+          "ItemWeight": 2,
+          "CanPickup": true,
+          "CanUse": true,
+          "CanCraft": false,
+          "KindOfItem": 3,
+          "StatusModified": 7
+        },
+        "Water Bottle": {
+          "StatusModifier": 0,
+          "Name": "Water Bottle",
+          "Description": "Bottle full of water.",
+          "UseMessage": "\nYou drink your water.\nYou don't'feel different.",
+          "ItemWeight": 2,
+          "CanPickup": true,
+          "CanUse": true,
+          "CanCraft": true,
+          "KindOfItem": 3,
+          "StatusModified": 7
+        },
+        "GFuel": {
+          "StatusModifier": 10,
+          "Name": "GFuel",
+          "Description": "Made out of raw energy.",
+          "UseMessage": "\nYou drink your GFuel.\nYou feel energy course through you!",
+          "ItemWeight": 2,
+          "CanPickup": true,
+          "CanUse": true,
+          "CanCraft": true,
+          "KindOfItem": 3,
+          "StatusModified": 7
+        },
+        "Desktop PC": {
+          "StatusModifier": 0,
+          "Name": "Desktop PC",
+          "Description": "My AMD beast",
+          "UseMessage": "\nYou use the PC to play some games.",
+          "ItemWeight": 50,
+          "CanPickup": false,
+          "CanUse": true,
+          "CanCraft": false,
+          "KindOfItem": 4,
+          "StatusModified": 5
+        }
+      }
+    },
+    "allLUTs": {
+      "allLUTs": {
+        "basic fridge": {
+          "pools": [
+            {
+              "rolls": {
+                "min": 1,
+                "max": 2
+              },
+              "entries": [
+                {
+                  "type": "consumable",
+                  "name": "Dr. Pepper",
+                  "weight": 2,
+                  "functions": [
+                    {
+                      "function": "SetCount",
+                      "count": {
+                        "min": 1,
+                        "max": 3
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "consumable",
+                  "name": "GFuel",
+                  "weight": 1,
+                  "functions": [
+                    {
+                      "function": "SetCount",
+                      "count": {
+                        "min": 0,
+                        "max": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "basic trash": {
+          "pools": [
+            {
+              "rolls": {
+                "min": 3,
+                "max": 8
+              },
+              "entries": [
+                {
+                  "type": "item",
+                  "name": "Empty Bottle",
+                  "weight": 1
+                },
+                {
+                  "type": "item",
+                  "name": "Cardboard boxes",
+                  "weight": 1
+                }
+              ]
+            }
+          ]
+        },
+        "basic closet": {
+          "pools": [
+            {
+              "rolls": {
+                "min": 1,
+                "max": 2
+              },
+              "entries": [
+                {
+                  "type": "armor",
+                  "name": "Plastic Armor",
+                  "weight": 1,
+                  "functions": [
+                    {
+                      "function": "SetCount",
+                      "count": {
+                        "min": 0,
+                        "max": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "armor",
+                  "name": "Cardboard Armor",
+                  "weight": 2,
+                  "functions": [
+                    {
+                      "function": "SetCount",
+                      "count": {
+                        "min": 1,
+                        "max": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "allFurnitures": {
+      "allFurnitures": {
+        "Camping chair in Living room": {
+          "Name": "Camping chair",
+          "Description": "The only furniture in the living room",
+          "UseMessage": "\nThe chair's magical properties seem\nto have healed you to full health",
+          "CanUse": true
+        },
+        "Crafting Table in Dining room": {
+          "Name": "Crafting Table",
+          "Description": "Used to craft things.\nPresumably.",
+          "UseMessage": "\nYou attempt to craft an item.",
+          "CanUse": true
+        },
+        "Bed in Sean's bedroom": {
+          "Name": "Bed",
+          "Description": "Used for sleeping and other things.",
+          "UseMessage": "\nYou lay in the bed.",
+          "CanUse": true
+        },
+        "Bed in Jeff's bedroom": {
+          "Name": "Bed",
+          "Description": "Used for sleeping and other things.",
+          "UseMessage": "\nYou lay in the bed.",
+          "CanUse": true
+        },
+        "Sink in Sean's bathroom": {
+          "Name": "Sink",
+          "Description": "Water comes from here.",
+          "UseMessage": "\nYou use the sink.",
+          "CanUse": true
+        },
+        "Chest in Sean's bathroom": {
+          "InventoryNames": [],
+          "FirstOpen": true,
+          "Lut": "",
+          "Name": "Chest",
+          "Description": "A run-of-the-mill chest.",
+          "UseMessage": "\nYou open the chest to see what's inside.",
+          "CanUse": true
+        },
+        "Chest in Jeff's bathroom": {
+          "InventoryNames": [],
+          "FirstOpen": true,
+          "Lut": "",
+          "Name": "Chest",
+          "Description": "A run-of-the-mill chest.",
+          "UseMessage": "\nYou open the chest to see what's inside.",
+          "CanUse": true
+        },
+        "Refrigerator in Kitchen": {
+          "InventoryNames": [],
+          "FirstOpen": false,
+          "Lut": "basic fridge",
+          "Name": "Refrigerator",
+          "Description": "Used to keep things cold.",
+          "UseMessage": "\nYou check for something cold inside.",
+          "CanUse": true
+        },
+        "Trash in Outer hallway": {
+          "InventoryNames": [],
+          "FirstOpen": false,
+          "Lut": "basic trash",
+          "Name": "Trash",
+          "Description": "Used to throw things away.",
+          "UseMessage": "\nYou dig in the trash.",
+          "CanUse": true
+        },
+        "Closet in Inner hallway": {
+          "InventoryNames": [],
+          "FirstOpen": false,
+          "Lut": "basic closet",
+          "Name": "Closet",
+          "Description": "Used to store clothes.",
+          "UseMessage": "\nYou open the closet.",
+          "CanUse": true
+        }
+      }
+    },
+    "allNPCs": {
+      "allNPCs": {
+        "Claudia": {
+          "Name": "Claudia",
+          "Dialogue": "Claudia dialogue",
+          "CurrentHealth": 100,
+          "MaximumHealth": 100,
+          "ArmorClass": 0,
+          "AttackDamage": 5,
+          "IsFriendly": true,
+          "IsAlive": true,
+          "EquippedArmor": "Clothes",
+          "HasEquippedArmor": false,
+          "EquippedWeapon": "Fists",
+          "HasEquippedWeapon": false,
+          "Inventory": [
+            "Dr. Pepper",
+            "Dr. Pepper"
+          ]
+        },
+        "Michaela": {
+          "Name": "Michaela",
+          "Dialogue": "Michaela dialogue",
+          "CurrentHealth": 100,
+          "MaximumHealth": 100,
+          "ArmorClass": 0,
+          "AttackDamage": 5,
+          "IsFriendly": true,
+          "IsAlive": true,
+          "EquippedArmor": "Clothes",
+          "HasEquippedArmor": false,
+          "EquippedWeapon": "Fists",
+          "HasEquippedWeapon": false,
+          "Inventory": [
+            "Cardboard Armor"
+          ]
+        },
+        "Jeff": {
+          "Name": "Jeff",
+          "Dialogue": "Jeff dialogue",
+          "CurrentHealth": 0,
+          "MaximumHealth": 100,
+          "ArmorClass": 10,
+          "AttackDamage": 15,
+          "IsFriendly": false,
+          "IsAlive": false,
+          "EquippedArmor": "Cardboard Armor",
+          "HasEquippedArmor": true,
+          "EquippedWeapon": "Stabby Thingies",
+          "HasEquippedWeapon": true,
+          "Inventory": []
+        }
+      }
+    },
+    "allRooms": {
+      "allRooms": {
+        "Sean's bedroom": {
+          "Name": "Sean's bedroom",
+          "StartMessage": "You start in Sean's bedroom",
+          "EnterMessage": "You've entered Sean's bedroom",
+          "LeaveMessage": "You've left Sean's bedroom",
+          "InMessage": "\nYou're in Sean's bedroom",
+          "ConnRooms": {
+            "N": "",
+            "E": "Inner hallway",
+            "S": "Sean's bathroom",
+            "W": ""
+          },
+          "HasItem": true,
+          "ItemInRoom": "Desktop PC",
+          "HasNPC": true,
+          "NPCInRoom": "Claudia",
+          "HasFurniture": true,
+          "FurnitureInRoom": "Bed"
+        },
+        "Sean's bathroom": {
+          "Name": "Sean's bathroom",
+          "StartMessage": "You start in Sean's bathroom",
+          "EnterMessage": "You've entered Sean's bathroom",
+          "LeaveMessage": "You've left Sean's bathroom",
+          "InMessage": "\nYou're in Sean's bathroom",
+          "ConnRooms": {
+            "N": "Sean's bedroom",
+            "E": "",
+            "S": "",
+            "W": ""
+          },
+          "HasItem": true,
+          "ItemInRoom": "Sean's Toothbrush",
+          "HasNPC": false,
+          "NPCInRoom": "",
+          "HasFurniture": true,
+          "FurnitureInRoom": "Sink"
+        },
+        "Inner hallway": {
+          "Name": "Inner hallway",
+          "StartMessage": "You start in Inner hallway",
+          "EnterMessage": "You've entered Inner hallway",
+          "LeaveMessage": "You've left Inner hallway",
+          "InMessage": "\nYou're in Inner hallway",
+          "ConnRooms": {
+            "N": "Outer hallway",
+            "E": "Jeff's bedroom",
+            "S": "Jeff's bathroom",
+            "W": "Sean's bedroom"
+          },
+          "HasItem": false,
+          "ItemInRoom": "",
+          "HasNPC": false,
+          "NPCInRoom": "",
+          "HasFurniture": true,
+          "FurnitureInRoom": "Closet"
+        },
+        "Jeff's bathroom": {
+          "Name": "Jeff's bathroom",
+          "StartMessage": "You start in Jeff's bathroom",
+          "EnterMessage": "You've entered Jeff's bathroom",
+          "LeaveMessage": "You've left Jeff's bathroom",
+          "InMessage": "\nYou're in Jeff's bathroom",
+          "ConnRooms": {
+            "N": "Inner hallway",
+            "E": "",
+            "S": "",
+            "W": ""
+          },
+          "HasItem": true,
+          "ItemInRoom": "Jeff's Toothbrush",
+          "HasNPC": false,
+          "NPCInRoom": "",
+          "HasFurniture": true,
+          "FurnitureInRoom": "Chest"
+        },
+        "Jeff's bedroom": {
+          "Name": "Jeff's bedroom",
+          "StartMessage": "You start in Jeff's bedroom",
+          "EnterMessage": "You've entered Jeff's bedroom",
+          "LeaveMessage": "You've left Jeff's bedroom",
+          "InMessage": "\nYou're in Jeff's bedroom",
+          "ConnRooms": {
+            "N": "",
+            "E": "",
+            "S": "",
+            "W": "Inner hallway"
+          },
+          "HasItem": false,
+          "ItemInRoom": "",
+          "HasNPC": true,
+          "NPCInRoom": "Jeff",
+          "HasFurniture": true,
+          "FurnitureInRoom": "Bed"
+        },
+        "Outer hallway": {
+          "Name": "Outer hallway",
+          "StartMessage": "You start in Outer hallway",
+          "EnterMessage": "You've entered Outer hallway",
+          "LeaveMessage": "You've left Outer hallway",
+          "InMessage": "\nYou're in Outer hallway",
+          "ConnRooms": {
+            "N": "Kitchen",
+            "E": "Dining room",
+            "S": "Inner hallway",
+            "W": "Living room"
+          },
+          "HasItem": false,
+          "ItemInRoom": "",
+          "HasNPC": false,
+          "NPCInRoom": "",
+          "HasFurniture": true,
+          "FurnitureInRoom": "Trash"
+        },
+        "Dining room": {
+          "Name": "Dining room",
+          "StartMessage": "You start in Dining room",
+          "EnterMessage": "You've entered Dining room",
+          "LeaveMessage": "You've left Dining room",
+          "InMessage": "\nYou're in Dining room",
+          "ConnRooms": {
+            "N": "",
+            "E": "",
+            "S": "",
+            "W": "Outer hallway"
+          },
+          "HasItem": true,
+          "ItemInRoom": "Cardboard boxes",
+          "HasNPC": false,
+          "NPCInRoom": "",
+          "HasFurniture": true,
+          "FurnitureInRoom": "Crafting Table"
+        },
+        "Kitchen": {
+          "Name": "Kitchen",
+          "StartMessage": "You start in Kitchen",
+          "EnterMessage": "You've entered Kitchen",
+          "LeaveMessage": "You've left Kitchen",
+          "InMessage": "\nYou're in Kitchen",
+          "ConnRooms": {
+            "N": "",
+            "E": "",
+            "S": "Outer hallway",
+            "W": ""
+          },
+          "HasItem": false,
+          "ItemInRoom": "",
+          "HasNPC": false,
+          "NPCInRoom": "",
+          "HasFurniture": true,
+          "FurnitureInRoom": "Refrigerator"
+        },
+        "Living room": {
+          "Name": "Living room",
+          "StartMessage": "You start in Living room",
+          "EnterMessage": "You've entered Living room",
+          "LeaveMessage": "You've left Living room",
+          "InMessage": "\nYou're in Living room",
+          "ConnRooms": {
+            "N": "",
+            "E": "Outer hallway",
+            "S": "",
+            "W": "Porch"
+          },
+          "HasItem": false,
+          "ItemInRoom": "",
+          "HasNPC": false,
+          "NPCInRoom": "",
+          "HasFurniture": true,
+          "FurnitureInRoom": "Camping chair"
+        },
+        "Porch": {
+          "Name": "Porch",
+          "StartMessage": "You start in Porch",
+          "EnterMessage": "You've entered Porch",
+          "LeaveMessage": "You've left Porch",
+          "InMessage": "\nYou're in Porch",
+          "ConnRooms": {
+            "N": "",
+            "E": "Living room",
+            "S": "",
+            "W": ""
+          },
+          "HasItem": false,
+          "ItemInRoom": "",
+          "HasNPC": true,
+          "NPCInRoom": "Michaela",
+          "HasFurniture": false,
+          "FurnitureInRoom": ""
+        }
+      }
+    },
+    "allRecipes": {
+      "allRecipes": {
+        "Cardboard Armor": {
+          "InputItems": [
+            "Cardboard boxes",
+            "Cardboard boxes"
+          ],
+          "OutputItem": "Cardboard Armor"
+        },
+        "Stabby Thingies": {
+          "InputItems": [
+            "Sean's Toothbrush",
+            "Jeff's Toothbrush"
+          ],
+          "OutputItem": "Stabby Thingies"
+        },
+        "Plastic Armor": {
+          "InputItems": [
+            "Empty Bottle",
+            "Empty Bottle",
+            "Empty Bottle",
+            "Empty Bottle",
+            "Empty Bottle"
+          ],
+          "OutputItem": "Plastic Armor"
+        },
+        "GFuel": {
+          "InputItems": [
+            "Water Bottle",
+            "GFuel Powder"
+          ],
+          "OutputItem": "GFuel"
+        }
+      }
+    },
+    "allDialogues": {
+      "allDialogues": {
+        "Claudia": {
+          "Dialogues": [
+            {
+              "Nodes": [
+                {
+                  "Options": [
+                    {
+                      "Text": "Hi Claudi!",
+                      "DestinationNodeId": 1
+                    },
+                    {
+                      "Text": "Goodbye Claudi!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 0,
+                  "Text": "\nHi Seanie!",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                },
+                {
+                  "Options": [
+                    {
+                      "Text": "Quest available?",
+                      "DestinationNodeId": 4
+                    },
+                    {
+                      "Text": "Trade.",
+                      "DestinationNodeId": 5
+                    },
+                    {
+                      "Text": "Take.",
+                      "DestinationNodeId": 7
+                    },
+                    {
+                      "Text": "Give.",
+                      "DestinationNodeId": 8
+                    },
+                    {
+                      "Text": "Chat.",
+                      "DestinationNodeId": 6
+                    },
+                    {
+                      "Text": "Goodbye Claudi!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 1,
+                  "Text": "\nHow can I help you?",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                },
+                {
+                  "Options": [
+                    {
+                      "Text": "Keep talking.",
+                      "DestinationNodeId": 1
+                    },
+                    {
+                      "Text": "Goodbye Claudi!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 2,
+                  "Text": "\nThat's good to hear.",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                },
+                {
+                  "Options": [
+                    {
+                      "Text": "Keep talking.",
+                      "DestinationNodeId": 1
+                    },
+                    {
+                      "Text": "Goodbye Claudi!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 3,
+                  "Text": "\nI'm sorry to hear that.",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                },
+                {
+                  "Options": [
+                    {
+                      "Text": "Keep talking.",
+                      "DestinationNodeId": 1
+                    },
+                    {
+                      "Text": "Goodbye Claudi!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 4,
+                  "Text": "\nUnfortunately not.\nCheck again later.",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                },
+                {
+                  "Options": [
+                    {
+                      "Text": "Keep talking.",
+                      "DestinationNodeId": 1
+                    },
+                    {
+                      "Text": "Goodbye Claudi!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 5,
+                  "Text": "\nLet's trade.",
+                  "HasMethod": true,
+                  "Method": "TradeItem",
+                  "Params": [
+                    "player"
+                  ]
+                },
+                {
+                  "Options": [
+                    {
+                      "Text": "Good.",
+                      "DestinationNodeId": 2
+                    },
+                    {
+                      "Text": "Bad.",
+                      "DestinationNodeId": 3
+                    }
+                  ],
+                  "NodeId": 6,
+                  "Text": "\nHow are you?",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                },
+                {
+                  "Options": [
+                    {
+                      "Text": "Keep talking.",
+                      "DestinationNodeId": 1
+                    },
+                    {
+                      "Text": "Goodbye Claudi!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 7,
+                  "Text": "\nWhat would you like?",
+                  "HasMethod": true,
+                  "Method": "TakeItem",
+                  "Params": [
+                    "player"
+                  ]
+                },
+                {
+                  "Options": [
+                    {
+                      "Text": "Keep talking.",
+                      "DestinationNodeId": 1
+                    },
+                    {
+                      "Text": "Goodbye Claudi!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 8,
+                  "Text": "\nWhat are you giving me?",
+                  "HasMethod": true,
+                  "Method": "GiveItem",
+                  "Params": [
+                    "player"
+                  ]
+                },
+                {
+                  "Options": [],
+                  "NodeId": -1,
+                  "Text": "\nGoodbye Seanie!",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                }
+              ]
+            }
+          ],
+          "Name": "Claudia dialogue"
+        },
+        "Jeff": {
+          "Dialogues": [
+            {
+              "Nodes": [
+                {
+                  "Options": [
+                    {
+                      "Text": "Hey Gennick!",
+                      "DestinationNodeId": 1
+                    },
+                    {
+                      "Text": "Goodbye Gennick!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 0,
+                  "Text": "\nHey Tesch!\n",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                },
+                {
+                  "Options": [
+                    {
+                      "Text": "Goodbye Gennick!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 1,
+                  "Text": "\nTalk to you later.\n",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                },
+                {
+                  "Options": [],
+                  "NodeId": -1,
+                  "Text": "\nGoodbye Tesch!",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                }
+              ]
+            }
+          ],
+          "Name": "Jeff dialogue"
+        },
+        "Michaela": {
+          "Dialogues": [
+            {
+              "Nodes": [
+                {
+                  "Options": [
+                    {
+                      "Text": "My man!",
+                      "DestinationNodeId": 1
+                    },
+                    {
+                      "Text": "Goodbye Michaela!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 0,
+                  "Text": "\nHey Tesch!\n",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                },
+                {
+                  "Options": [
+                    {
+                      "Text": "Goodbye Michaela!",
+                      "DestinationNodeId": -1
+                    }
+                  ],
+                  "NodeId": 1,
+                  "Text": "\nMy man!\n",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                },
+                {
+                  "Options": [],
+                  "NodeId": -1,
+                  "Text": "\nGoodbye Tesch!",
+                  "HasMethod": false,
+                  "Method": "",
+                  "Params": []
+                }
+              ]
+            }
+          ],
+          "Name": "Michaela dialogue"
+        }
+      }
+    }
+  }
+}
