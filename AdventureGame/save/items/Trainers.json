@@ -8,6 +8,7 @@
     "CanUse": true,
     "CanCraft": false,
     "KindOfItem": "Trainer",
-    "StatusModified": "AttackDamage"
+    "StatusModified": "AttackDamage",
+    "StatusModifier":  10
   }
 }

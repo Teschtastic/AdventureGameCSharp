@@ -19,10 +19,9 @@ namespace AdventureGame.Actions
         public static void Move(GameObject game)
         {
             string move = game.GetPlayerMove();
-            string moveRoom = "";
-
             Room currentRoom = game.GetRoomPlayerIsIn();
 
+            string moveRoom;
             if (!currentRoom.ConnRooms.TryGetValue(move, out moveRoom!))
             {
                 Console.WriteLine("\nInvalid direction.");
@@ -93,19 +92,11 @@ namespace AdventureGame.Actions
         public static void UseItemInRoom(GameObject game)
         {
             Room room = game.GetRoomPlayerIsIn();
-            Item? item = game.GetItemInRoom();
 
             if (room.HasItem)
             {
-                if (item!.CanUse)
-                {
-                    Console.WriteLine(item.UseMessage);
-                    UsedItemOnPlayer.UseItem(game, item);
-                }
-                else
-                {
-                    Console.WriteLine("\nYou can't use the " + item.Name);
-                }
+                Item item = game.GetItemInRoom()!;
+                item.UseItem(game);
             }
             else
             {

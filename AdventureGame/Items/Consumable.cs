@@ -6,13 +6,32 @@ namespace AdventureGame.Items
     {
         public int StatusModifier { get; set; } = sM;
 
+        public override void UseItem(GameObject game)
+        {
+            if (CanUseItem())
+            {
+                Player.Player player = game.Player;
+
+                Console.WriteLine(UseMessage);
+                Console.WriteLine($"\nYour {StatusModified} increased by {StatusModifier}.");
+                player.UpdatePlayerStatus(StatusModified, StatusModifier);
+                player.RemoveFromInventory(this);
+                player.AddToInventory(game.GetItem("Empty Bottle")!);
+            }
+        }
+
         public void UseConsumable(GameObject game)
         {
-            Player.Player player = game.Player;
-            Console.WriteLine($"\nYour {StatusModified} increased by {StatusModifier}.");
-            player.UpdatePlayerStatus(StatusModified, StatusModifier);
-            player.RemoveFromInventory(this);
-            player.AddToInventory(game.GetItem("Empty Bottle")!);
+            if (CanUseItem())
+            {
+                Player.Player player = game.Player;
+
+                Console.WriteLine(UseMessage);
+                Console.WriteLine($"\nYour {StatusModified} increased by {StatusModifier}.");
+                player.UpdatePlayerStatus(StatusModified, StatusModifier);
+                player.RemoveFromInventory(this);
+                player.AddToInventory(game.GetItem("Empty Bottle")!); 
+            }
         }
 
         public override bool Equals(object? obj)

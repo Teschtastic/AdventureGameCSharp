@@ -6,15 +6,32 @@ namespace AdventureGame.Items
     {
         public int StatusModifier { get; set; } = sM;
 
-        public void UseTrainer(GameObject game)
+        public override void UseItem(GameObject game)
         {
             Player.Player player = game.Player;
+            string direction = StatusModifier >= 0 ? "increases" : "decreases";
+
+            Console.WriteLine(UseMessage);
             Console.WriteLine(
                     "\nYou look up fighting techniques\non the internet." +
-                    $"\nYour {StatusModified} goes up by {StatusModifier}.");
+                    $"\nYour {StatusModified} {direction} by {StatusModifier}.");
 
             player.UpdatePlayerStatus(StatusModified, StatusModifier);
             CanUse = false;
+        }
+
+        public void UseTrainer(GameObject game)
+        {
+            if (CanUseItem())
+            {
+                Player.Player player = game.Player;
+                Console.WriteLine(
+                        "\nYou look up fighting techniques\non the internet." +
+                        $"\nYour {StatusModified} goes up by {StatusModifier}.");
+
+                player.UpdatePlayerStatus(StatusModified, StatusModifier);
+                CanUse = false;
+            }
         }
 
         public override bool Equals(object? obj)

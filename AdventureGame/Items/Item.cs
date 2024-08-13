@@ -1,4 +1,6 @@
-﻿namespace AdventureGame.Items
+﻿using AdventureGame.Game;
+
+namespace AdventureGame.Items
 {
     public class Item(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType) : IEquatable<Item?>
     {
@@ -32,6 +34,23 @@
         public bool CanCraft { get; set; } = cC;
         public ItemType KindOfItem { get; set; } = iType;
         public StatusType StatusModified { get; set; } = sType;
+
+        public bool CanUseItem()
+        {
+
+            if (!CanUse)
+            {
+                Console.WriteLine("\nYou can't use " + Name);
+                return false;
+            }
+            return true;
+        }
+
+        public virtual void UseItem(GameObject game)
+        {
+            if (CanUseItem())
+                Console.WriteLine("\nThis doesn't seem to help you");
+        }
 
         public override bool Equals(object? obj)
         {
