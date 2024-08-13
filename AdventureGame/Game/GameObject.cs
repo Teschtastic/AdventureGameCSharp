@@ -139,7 +139,7 @@ namespace AdventureGame.Game
 
         public List<Container> GetContainersList()
         {
-            return AllObjects.allFurnitures.ReturnContainers().Values.ToList();
+            return [.. AllObjects.allFurnitures.ReturnContainers().Values];
         }
 
         public Dictionary<string, Container> GetContainersDictionary()
@@ -164,7 +164,7 @@ namespace AdventureGame.Game
 
         public Item? GetItemInInventory(List<Item> inventory)
         {
-            List<string> items = new();
+            List<string> items = [];
             foreach (Item i in inventory)
             {  
                 items.Add(i.Name); 
@@ -198,7 +198,7 @@ namespace AdventureGame.Game
             return AllObjects.allDialogues.GetDialogueList(NPCName);
         }
 
-        public LUT GetLUT(string lut)
+        public LUT? GetLUT(string lut)
         {
             return AllObjects.allLUTs.GetLUT(lut);
         }

@@ -9,7 +9,7 @@ namespace AdventureGame.Actions
         /* Method used to describe an item in your inventory */
         public static void DescribeItem(GameObject game)
         {
-            List<string> itemsToDescribe = new();
+            List<string> itemsToDescribe = [];
             List<Item> inventory = game.GetItemsInInventory();
 
             Item? itemInRoom = game.GetItemInRoom();
@@ -157,7 +157,7 @@ namespace AdventureGame.Actions
         public static void EquipItem(GameObject game)
         {
             List<Item> playerInventory = game.GetItemsInInventory();
-            List<string> weaponArmorInventory = new();
+            List<string> weaponArmorInventory = [];
             Item? item;
 
             foreach (Item i in playerInventory)

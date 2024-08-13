@@ -4,19 +4,11 @@ using AdventureGame.Items;
 
 namespace AdventureGame.Furnitures
 {
-    public class Container : Furniture
+    public class Container(string n, string d, string uMessage, bool cUse, bool firstOpen, string lut) : Furniture(n, d, uMessage, cUse)
     {
-        public Container(string n, string d, string uMessage, bool cUse, bool firstOpen, string lut)
-            : base(n, d, uMessage, cUse)
-        {
-            InventoryNames  = new();
-            FirstOpen       = firstOpen;
-            Lut             = lut;
-        }
-
-        public List<string> InventoryNames  { get; set; }
-        public bool         FirstOpen       { get; set; }
-        public string       Lut             { get; set; }
+        public List<string> InventoryNames { get; set; } = [];
+        public bool FirstOpen { get; set; } = firstOpen;
+        public string Lut { get; set; } = lut;
 
         public void AddToInventory(Item item)
         {
@@ -120,7 +112,7 @@ namespace AdventureGame.Furnitures
                     Console.WriteLine("\n What would you like to take: \n");
                     int i = 1;
                     int totalWeight = 0;
-                    Item? item;
+                    Item item;
 
                     // Choice for which item to take: one, all, or none
                     foreach (Item it in containerInventory)
@@ -161,7 +153,7 @@ namespace AdventureGame.Furnitures
                         // Takes the item the player chose from the inventory
                         else
                         {
-                            item = game.GetItem(containerInventory[int.Parse(itemIndex) - 1].Name);
+                            item = game.GetItem(containerInventory[int.Parse(itemIndex) - 1].Name)!;
                             if ((player.CurrentCarryWeight + item.ItemWeight) < player.MaximumCarryWeight)
                             {
                                 Console.WriteLine("\n You take the " + item.Name);

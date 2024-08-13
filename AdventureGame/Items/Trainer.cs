@@ -11,9 +11,9 @@ namespace AdventureGame.Items
             Player.Player player = game.Player;
             Console.WriteLine(
                     "\nYou look up fighting techniques\non the internet." +
-                    $"\nYour {sType} goes up by {StatusModifier}.");
+                    $"\nYour {StatusModified} goes up by {StatusModifier}.");
 
-            player.UpdatePlayerStatus(sType, StatusModifier);
+            player.UpdatePlayerStatus(StatusModified, StatusModifier);
             CanUse = false;
         }
 
