@@ -1,23 +1,23 @@
-﻿using AdventureGame.Globals;
-using AdventureGame.Rooms;
+﻿using AdventureGame.Rooms;
 using AdventureGame.Furnitures;
+using AdventureGame.Game;
 
 namespace AdventureGame.Actions
 {
     internal class FurnitureActions
     {
         /* Method used to use a furniture */
-        public static void UseFurniture(Player.Player player)
+        public static void UseFurniture(GameObject game)
         {
-            Room room = AllObjects.allRooms.GetRoom(player.RoomIsIn);
+            Room room = game.GetRoomPlayerIsIn();
             if (room.HasFurniture)
             {
-                Furniture furniture = AllObjects.allFurnitures.GetFurniture(room.FurnitureInRoom + " in " + room.Name);
+                Furniture furniture = game.GetFurnitureInRoom();
 
-                if (furniture.CanUse)
+                if (furniture != null && furniture.CanUse)
                 {
                     Console.WriteLine(furniture.UseMessage);
-                    UsedFurnitureOnPlayer.UseFurniture(player);
+                    UsedFurnitureOnPlayer.UseFurniture(game);
                 }
                 else
                     Console.WriteLine("\nYou can't use this furniture");
@@ -29,10 +29,10 @@ namespace AdventureGame.Actions
         }
 
         /* Method used to describe a furniture */
-        public static void DescribeFurniture(Player.Player player)
+        public static void DescribeFurniture(GameObject game)
         {
-            Room room = AllObjects.allRooms.GetRoom(player.RoomIsIn);
-            Furniture furniture = AllObjects.allFurnitures.GetFurniture(room.FurnitureInRoom + " in " + room.Name);
+            Room room = game.GetRoomPlayerIsIn();
+            Furniture furniture = game.GetFurnitureInRoom();
 
             if (furniture != null && room.HasFurniture)
             {

@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
 
-namespace AdventureGame.Globals
+namespace AdventureGame.Game
 {
     public class GlobalMethods
     {
         public static object? CallByName<T>(T a, string name, object[] paramsToPass)
         {
             //Search public methods
-            MethodInfo? method = a.GetType().GetMethod(name);
+            MethodInfo? method = a!.GetType().GetMethod(name);
             if (method == null)
             {
                 Console.WriteLine($"Method {name} not found on type {a.GetType()}.");

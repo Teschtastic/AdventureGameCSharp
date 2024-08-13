@@ -1,5 +1,4 @@
-﻿using AdventureGame.Globals;
-using AdventureGame.Items;
+﻿using AdventureGame.Items;
 using AdventureGame.Rooms;
 
 namespace AdventureGame.Player
@@ -13,12 +12,12 @@ namespace AdventureGame.Player
             RoomIsIn = "";
             EquippedArmor = "";
             EquippedWeapon = "";
-            Inventory = new();
-            KnownRecipes = new();
+            Inventory = [];
+            KnownRecipes = [];
             CurrentQuest = "";
-            AvailableQuests = new();
-            CompletedQuests = new();
-            FailedeQuests = new();
+            AvailableQuests = [];
+            CompletedQuests = [];
+            FailedeQuests = [];
         }
 
         public string       Name                { get; set; }
@@ -40,19 +39,55 @@ namespace AdventureGame.Player
         public List<string> CompletedQuests     { get; set; }
         public List<string> FailedeQuests       { get; set; }
 
+        public Player ShallowCopy()
+        {
+            return (Player)MemberwiseClone();
+        }
+
+        public Player DeepCopy()
+        {
+             Player other = (Player)MemberwiseClone();
+            other.Name = Name + "Copy";
+            return other;
+        }
+
+        public void UpdatePlayerStatus(Item.StatusType sType, object sModifier)
+        {
+            switch (sType)
+            {
+                case Item.StatusType.Default:
+                    throw new NotImplementedException();
+                case Item.StatusType.Name:
+                    Name = (string)sModifier;
+                    break;
+                case Item.StatusType.CurrentHealth: 
+                    CurrentHealth += (int)sModifier;
+                    break;
+                case Item.StatusType.MaximumHealth:
+                    MaximumHealth += (int)sModifier;
+                    break;
+                case Item.StatusType.ArmorClass:
+                    ArmorClass += (int)sModifier;
+                    break;
+                case Item.StatusType.AttackDamage:
+                    AttackDamage += (int)sModifier;
+                    break;
+                case Item.StatusType.CurrentCarryWeight:
+                    CurrentCarryWeight += (int)sModifier;
+                    break;
+                case Item.StatusType.MaximumCarryWeight:
+                    MaximumCarryWeight += (int)sModifier;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            };
+        }
+            
+
         public void AddToInventory(Item item)
         {
             Inventory.Add(item.Name);
             CurrentCarryWeight += item.ItemWeight;
-        }
-
-        public void AddToInventory(string itemName)
-        {
-            var item = AllObjects.allItems.GetItem(itemName);
-            if (item != null)
-            {
-                AddToInventory(item);
-            }
         }
 
         public void AddToInventory(List<Item> items)
@@ -63,27 +98,10 @@ namespace AdventureGame.Player
             }
         }
 
-        public void AddToInventory(List<string> itemNames)
-        {
-            foreach (string itemName in itemNames)
-            {
-                AddToInventory(itemName);
-            }
-        }
-
         public void RemoveFromInventory(Item item)
         {
             Inventory.Remove(item.Name);
             CurrentCarryWeight -= item.ItemWeight;
-        }
-
-        public void RemoveFromInventory(string itemName)
-        {
-            var item = AllObjects.allItems.GetItem(itemName);
-            if (item != null)
-            {
-                RemoveFromInventory(item);
-            }
         }
 
         public void RemoveFromInventory(List<Item> items)
@@ -91,14 +109,6 @@ namespace AdventureGame.Player
             foreach (Item item in items)
             {
                 RemoveFromInventory(item);
-            }
-        }
-
-        public void RemoveFromInventory(List<string> itemNames)
-        {
-            foreach (string itemName in itemNames)
-            {
-                RemoveFromInventory(itemName);
             }
         }
 
@@ -141,6 +151,45 @@ namespace AdventureGame.Player
             }
         }
 
+        public void EquipArmor(Armor armor)
+        {
+            Console.WriteLine(armor.UseMessage);
+            Console.WriteLine("\nYour armor class increased by " + armor.StatusModifer + ".");
+            EquippedArmor = armor.Name;
+            HasEquippedArmor = true;
+            ArmorClass += armor.StatusModifer;
+            RemoveFromInventory(armor);
+        }
+
+        public void EquipWeapon(Weapon weapon)
+        {
+            Console.WriteLine(weapon.UseMessage);
+            Console.WriteLine("\nYour attack damage increased by " + weapon.StatusModifer + ".");
+            EquippedWeapon = weapon.Name;
+            HasEquippedWeapon = true;
+            AttackDamage += weapon.StatusModifer;
+            RemoveFromInventory(weapon);
+        }
+        public void UnEquipArmor(Armor armor)
+        {
+            Console.WriteLine("\nYou un equip your " + armor.Name);
+            Console.WriteLine("Your armor class decreases by " + armor.StatusModifer + ".");
+            EquippedArmor = "Clothes";
+            HasEquippedArmor = false;
+            ArmorClass -= armor.StatusModifer;
+            AddToInventory(armor);
+        }
+
+        public void UnEquipWeapon(Weapon weapon)
+        {
+            Console.WriteLine("\nYou un equip your " + weapon.Name);
+            Console.WriteLine("Your attack damage decreases by " + weapon.StatusModifer + ".");
+            EquippedWeapon = "Fists";
+            HasEquippedWeapon = false;
+            AttackDamage -= weapon.StatusModifer;
+            AddToInventory(weapon);
+        }
+
         public void AddToRecipes(string recipe)
         {
             KnownRecipes.Add(recipe);
@@ -163,6 +212,18 @@ namespace AdventureGame.Player
                     "Attack damage:   " + AttackDamage          + "\n" +
                     "Equipped armor:  " + EquippedArmor         + "\n" +
                     "Equipped weapon: " + EquippedWeapon;
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new();
+            hash.Add(Name);
+            hash.Add(CurrentHealth);
+            hash.Add(CurrentCarryWeight);
+            hash.Add(MaximumHealth);
+            hash.Add(CurrentCarryWeight);
+            hash.Add(MaximumCarryWeight);
+            return hash.ToHashCode();
         }
     }
 }

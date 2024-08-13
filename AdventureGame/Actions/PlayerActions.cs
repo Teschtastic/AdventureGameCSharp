@@ -1,21 +1,21 @@
-﻿using AdventureGame.save;
+﻿using AdventureGame.Game;
+using AdventureGame.Items;
+using AdventureGame.save;
 
 namespace AdventureGame.Actions
 {
     public class PlayerActions
     {
         /* Method to display your inventory */
-        public static void Inventory(Player.Player player)
+        public static void Inventory(List<Item> inventory)
         {
-            var inventory = player.Inventory;
-
             if (inventory == null || inventory.Count == 0)
                 Console.WriteLine("\nYour inventory is empty.");
             else
             {
                 Console.WriteLine("\nYour inventory contains:");
                 foreach (var i in inventory)
-                    Console.WriteLine(" - " + i);
+                    Console.WriteLine(" - " + i.Name);
             }
         }
 
@@ -36,7 +36,7 @@ namespace AdventureGame.Actions
         }
 
         /* Method used to use something, whether it's an item or furniture */
-        public static void UseSomething(Player.Player player)
+        public static void UseSomething(GameObject game)
         {
             Console.WriteLine(
                     "\nWhat would you like to use?\n" +
@@ -47,21 +47,21 @@ namespace AdventureGame.Actions
 
             Actions.CommandChoice();
 
-            string? useChoice = Console.ReadLine();
+            string useChoice = Console.ReadLine() ?? "";
 
-            if (useChoice != null)
+            if (useChoice != "")
             {
                 if (useChoice == "1")
                 {
-                    ItemActions.UseInventoryItem(player);
+                    ItemActions.UseInventoryItem(game);
                 }
                 else if (useChoice == "2")
                 {
-                    RoomActions.UseItemInRoom(player);
+                    RoomActions.UseItemInRoom(game);
                 }
                 else if (useChoice == "3")
                 {
-                    FurnitureActions.UseFurniture(player);
+                    FurnitureActions.UseFurniture(game);
                 }
                 else if (useChoice == "0")
                 {
@@ -79,7 +79,7 @@ namespace AdventureGame.Actions
         }
 
         /* Method used to use something, whether it's an item or furniture */
-        public static void DescribeSomething(Player.Player player)
+        public static void DescribeSomething(GameObject game)
         {
             Console.WriteLine(
                     "\nWhat would you like to describe?\n" +
@@ -89,22 +89,22 @@ namespace AdventureGame.Actions
                     "\n0 - Exit describing\n");
             Actions.CommandChoice();
 
-            string? describeChoice = Console.ReadLine();
+            string describeChoice = Console.ReadLine() ?? "";
 
-            if (describeChoice != null)
+            if (describeChoice != "")
             {
 
                 if (describeChoice == "1")
                 {
-                    ItemActions.DescribeItem(player);
+                    ItemActions.DescribeItem(game);
                 }
                 else if (describeChoice == "2")
                 {
-                    FurnitureActions.DescribeFurniture(player);
+                    FurnitureActions.DescribeFurniture(game);
                 }
                 else if (describeChoice == "3")
                 {
-                    NPCActions.DescribeNPC(player);
+                    NPCActions.DescribeNPC(game);
                 }
                 else if (describeChoice == "0")
                 {
@@ -155,7 +155,7 @@ namespace AdventureGame.Actions
 
                 try
                 {
-                    string? itemDesc = Console.ReadLine();
+                    string itemDesc = Console.ReadLine() ?? "";
                     int itemChoice = -1;
 
                     if (int.TryParse(itemDesc, out itemChoice))
@@ -182,12 +182,13 @@ namespace AdventureGame.Actions
             return "";
         }
 
-        public static void SaveGame(Player.Player player)
+        public static void SaveGame(GameObject game)
         {
-            SaveToFile.SavePlayerToFile(player);
-            SaveToFile.SaveRoomsToFile();
-            SaveToFile.SaveContainersToFile();
-            SaveToFile.SaveNPCsToFile();
+            SaveToFile.SavePlayerToFile(game.Player);
+            SaveToFile.SaveRoomsToFile(game.GetRoomsDictionary());
+            SaveToFile.SaveContainersToFile(game.GetContainersDictionary());
+            SaveToFile.SaveNPCsToFile(game.GetNPCDictionary());
+            SaveToFile.SaveGameObjectToFile(game);
 
             Actions.SaveMessage();
         }

@@ -4,7 +4,7 @@
     {
         private readonly Dictionary<string, DialogueList> dialogues = new Dialogues().dialoguesMap;
 
-        public Dictionary<string, DialogueList> allDialogues = new();
+        public Dictionary<string, DialogueList> allDialogues = [];
 
         public AllDialogues()
         {
@@ -23,7 +23,7 @@
                     return dialogue.Value;
                 }
             }
-            return null;
+            return new();
         }
     }
 }

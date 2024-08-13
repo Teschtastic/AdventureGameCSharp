@@ -2,11 +2,12 @@
   "Jeff": {
     "Name": "Jeff",
     "Dialogue": "Jeff dialogue",
-    "CurrentHealth": 100,
+    "CurrentHealth": 0,
     "MaximumHealth": 100,
     "ArmorClass": 10,
     "AttackDamage": 15,
     "IsFriendly": false,
+    "IsAlive": false,
     "EquippedArmor": "Cardboard Armor",
     "HasEquippedArmor": true,
     "EquippedWeapon": "Stabby Thingies",

@@ -14,7 +14,12 @@
 
         public Room GetRoom(string roomName)
         {
-            return allRooms.ContainsKey(roomName) ? allRooms[roomName] : null;
+            return allRooms[roomName];
+        }
+
+        public List<Room> GetRooms()
+        {
+            return rooms.Values.ToList();
         }
 
         public List<Room> GetRooms(List<string> roomNames)

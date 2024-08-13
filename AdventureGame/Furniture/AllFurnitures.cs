@@ -16,7 +16,7 @@
 
         public Furniture GetFurniture(string furnitureName)
         {
-            return allFurnitures.ContainsKey(furnitureName) ? allFurnitures[furnitureName] : null;
+            return allFurnitures[furnitureName];
         }
 
         public List<Furniture> GetFurnitures(List<string> furnitureNames)

@@ -7,10 +7,9 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": true,
-    "IsArmor": true,
-    "IsWeapon": false,
-    "IsConsumable": false,
-    "ArmorClass": 10
+    "KindOfItem": "Armor",
+    "StatusModified": "ArmorClass",
+    "StatusModifier": 10
   },
   "Plastic Armor": {
     "Name": "Plastic Armor",
@@ -20,9 +19,8 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": true,
-    "IsArmor": true,
-    "IsWeapon": false,
-    "IsConsumable": false,
-    "ArmorClass": 15
+    "KindOfItem": "Armor",
+    "StatusModified": "ArmorClass",
+    "StatusModifier": 15
   }
 }

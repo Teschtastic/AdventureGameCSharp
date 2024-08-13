@@ -6,19 +6,19 @@ using AdventureGame.Crafting;
 using AdventureGame.Dialogue;
 using AdventureGame.LUTs;
 
-namespace AdventureGame.Globals
+namespace AdventureGame.Game
 {
-    public static class AllObjects
+    public class AllObjects
     {
-        public static readonly AllItems          allItems;
-        public static readonly AllLUTs           allLUTs;
-        public static readonly AllFurnitures     allFurnitures;
-        public static readonly AllNPCs           allNPCs;
-        public static readonly AllRooms          allRooms;
-        public static readonly AllRecipes        allRecipes;
-        public static readonly AllDialogues      allDialogues;
+        public readonly AllItems          allItems;
+        public readonly AllLUTs           allLUTs;
+        public readonly AllFurnitures     allFurnitures;
+        public readonly AllNPCs           allNPCs;
+        public readonly AllRooms          allRooms;
+        public readonly AllRecipes        allRecipes;
+        public readonly AllDialogues      allDialogues;
 
-        static AllObjects()
+        public AllObjects()
         {
             allItems        = new AllItems();
             allLUTs         = new AllLUTs();

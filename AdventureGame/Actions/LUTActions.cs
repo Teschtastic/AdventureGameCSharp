@@ -1,20 +1,20 @@
 ﻿using AdventureGame.Furnitures;
-using AdventureGame.Globals;
+using AdventureGame.Game;
 using AdventureGame.LUTs;
 
 namespace AdventureGame.Actions
 {
     public class LUTActions
     {
-        public static void ProcessLUT(Container container)
+        public static void ProcessLUT(GameObject game, Container container)
         {
-            LUT lut = AllObjects.allLUTs.GetLUT(container.Lut);
+            LUT lut = game.GetLUT(container.Lut)!;
 
             foreach (var pool in lut.Pools)
             {
                 var roll = new Random().Next(pool.Rolls.Min, pool.Rolls.Max);
                 var weight = 0;
-                List<string> entries = new();
+                List<string> entries = [];
 
                 int index = 0;
                 foreach (var entry in pool.Entries)
@@ -31,7 +31,7 @@ namespace AdventureGame.Actions
                     {
                         foreach (var function in entry.Functions)
                         {
-                            GlobalMethods.CallByName(new LUTActions(), function.FunctionFunction, new object[] { container, entry.Name, function.Count.Min, function.Count.Max });
+                            GlobalMethods.CallByName(new LUTActions(), function.FunctionFunction, [container, entry.Name, function.Count.Min, function.Count.Max]);
                         }
                     }
                 }

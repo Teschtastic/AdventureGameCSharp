@@ -1,18 +1,18 @@
-﻿using AdventureGame.Items;
+using AdventureGame.Items;
 using AdventureGame.Rooms;
-using AdventureGame.Globals;
+using AdventureGame.Game;
 
 namespace AdventureGame.Actions
 {
     public class ItemActions
     {
         /* Method used to describe an item in your inventory */
-        public static void DescribeItem(Player.Player player)
+        public static void DescribeItem(GameObject game)
         {
-            List<string> itemsToDescribe = new();
-            List<Item>? inventory = AllObjects.allItems.GetItems(player.Inventory);
+            List<string> itemsToDescribe = [];
+            List<Item> inventory = game.GetItemsInInventory();
 
-            Item? itemInRoom = AllObjects.allItems.GetItem(AllObjects.allRooms.GetRoom(player.RoomIsIn).ItemInRoom);
+            Item? itemInRoom = game.GetItemInRoom();
 
             if (inventory != null && inventory.Count > 0)
             {
@@ -32,72 +32,63 @@ namespace AdventureGame.Actions
             }
             else
             {
-                Item item = AllObjects.allItems.GetItem(PlayerActions.TakeItemFromInventory(itemsToDescribe));
+                Item item = game.GetItemInInventory(itemsToDescribe)!;
 
-                if (item != null)
-                {
-                    Console.WriteLine(
-                        "\nYou inspect the "        + item.Name         +
-                        "\n\nYou describe it as:\n" + item.Description  +
-                        "\n\nWith a weight of: "    + item.ItemWeight);
-                }
+                Console.WriteLine(
+                    "\nYou inspect the "        + item.Name         +
+                    "\n\nYou describe it as:\n" + item.Description  +
+                    "\n\nWith a weight of: "    + item.ItemWeight);
             }
         }
 
         /* Method used for attempting to pick up an item */
-        public static void PickupItem(Player.Player player)
+        public static void PickupItem(GameObject game)
         {
-            Room room = AllObjects.allRooms.GetRoom(player.RoomIsIn);
+            Room room = game.GetRoomPlayerIsIn();
 
-            if (room != null)
+            // If there isn't an item in the room, nothing to pickup
+            if (!room.HasItem)
             {
-                // If there isn't an item in the room, nothing to pickup
-                if (!room.HasItem)
-                {
-                    Console.WriteLine("\nThere is no item to pickup.");
-                }
-                // This means there is something in the room
-                else if (room.HasItem)
-                {
-                    Item item = AllObjects.allItems.GetItem(room.ItemInRoom);
+                Console.WriteLine("\nThere is no item to pickup.");
+            }
+            // This means there is something in the room
+            else
+            {
+                Item item = game.GetItemInRoom()!;
 
-                    if (item != null)
+                // The item can be picked up, so remove it from the room and remove the room tag for the item
+                // then add the item to the players inventory
+                if (item.CanPickup)
+                {
+                    if ((game.Player.CurrentCarryWeight + item.ItemWeight) > game.Player.MaximumCarryWeight)
                     {
-                        // The item can be picked up, so remove it from the room and remove the room tag for the item
-                        // then add the item to the players inventory
-                        if (item.CanPickup)
-                        {
-                            if ((player.CurrentCarryWeight + item.ItemWeight) > player.MaximumCarryWeight)
-                            {
-                                Console.WriteLine("\nYour inventory is too full to pickup\nthe " + item.Name);
-                            }
-                            else
-                            {
-                                Console.WriteLine("\nYou pickup the " + item.Name);
-                                room.HasItem = false;
-                                room.ItemInRoom = "";
-                                player.AddToInventory(item);
-                            }
-
-                        }
-                        // Otherwise, the item isn't able to be picked up
-                        else
-                        {
-                            Console.WriteLine("\nYou can't pickup the " + item.Name);
-                        }
+                        Console.WriteLine("\nYour inventory is too full to pickup\nthe " + item.Name);
                     }
+                    else
+                    {
+                        Console.WriteLine("\nYou pickup the " + item.Name);
+                        room.HasItem = false;
+                        room.ItemInRoom = "";
+                        game.Player.AddToInventory(item);
+                    }
+
+                }
+                // Otherwise, the item isn't able to be picked up
+                else
+                {
+                    Console.WriteLine("\nYou can't pickup the " + item.Name);
                 }
             }
         }
 
         /* Method used to drop and item in your inventory */
-        public static void DropItem(Player.Player player)
+        public static void DropItem(GameObject game)
         {
-            Room room = AllObjects.allRooms.GetRoom(player.RoomIsIn);
+            Room room = game.GetRoomPlayerIsIn();
 
-            if (room != null && !room.HasItem)
+            if (!room.HasItem)
             {
-                Item item = AllObjects.allItems.GetItem(PlayerActions.TakeItemFromInventory(player.Inventory));
+                Item? item = game.GetItemInInventory(game.Player.Inventory);
 
                 if (item != null)
                 {
@@ -105,7 +96,7 @@ namespace AdventureGame.Actions
 
                     room.HasItem = true;
                     room.ItemInRoom = item.Name;
-                    player.RemoveFromInventory(item);
+                    game.Player.RemoveFromInventory(item);
                 }
                 else
                 {
@@ -118,12 +109,12 @@ namespace AdventureGame.Actions
                 Console.WriteLine("\n1 - Yes\n0 - No");
                 Actions.CommandChoice();
 
-                string? dropChoice = Console.ReadLine();
+                string dropChoice = Console.ReadLine() ?? "";
 
-                if (dropChoice != null && dropChoice == "1")
+                if (dropChoice == "1")
                 {
-                    PickupItem(player);
-                    DropItem(player);
+                    PickupItem(game);
+                    DropItem(game);
                 }
                 else
                 {
@@ -133,20 +124,15 @@ namespace AdventureGame.Actions
         }
 
         /* Method used to use an item in either your inventory or in the world */
-        public static void UseInventoryItem(Player.Player player)
+        public static void UseInventoryItem(GameObject game)
         {
-            Item item = AllObjects.allItems.GetItem(PlayerActions.TakeItemFromInventory(player.Inventory));
+            Item? item = game.GetItemInInventory(game.GetItemsInInventory());
 
             // If the item has the can use flag, use it and remove
             // it from the player's inventory
-            if (item != null && item.CanUse)
+            if (item != null)
             {
-                Console.WriteLine(item.UseMessage);
-                UsedItemOnPlayer.UseItem(player, item);
-            }
-            else if (item != null && !item.CanUse)
-            {
-                Console.WriteLine("\nYou can't use " + item.Name);
+                item.UseItem(game);
             }
             else
             {
@@ -154,15 +140,15 @@ namespace AdventureGame.Actions
             }
         }
 
-        public static void EquipItem(Player.Player player)
+        public static void EquipItem(GameObject game)
         {
-            List<Item> playerInventory = AllObjects.allItems.GetItems(player.Inventory);
-            List<string> weaponArmorInventory = new();
-            Item item;
+            List<Item> playerInventory = game.GetItemsInInventory();
+            List<string> weaponArmorInventory = [];
+            Item? item;
 
             foreach (Item i in playerInventory)
             {
-                if (i.IsArmor || i.IsWeapon)
+                if (i.KindOfItem == Item.ItemType.Armor || i.KindOfItem == Item.ItemType.Weapon)
                 {
                     weaponArmorInventory.Add(i.Name);
                 }
@@ -182,23 +168,24 @@ namespace AdventureGame.Actions
                 Console.WriteLine("\n1 - Armor\n2 - Weapon\n0 - Nothing");
                 Actions.CommandChoice();
 
-                string? equipChoice = Console.ReadLine();
+                string equipChoice = Console.ReadLine() ?? "";
 
-                item = AllObjects.allItems.GetItem(PlayerActions.TakeItemFromInventory(weaponArmorInventory));
+                item = game.GetItemInInventory(weaponArmorInventory);
 
                 if (item != null)
                 {
                     if (equipChoice == "1")
                     {
-                        if (item.IsArmor)
+                        if (item.KindOfItem == Item.ItemType.Armor)
                         {
-                            if (player.HasEquippedArmor)
+                            if (game.Player.HasEquippedArmor)
                             {
                                 Console.WriteLine("\nYou already have equipped armor.");
                             }
                             else
                             {
-                                EquipItemToPlayer.EquipArmor(player, (Armor)item);
+                                game.Player.EquipArmor((Armor)item);
+                                //EquipItemToPlayer.EquipArmor(game.GetPlayer(), (Armor)item);
                             }
                         }
                         else
@@ -208,15 +195,16 @@ namespace AdventureGame.Actions
                     }
                     else if (equipChoice == "2")
                     {
-                        if (item.IsWeapon)
+                        if (item.KindOfItem == Item.ItemType.Weapon)
                         {
-                            if (player.HasEquippedWeapon)
+                            if (game.Player.HasEquippedWeapon)
                             {
                                 Console.WriteLine("\nYou already have an equipped weapon.");
                             }
                             else
                             {
-                                EquipItemToPlayer.EquipWeapon(player, (Weapon)item);
+                                game.Player.EquipWeapon((Weapon)item);
+                                //EquipItemToPlayer.EquipWeapon(game.GetPlayer(), (Weapon)item);
                             }
                         }
                         else
@@ -236,9 +224,9 @@ namespace AdventureGame.Actions
             }
         }
 
-        public static void UnEquipItem(Player.Player player)
+        public static void UnEquipItem(GameObject game)
         {
-            if (!player.HasEquippedArmor && !player.HasEquippedWeapon)
+            if (!game.Player.HasEquippedArmor && !game.Player.HasEquippedWeapon)
             {
                 Console.WriteLine("\nYou don't have anything equipped.");
             }
@@ -248,14 +236,15 @@ namespace AdventureGame.Actions
                 Console.WriteLine("\n1 - Armor\n2 - Weapon\n0 - Nothing");
                 Actions.CommandChoice();
 
-                string? unequipChoice = Console.ReadLine();
+                string unequipChoice = Console.ReadLine() ?? "";
 
                 if (unequipChoice == "1")
                 {
-                    if (player.HasEquippedArmor)
+                    if (game.Player.HasEquippedArmor)
                     {
-                        Armor armor = (Armor)AllObjects.allItems.GetItem(player.EquippedArmor);
-                        UnEquipItemFromPlayer.UnEquipArmor(player, armor);
+                        Armor armor = (Armor)game.GetItem(game.Player.EquippedArmor)!;
+                        game.Player.UnEquipArmor(armor);
+                        //UnEquipItemFromPlayer.UnEquipArmor(game.GetPlayer(), armor);
                     }
                     else
                     {
@@ -264,10 +253,11 @@ namespace AdventureGame.Actions
                 }
                 else if (unequipChoice == "2")
                 {
-                    if (player.HasEquippedWeapon)
+                    if (game.Player.HasEquippedWeapon)
                     {
-                        Weapon weapon = (Weapon)AllObjects.allItems.GetItem(player.EquippedWeapon);
-                        UnEquipItemFromPlayer.UnEquipWeapon(player, weapon);
+                        Weapon weapon = (Weapon)game.GetItem(game.Player.EquippedWeapon)!;
+                        game.Player.UnEquipWeapon(weapon);
+                        //UnEquipItemFromPlayer.UnEquipWeapon(game.GetPlayer(), weapon);
                     }
                     else
                     {

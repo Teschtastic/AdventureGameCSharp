@@ -1,29 +1,26 @@
-﻿namespace AdventureGame.Actions
+﻿using AdventureGame.Game;
+
+namespace AdventureGame.Actions
 {
     public class ActionsParser
     {
-        public static void GameLoop(Player.Player player, Dictionary<int, List<string>> userActions)
+        public static void GameLoop(GameObject game)
         {
             Actions.WelcomeMessage();                       // Welcome message
-            Console.WriteLine(player.RoomIsIn);             // Tells you which room you're in
-            bool isGameRunning = true;
+            //bool clearScreen = false;
 
-            while (isGameRunning)                           // Main game loop
+            while (game.IsRunning)                           // Main game loop
             {
+                //if (clearScreen)
+                //{
+                //    Console.Clear();
+                //}
+
+                //clearScreen = true;
+                
+                Console.WriteLine($"\nYou are currently in: {game.GetRoomPlayerIsIn().Name}" );             // Tells you which room you're in
                 int choiceIndex = -1;
-                Actions.CommandChoice();
-
-                string? playerAction = Console.ReadLine();  // Reads the next line into the player's action
-
-                // Checks to see if the user choice is defined in the actions scope,
-                // then assigns it to an int
-                foreach (var entry in userActions)
-                {
-                    if (playerAction != null && entry.Value.Contains(playerAction.ToLower()))
-                    {
-                        choiceIndex = entry.Key;
-                    }
-                }
+                game.GetUserChoice(ref choiceIndex);
 
                 // If there was no action for the choice given, set to error choice
                 // else use the choice given index above
@@ -31,73 +28,76 @@
                 {
                     // Switch case to parse the user's choice
                     case 1:
-                        PlayerActions.Inventory(player);            // Accesses the inventory
+                        PlayerActions.Inventory(game.GetItemsInInventory());            // Accesses the inventory
                         break;
 
                     case 2:
-                        PlayerActions.Help(userActions);            // Accesses the help menu
+                        PlayerActions.Help(game.UserActions);            // Accesses the help menu
                         break;
 
                     case 3:
-                        RoomActions.PrintLocation(player);          // Prints your location
+                        RoomActions.PrintLocation(game);          // Prints your location
                         break;
 
                     case 4:
-                        string move = playerAction != null ? playerAction.ToUpper() : "";
-                        RoomActions.Move(player, move);             // Moves into a new room
+                        RoomActions.Move(game);             // Moves into a new room
                         break;
 
                     case 5:
-                        RoomActions.LookAround(player);             // Looks around the room
+                        RoomActions.LookAround(game);             // Looks around the room
                         break;
 
                     case 6:
-                        ItemActions.PickupItem(player);             // Attempts to pickup an item
+                        ItemActions.PickupItem(game);             // Attempts to pickup an item
                         break;
 
                     case 7:
-                        ItemActions.DropItem(player);               // Drops an item into the current room
+                        ItemActions.DropItem(game);               // Drops an item into the current room
                         break;
 
                     case 8:
-                        PlayerActions.DescribeSomething(player);    // Describes something
+                        PlayerActions.DescribeSomething(game);    // Describes something
                         break;
 
                     case 9:
-                        PlayerActions.UseSomething(player);         // Uses something that can be used
+                        PlayerActions.UseSomething(game);         // Uses something that can be used
                         break;
 
                     case 10:
-                        NPCActions.TalkToNPC(player);               // Talks to the NPC in the room
+                        NPCActions.TalkToNPC(game);               // Talks to the NPC in the room
                         break;
 
                     case 11:
-                        NPCActions.GiveItem(player);                // Gives item to the NPC in the room
+                        NPCActions.GiveItem(game);                // Gives item to the NPC in the room
                         break;
 
                     case 12:
-                        NPCActions.TakeItem(player);                // Gives item to the NPC in the room
+                        NPCActions.TakeItem(game);                // Gives item to the NPC in the room
                         break;
 
                     case 13:
-                        PlayerActions.DescribePlayer(player);       // Describes the player character
+                        PlayerActions.DescribePlayer(game.Player);       // Describes the player character
                         break;
 
                     case 14:
-                        ItemActions.EquipItem(player);              // Equips an item to player
+                        ItemActions.EquipItem(game);              // Equips an item to player
                         break;
 
                     case 15:
-                        ItemActions.UnEquipItem(player);            // Unequips an item from player
+                        ItemActions.UnEquipItem(game);            // Unequips an item from player
                         break;
 
                     case 16:
-                        PlayerActions.SaveGame(player);             // Saves the game
+                        PlayerActions.SaveGame(game);             // Saves the game
+                        break;
+
+                    case 17:
+                        NPCActions.BattleNPC(game);
                         break;
 
                     case 0:
                         Actions.ExitMessage();                      // Quits the game
-                        isGameRunning = false;
+                        game.IsRunning = false;
                         break;
 
                     case -1:
@@ -109,10 +109,10 @@
                         break;
                 }
 
-                if (player.CurrentHealth <= 0)                      // Checks if player is dead, and ends game
+                if (game.Player.CurrentHealth <= 0)                      // Checks if player is dead, and ends game
                 {
                     Actions.DeathMessage();
-                    isGameRunning = false;
+                    game.IsRunning = false;
                 }
             }
         }

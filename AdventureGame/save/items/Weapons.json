@@ -7,10 +7,9 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": true,
-    "IsArmor": false,
-    "IsWeapon": true,
-    "IsConsumable": false,
-    "AttackDamage": 10
+    "KindOfItem": "Weapon",
+    "StatusModified": "AttackDamage",
+    "StatusModifier": 10
   },
   "Steak Knife": {
     "Name": "Steak Knife",
@@ -20,9 +19,8 @@
     "CanPickup": true,
     "CanUse": false,
     "CanCraft": false,
-    "IsArmor": false,
-    "IsWeapon": true,
-    "IsConsumable": false,
-    "AttackDamage": 15
+    "KindOfItem": "Weapon",
+    "StatusModified": "AttackDamage",
+    "StatusModifier": 15
   }
 }

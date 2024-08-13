@@ -12,9 +12,9 @@
             recipes.ToList().ForEach(x => allRecipes.Add(x.Key, x.Value));
         }
 
-        public Recipe? GetRecipe(string recipeName)
+        public Recipe GetRecipe(string recipeName)
         {
-            return allRecipes.ContainsKey(recipeName) ? allRecipes[recipeName] : null;
+            return allRecipes[recipeName];
         }
 
         public List<Recipe> GetRecipes(List<string> recipeNames)
