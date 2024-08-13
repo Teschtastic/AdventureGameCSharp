@@ -1,4 +1,4 @@
-﻿using AdventureGame.Game;
+using AdventureGame.Game;
 
 namespace AdventureGame.Items
 {
@@ -17,20 +17,6 @@ namespace AdventureGame.Items
                 player.UpdatePlayerStatus(StatusModified, StatusModifier);
                 player.RemoveFromInventory(this);
                 player.AddToInventory(game.GetItem("Empty Bottle")!);
-            }
-        }
-
-        public void UseConsumable(GameObject game)
-        {
-            if (CanUseItem())
-            {
-                Player.Player player = game.Player;
-
-                Console.WriteLine(UseMessage);
-                Console.WriteLine($"\nYour {StatusModified} increased by {StatusModifier}.");
-                player.UpdatePlayerStatus(StatusModified, StatusModifier);
-                player.RemoveFromInventory(this);
-                player.AddToInventory(game.GetItem("Empty Bottle")!); 
             }
         }
 

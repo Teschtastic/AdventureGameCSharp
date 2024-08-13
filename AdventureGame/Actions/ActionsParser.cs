@@ -18,7 +18,7 @@ namespace AdventureGame.Actions
 
                 //clearScreen = true;
                 
-                Console.WriteLine("\nYou are currently in: {0}", game.GetRoomPlayerIsIn().Name);             // Tells you which room you're in
+                Console.WriteLine($"\nYou are currently in: {game.GetRoomPlayerIsIn().Name}" );             // Tells you which room you're in
                 int choiceIndex = -1;
                 game.GetUserChoice(ref choiceIndex);
 
@@ -89,6 +89,10 @@ namespace AdventureGame.Actions
 
                     case 16:
                         PlayerActions.SaveGame(game);             // Saves the game
+                        break;
+
+                    case 17:
+                        NPCActions.BattleNPC(game);
                         break;
 
                     case 0:

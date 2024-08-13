@@ -42,8 +42,8 @@ namespace AdventureGame.save
             string saveFilePathJSONnpcs = projectDirectory + "/save/npcs/NPCs.json";
             string saveFilePathJSONenemies = projectDirectory + "/save/npcs/Enemies.json";
 
-            Dictionary<string, NPC> npcs = new();
-            Dictionary<string, NPC> enemies = new();
+            Dictionary<string, NPC> npcs = [];
+            Dictionary<string, NPC> enemies = [];
 
             foreach (var npc in allNPCs)
             {

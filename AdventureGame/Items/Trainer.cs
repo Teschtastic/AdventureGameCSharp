@@ -20,20 +20,6 @@ namespace AdventureGame.Items
             CanUse = false;
         }
 
-        public void UseTrainer(GameObject game)
-        {
-            if (CanUseItem())
-            {
-                Player.Player player = game.Player;
-                Console.WriteLine(
-                        "\nYou look up fighting techniques\non the internet." +
-                        $"\nYour {StatusModified} goes up by {StatusModifier}.");
-
-                player.UpdatePlayerStatus(StatusModified, StatusModifier);
-                CanUse = false;
-            }
-        }
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as Trainer);

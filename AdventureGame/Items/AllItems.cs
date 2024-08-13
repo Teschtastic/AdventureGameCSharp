@@ -1,4 +1,6 @@
-﻿namespace AdventureGame.Items
+﻿using AdventureGame.Game;
+
+namespace AdventureGame.Items
 {
     public class AllItems
     {
@@ -22,7 +24,7 @@
 
         public Item? GetItem(string itemName)
         {
-            return allItems.ContainsKey(itemName) ? allItems[itemName] : null;
+            return allItems.TryGetValue(itemName, out Item? value) ? value : null;
         }
 
         public List<Item> GetItems(List<string> itemNames)

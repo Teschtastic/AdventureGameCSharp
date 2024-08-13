@@ -97,12 +97,12 @@ namespace AdventureGame.Game
             GamePlayer.RoomIsIn = roomName;
         }
 
-        public NPC GetNPC(string npcName)
+        public NPC? GetNPC(string npcName)
         {
             return AllObjects.allNPCs.GetNPC(npcName);
         }
 
-        public NPC GetNPCInRoom()
+        public NPC? GetNPCInRoom()
         {
             return GetNPC(GetRoomPlayerIsIn().NPCInRoom);
         }

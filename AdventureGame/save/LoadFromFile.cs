@@ -13,11 +13,11 @@ namespace AdventureGame.save
     public class LoadFromFile
 	{
         private static readonly string workingDirectory = Environment.CurrentDirectory;
-        private static readonly string projectDirectory = Directory.GetParent(workingDirectory)!.Parent!.Parent!.FullName;
+        private static readonly string projectDirectory = Directory.GetParent(workingDirectory)!.Parent!.Parent!.Parent!.FullName;
 
         public static Player.Player LoadPlayerFromFile(AllObjects allObjects)
 		{
-            string saveFilePathJSON = projectDirectory + "/save/player/Player.json";
+            string saveFilePathJSON = projectDirectory + "/AdventureGame/save/player/Player.json";
 
             string playerStatsFile = File.ReadAllText(saveFilePathJSON);
             var playerJSONObject = JsonConvert.DeserializeObject<Player.Player>(playerStatsFile);
@@ -47,7 +47,7 @@ namespace AdventureGame.save
 
         public static void LoadItemsFromFile(Dictionary<string, Item> itemsMap)
         {
-            string itemFilePathJSON = projectDirectory + "/save/items/Items.json";
+            string itemFilePathJSON = projectDirectory + "/AdventureGame/save/items/Items.json";
 
             string itemFile = File.ReadAllText(itemFilePathJSON);
             var itemJSONObject = JsonConvert.DeserializeObject<Dictionary<string, Item>>(itemFile);
@@ -78,7 +78,7 @@ namespace AdventureGame.save
 
         public static void LoadTrainersFromFile(Dictionary<string, Trainer> trainersMap)
         {
-            string trainerFilePathJSON = projectDirectory + "/save/items/Trainers.json";
+            string trainerFilePathJSON = projectDirectory + "/AdventureGame/save/items/Trainers.json";
 
             string trainerFile = File.ReadAllText(trainerFilePathJSON);
             var trainerJSONObject = JsonConvert.DeserializeObject<Dictionary<string, Trainer>>(trainerFile);
@@ -110,7 +110,7 @@ namespace AdventureGame.save
 
         public static void LoadConsumablesFromFile(Dictionary<string, Consumable> consumablesMap)
         {
-            string consumableFilePathJSON = projectDirectory + "/save/items/Consumables.json";
+            string consumableFilePathJSON = projectDirectory + "/AdventureGame/save/items/Consumables.json";
 
             string consumableFile = File.ReadAllText(consumableFilePathJSON);
             var consumableJSONObject = JsonConvert.DeserializeObject<Dictionary<string, Consumable>>(consumableFile);
@@ -142,7 +142,7 @@ namespace AdventureGame.save
 
         public static void LoadArmorsFromFile(Dictionary<string, Armor> armorsMap)
         {
-            string armorsFilePathJSON = projectDirectory + "/save/items/Armors.json";
+            string armorsFilePathJSON = projectDirectory + "/AdventureGame/save/items/Armors.json";
 
             string armorFile = File.ReadAllText(armorsFilePathJSON);
             var armorJSONObject = JsonConvert.DeserializeObject<Dictionary<string, Armor>>(armorFile);
@@ -174,7 +174,7 @@ namespace AdventureGame.save
 
         public static void LoadWeaponsFromFile(Dictionary<string, Weapon> weaponsMap)
         {
-            string weaponsFilePathJSON = projectDirectory + "/save/items/Weapons.json";
+            string weaponsFilePathJSON = projectDirectory + "/AdventureGame/save/items/Weapons.json";
 
             string weaponFile = File.ReadAllText(weaponsFilePathJSON);
             var weaponJSONObject = JsonConvert.DeserializeObject<Dictionary<string, Weapon>>(weaponFile);
@@ -206,7 +206,7 @@ namespace AdventureGame.save
 
         public static void LoadFurnituresFromFile(Dictionary<string, Furniture> furnituresMap)
         {
-            string furnitureFilePathJSON = projectDirectory + "/save/furniture/Furnitures.json";
+            string furnitureFilePathJSON = projectDirectory + "/AdventureGame/save/furniture/Furnitures.json";
 
             string furnitureFile = File.ReadAllText(furnitureFilePathJSON);
             var furnitureJSONObject = JsonConvert.DeserializeObject<Dictionary<string, Furniture>>(furnitureFile);
@@ -232,7 +232,7 @@ namespace AdventureGame.save
 
         public static void LoadLUTsFromFile(Dictionary<string, LUT> lutsMap)
         {
-            string saveFilePathJSON = projectDirectory + "/save/luts/LUTs.json";
+            string saveFilePathJSON = projectDirectory + "/AdventureGame/save/luts/LUTs.json";
             string lutFile = File.ReadAllText(saveFilePathJSON);
             var lutJSONObject = Lut.FromJson(lutFile);
 
@@ -251,7 +251,7 @@ namespace AdventureGame.save
 
         public static void LoadContainersFromFile(Dictionary<string, Container> containersMap)
         {
-            string containerFilePathJSON = projectDirectory + "/save/furniture/Containers.json";
+            string containerFilePathJSON = projectDirectory + "/AdventureGame/save/furniture/Containers.json";
             
             string containerFile = File.ReadAllText(containerFilePathJSON);
             var containerJSONObject = JsonConvert.DeserializeObject<Dictionary<string, Container>>(containerFile);
@@ -284,7 +284,7 @@ namespace AdventureGame.save
 
         public static void LoadRoomsFromFile(Dictionary<string, Room> rooms)
         {
-            string roomFilePathJSON = projectDirectory + "/save/rooms/Rooms.json";
+            string roomFilePathJSON = projectDirectory + "/AdventureGame/save/rooms/Rooms.json";
 
             string roomFile = File.ReadAllText(roomFilePathJSON);
             var roomJSONObject = JsonConvert.DeserializeObject<Dictionary<string, Room>>(roomFile);
@@ -314,7 +314,7 @@ namespace AdventureGame.save
 
         public static void LoadDialoguesFromFile(Dictionary<string, DialogueList> dialogues)
         {
-            string dialogueFilePathJSON = projectDirectory + "/save/dialogue/Dialogue.json";
+            string dialogueFilePathJSON = projectDirectory + "/AdventureGame/save/dialogue/Dialogue.json";
 
             string dialogueFile = File.ReadAllText(dialogueFilePathJSON);
             var dialogueJSONObject = Dialogue.Dialogue.FromJson(dialogueFile);
@@ -334,7 +334,7 @@ namespace AdventureGame.save
 
         public static void LoadNPCsFromFile(Dictionary<string, NPC> npcs)
         {
-            string npcFilePathJSON = projectDirectory + "/save/npcs/NPCs.json";
+            string npcFilePathJSON = projectDirectory + "/AdventureGame/save/npcs/NPCs.json";
 
             string npcFile = File.ReadAllText(npcFilePathJSON);
             var npcJSONObject = JsonConvert.DeserializeObject<Dictionary<string, NPC>>(npcFile);
@@ -369,7 +369,7 @@ namespace AdventureGame.save
 
         internal static void LoadEnemiesFromFile(Dictionary<string, NPC> enemies)
         {
-            string enemyFilePathJSON = projectDirectory + "/save/npcs/Enemies.json";
+            string enemyFilePathJSON = projectDirectory + "/AdventureGame/save/npcs/Enemies.json";
 
             string nenemyFile = File.ReadAllText(enemyFilePathJSON);
             var enemyJSONObject = JsonConvert.DeserializeObject<Dictionary<string, NPC>>(nenemyFile);
@@ -404,7 +404,7 @@ namespace AdventureGame.save
 
         public static void LoadRecipesFromFile(Dictionary<string, Recipe> recipes)
         {
-            string recipeFilePathJSON = projectDirectory + "/save/recipes/Recipes.json";
+            string recipeFilePathJSON = projectDirectory + "/AdventureGame/save/recipes/Recipes.json";
 
             string recipeFile = File.ReadAllText(recipeFilePathJSON);
             var recipeJSONObject = JsonConvert.DeserializeObject<Dictionary<string, Recipe>>(recipeFile);

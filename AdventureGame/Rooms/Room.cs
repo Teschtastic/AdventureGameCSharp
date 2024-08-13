@@ -1,4 +1,5 @@
-﻿using AdventureGame.NPCs;
+﻿using AdventureGame.Game;
+using AdventureGame.NPCs;
 
 namespace AdventureGame.Rooms
 {
@@ -17,9 +18,15 @@ namespace AdventureGame.Rooms
         public bool HasFurniture { get; set; } = hF;
         public string FurnitureInRoom { get; set; } = fIR;
 
-        public bool IsAliveNPCInRoom(NPC npc)
+        public bool HasAliveEnemy(GameObject game)
         {
-            return HasNPC && npc.IsAlive && npc != null;
+            if(!HasNPC)
+                return false;
+            else
+            {
+                NPC npc = game.GetNPC(NPCInRoom)!;
+                return npc.IsAlive && npc.IsNPCAnEnemy();
+            }
         }
 
         public string GetMoves()

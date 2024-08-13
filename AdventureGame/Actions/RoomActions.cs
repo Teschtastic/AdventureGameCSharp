@@ -1,4 +1,4 @@
-﻿using AdventureGame.Game;
+using AdventureGame.Game;
 using AdventureGame.Items;
 using AdventureGame.NPCs;
 using AdventureGame.Rooms;
@@ -41,15 +41,9 @@ namespace AdventureGame.Actions
                     Console.WriteLine(newRoom.EnterMessage);
                     game.SetRoomPlayerIsIn(newRoom.Name);
 
-                    if (newRoom.HasNPC)
+                    if(newRoom.HasAliveEnemy(game))
                     {
-
-                        NPC npc = game.GetNPCInRoom();
-
-                        if (newRoom.IsAliveNPCInRoom(npc) && npc.IsNPCAnEnemy())
-                        {
-                            NPCActions.BattleNPC(game);
-                        }
+                        NPCActions.BattleNPC(game);
                     }
                 }
             }

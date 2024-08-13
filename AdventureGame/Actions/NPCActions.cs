@@ -12,32 +12,36 @@ namespace AdventureGame.Actions
         public static void TalkToNPC(GameObject game)
         {
             Room room = game.GetRoomPlayerIsIn();
-            NPC npc = game.GetNPCInRoom();
 
-            if (npc == null || !room.HasNPC)
+            if (!room.HasNPC)
             {
                 Console.WriteLine("\nThere is nobody to talk to.");
             }
-            else if (!npc.IsAlive)
-            {
-                Console.WriteLine("\n" + npc.Name + " is not alive.");
-            }
             else
             {
-                //Console.WriteLine("\n" + npc.Name + " says \"" + npc.Message + "\"");
-                DialogueList list = game.GetNPCDialogue(npc.Name);
+                NPC npc = game.GetNPCInRoom()!;
+                if (!npc.IsAlive)
+                {
+                    Console.WriteLine("\n" + npc.Name + " is not alive.");
+                }
+                else
+                {
+                    //Console.WriteLine("\n" + npc.Name + " says \"" + npc.Message + "\"");
+                    DialogueList list = game.GetNPCDialogue(npc.Name);
 
-                npc.ProcessDialogue(game.Player, list);
+                    npc.ProcessDialogue(game.Player, list);
+                }
             }
         }
 
         public static void DescribeNPC(GameObject game)
         {
             Room room = game.GetRoomPlayerIsIn();
-            NPC npc = game.GetNPCInRoom();
 
-            if (npc != null && room.HasNPC)
+            if (room.HasNPC)
             {
+                NPC npc = game.GetNPCInRoom()!;
+
                 Console.WriteLine("\nYou inspect " + npc.Name +
                                     npc.ToString());
                 if (!npc.IsAlive)
@@ -56,55 +60,66 @@ namespace AdventureGame.Actions
         {
             Player.Player player  = game.Player;
             List<string> inventory = player.Inventory;
-            NPC npc = game.GetNPCInRoom();
-            Item? item = null;
+            Room room = game.GetRoomPlayerIsIn();
 
-            // Nothing in inventory to give
-            if (inventory.Count == 0)
+            if(!room.HasNPC)
             {
-                Console.WriteLine("\nThere is nothing in your inventory to give.");
-            }
-            // Only one item in your inventory to give
-            else if (inventory.Count == 1)
-            {
-                item = game.GetItem(inventory[0]);
+                Console.WriteLine("\nThere is nobody in the room to give anything to.");
             }
             else
             {
-                item = game.GetItem(PlayerActions.TakeItemFromInventory(inventory));
-            }
+                NPC npc = game.GetNPCInRoom()!;
+                Item? item;
+                // Nothing in inventory to give
+                if (inventory.Count == 0)
+                {
+                    Console.WriteLine("\nThere is nothing in your inventory to give.");
+                }
 
-            if (item != null)
-            {
-                // Removes item from your inventory and adds to the NPCs
-                player.RemoveFromInventory(item);
-                npc.Inventory.Add(item.Name);
-                Console.WriteLine("\nYou gave " + npc.Name + " your " + item.Name);
+                // Ternary for if there is one or more items in the inventory
+                item = game.GetItem(inventory.Count > 1 ? PlayerActions.TakeItemFromInventory(inventory) : inventory[0]);
+
+                if (item != null)
+                {
+                    // Removes item from your inventory and adds to the NPCs
+                    player.RemoveFromInventory(item);
+                    npc.Inventory.Add(item.Name);
+                    Console.WriteLine("\nYou gave " + npc.Name + " your " + item.Name);
+                }
             }
         }
 
         /* Method used to take an item from an NPC */
         public static void TakeItem(GameObject game)
         {
-            NPC npc = game.GetNPCInRoom();
+            Room room = game.GetRoomPlayerIsIn();
             Item? item;
 
-            // If there isn't an item in the NPCs inventory, nothing to take
-            if (npc.Inventory.Count == 0)
+
+            if (!room.HasNPC)
             {
-                Console.WriteLine("\n" + npc.Name + " doesn't have an item.");
+                Console.WriteLine("\nThere is nobody in the room to take anything from.");
             }
             else
             {
-                item = game.GetItem(PlayerActions.TakeItemFromInventory(npc.Inventory));
-
-                // The item is able to be taken, so remove it from the NPCs inventory and add it to yours
-                if (item != null)
+                NPC npc = game.GetNPCInRoom()!;
+                // If there isn't an item in the NPCs inventory, nothing to take
+                if (npc.Inventory.Count == 0)
                 {
-                    npc.Inventory.Remove(item.Name);
-                    game.Player.AddToInventory(item);
-                    Console.WriteLine("\nYou take the " + item.Name +
-                            "\nfrom " + npc.Name);
+                    Console.WriteLine("\n" + npc.Name + " doesn't have an item.");
+                }
+                else
+                {
+                    item = game.GetItem(PlayerActions.TakeItemFromInventory(npc.Inventory));
+
+                    // The item is able to be taken, so remove it from the NPCs inventory and add it to yours
+                    if (item != null)
+                    {
+                        npc.Inventory.Remove(item.Name);
+                        game.Player.AddToInventory(item);
+                        Console.WriteLine("\nYou take the " + item.Name +
+                                "\nfrom " + npc.Name);
+                    }
                 }
             }
         }
@@ -113,13 +128,23 @@ namespace AdventureGame.Actions
         // TODO: Implement
         public static void TradeItem(GameObject game)
         {
-            NPC npc = game.GetNPCInRoom();
-            //Item item;
+            Room room = game.GetRoomPlayerIsIn();
 
-            Console.WriteLine("\nCan't trade with " + npc.Name);
-            Console.WriteLine("\nNot implemented.");
+            if (!room.HasNPC)
+            {
+                Console.WriteLine("\nThere is nobody in the room to trade with.");
+            }
+            else
+            {
+                NPC npc = game.GetNPCInRoom()!;
+                //Item item;
+
+                Console.WriteLine("\nCan't trade with " + npc.Name);
+                Console.WriteLine("\nNot implemented.");
+            }
         }
 
+        // TODO: Make NPC do more than just attack, and maybe rework damage calculation
         public static void NPCBattleDecision(Player.Player player, NPC npc)
         {
             int damageDoneToYou = Math.Clamp(npc.AttackDamage - player.ArmorClass, 0, npc.AttackDamage);
@@ -134,74 +159,81 @@ namespace AdventureGame.Actions
         {
             Player.Player player = game.Player;
             Room room = game.GetRoomPlayerIsIn();
-            NPC npc = game.GetNPCInRoom();
 
-            bool battling = true;
-            Actions.BattleMessage();
-            Console.WriteLine("\nyou are battling with: " + npc.Name);
-
-            do
+            if (!room.HasNPC)
             {
-                // Prints an options menu
-                Console.WriteLine("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                Console.WriteLine("\n Your health: " + player.CurrentHealth);
-                Console.WriteLine(" " + npc.Name + "\'s health: " + npc.CurrentHealth);
-                Console.WriteLine("\n What would you like to do?");
-                Console.WriteLine(
-                                "\n 1 - Attack " + npc.Name +
-                                "\n 2 - Use item" +
-                                "\n 0 - Exit battle");
-                Console.WriteLine("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                Actions.BattleChoice();
+                Console.WriteLine("\nThere is nobody to battle with.");
+            }
+            else
+            {
+                NPC npc = game.GetNPCInRoom()!;
+                bool battling = true;
 
-                string battleChoice = Console.ReadLine() ?? "";
+                Actions.BattleMessage();
+                Console.WriteLine("\nyou are battling with: " + npc.Name);
 
-                // This either shows the container's inventory or that it is empty
-                if (battleChoice != "")
+                do
                 {
-                    int damageYouDealt = Math.Clamp(player.AttackDamage - npc.ArmorClass, 0, player.AttackDamage);
+                    // Prints an options menu
+                    Console.WriteLine("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    Console.WriteLine("\n Your health: " + player.CurrentHealth);
+                    Console.WriteLine(" " + npc.Name + "\'s health: " + npc.CurrentHealth);
+                    Console.WriteLine("\n What would you like to do?");
+                    Console.WriteLine(
+                                    "\n 1 - Attack " + npc.Name +
+                                    "\n 2 - Use item" +
+                                    "\n 0 - Exit battle");
+                    Console.WriteLine("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    Actions.BattleChoice();
 
-                    if (battleChoice == "1")
+                    string battleChoice = Console.ReadLine() ?? "";
+
+                    // This either shows the container's inventory or that it is empty
+                    if (battleChoice != "")
                     {
-                        Console.WriteLine("\n You attack " + npc.Name + "\n for " + damageYouDealt + " points of damage.");
+                        int damageYouDealt = Math.Clamp(player.AttackDamage - npc.ArmorClass, 0, player.AttackDamage);
 
-                        npc.CurrentHealth -= damageYouDealt;
-
-                        if (npc.CurrentHealth <= 0)
+                        if (battleChoice == "1")
                         {
-                            Console.WriteLine("\n You have slain " + npc.Name);
-                            npc.IsAlive = false;
-                            battling = false;
-                            break;
+                            Console.WriteLine("\n You attack " + npc.Name + "\n for " + damageYouDealt + " points of damage.");
+
+                            npc.CurrentHealth -= damageYouDealt;
+
+                            if (npc.CurrentHealth <= 0)
+                            {
+                                Console.WriteLine("\n You have slain " + npc.Name);
+                                npc.IsAlive = false;
+                                break;
+                            }
+
+                            NPCBattleDecision(player, npc);
+
+                            if (player.CurrentHealth <= 0)
+                            {
+                                Console.WriteLine("\n You have been slain by " + npc.Name);
+                                battling = false;
+                            }
+
                         }
-
-                        NPCBattleDecision(player, npc);
-
-                        if (player.CurrentHealth <= 0)
+                        else if (battleChoice == "2")
                         {
-                            Console.WriteLine("\n You have been slain by " + npc.Name);
+                            ItemActions.UseInventoryItem(game);
+
+                            NPCBattleDecision(player, npc);
+                        }
+                        else if (battleChoice == "0")
+                        {
+                            Console.WriteLine("\n You left the battle.");
                             battling = false;
                         }
-
                     }
-                    else if (battleChoice == "2")
+                    else
                     {
-                        ItemActions.UseInventoryItem(game);
-
-                        NPCBattleDecision(player, npc);
+                        Console.WriteLine("\n Invalid choice.");
                     }
-                    else if (battleChoice == "0")
-                    {
-                        Console.WriteLine("\n You left the battle.");
-                        battling = false;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("\n Invalid choice.");
-                }
-            } while (battling);
-            Console.WriteLine("\n The battle is now over.");
+                } while (battling);
+                Console.WriteLine("\n The battle is now over.");
+            }
         }
     }
 }

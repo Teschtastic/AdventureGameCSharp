@@ -1,4 +1,4 @@
-﻿using AdventureGame.Items;
+using AdventureGame.Items;
 using AdventureGame.Rooms;
 using AdventureGame.Game;
 

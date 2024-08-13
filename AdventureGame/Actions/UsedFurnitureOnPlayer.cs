@@ -65,7 +65,7 @@ namespace AdventureGame.Actions
 
             if (room.HasNPC)
             {
-                npc = game.GetNPC(room.NPCInRoom);
+                npc = game.GetNPC(room.NPCInRoom)!;
 
                 if (npc.IsFriendly == true)
                 {

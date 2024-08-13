@@ -39,6 +39,18 @@ namespace AdventureGame.Player
         public List<string> CompletedQuests     { get; set; }
         public List<string> FailedeQuests       { get; set; }
 
+        public Player ShallowCopy()
+        {
+            return (Player)MemberwiseClone();
+        }
+
+        public Player DeepCopy()
+        {
+             Player other = (Player)MemberwiseClone();
+            other.Name = Name + "Copy";
+            return other;
+        }
+
         public void UpdatePlayerStatus(Item.StatusType sType, object sModifier)
         {
             switch (sType)
@@ -64,7 +76,7 @@ namespace AdventureGame.Player
                     CurrentCarryWeight += (int)sModifier;
                     break;
                 case Item.StatusType.MaximumCarryWeight:
-                    MaximumCarryWeight -= (int)sModifier;
+                    MaximumCarryWeight += (int)sModifier;
                     break;
                 default:
                     throw new NotImplementedException();
@@ -200,6 +212,18 @@ namespace AdventureGame.Player
                     "Attack damage:   " + AttackDamage          + "\n" +
                     "Equipped armor:  " + EquippedArmor         + "\n" +
                     "Equipped weapon: " + EquippedWeapon;
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new();
+            hash.Add(Name);
+            hash.Add(CurrentHealth);
+            hash.Add(CurrentCarryWeight);
+            hash.Add(MaximumHealth);
+            hash.Add(CurrentCarryWeight);
+            hash.Add(MaximumCarryWeight);
+            return hash.ToHashCode();
         }
     }
 }

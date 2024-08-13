@@ -10,23 +10,24 @@
         /* Constructing the different actions that will be used */
         public Actions()
         {
-            actionsMap.Add(1,  new List<string> { "i",      "inventory" });
-            actionsMap.Add(2,  new List<string> { "h",      "help"      });
-            actionsMap.Add(3,  new List<string> { "wh",     "where"     });
-            actionsMap.Add(4,  new List<string> { "n",      "e",        "s",    "w",    "N",    "E",    "S",    "W" });
-            actionsMap.Add(5,  new List<string> { "v",      "view",     "l",    "look"  });
-            actionsMap.Add(6,  new List<string> { "p",      "pickup",   "g",    "grab"  });
-            actionsMap.Add(7,  new List<string> { "dr",     "drop",     "to",   "toss"  });
-            actionsMap.Add(8,  new List<string> { "de",     "describe"  });
-            actionsMap.Add(9,  new List<string> { "u",      "use"       });
-            actionsMap.Add(10, new List<string> { "t",      "talk"      });
-            actionsMap.Add(11, new List<string> { "g",      "give"      });
-            actionsMap.Add(12, new List<string> { "ta",     "take"      });
-            actionsMap.Add(13, new List<string> { "ch",     "character" });
-            actionsMap.Add(14, new List<string> { "eq",     "equip"     });
-            actionsMap.Add(15, new List<string> { "une",    "unequip"   });
-            actionsMap.Add(16, new List<string> { "sa",     "save"      });
-            actionsMap.Add(0,  new List<string> { "q",      "quit"      });
+            actionsMap.Add(1,  ["i",      "inventory"]);
+            actionsMap.Add(2,  ["h",      "help"]);
+            actionsMap.Add(3,  ["wh",     "where"]);
+            actionsMap.Add(4,  ["n",      "e",        "s",    "w",    "N",    "E",    "S",    "W"]);
+            actionsMap.Add(5,  ["v",      "view",     "l",    "look"]);
+            actionsMap.Add(6,  ["p",      "pickup",   "g",    "grab"]);
+            actionsMap.Add(7,  ["dr",     "drop",     "to",   "toss"]);
+            actionsMap.Add(8,  ["de",     "describe"]);
+            actionsMap.Add(9,  ["u",      "use"]);
+            actionsMap.Add(10, ["t",      "talk"]);
+            actionsMap.Add(11, ["g",      "give"]);
+            actionsMap.Add(12, ["ta",     "take"]);
+            actionsMap.Add(13, ["ch",     "character"]);
+            actionsMap.Add(14, ["eq",     "equip"]);
+            actionsMap.Add(15, ["une",    "unequip"]);
+            actionsMap.Add(16, ["sa",     "save"]);
+            actionsMap.Add(17, ["b",      "battle"]);
+            actionsMap.Add(0,  ["q",      "quit"]);
         }
 
         /* Generic type choice message */
