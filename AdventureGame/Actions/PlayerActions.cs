@@ -7,15 +7,21 @@ namespace AdventureGame.Actions
     public class PlayerActions
     {
         /* Method to display your inventory */
-        public static void Inventory(List<Item> inventory)
+        public static void Inventory(GameObject game)
         {
+            var inventory = game.GetItemsInInventory();
+            var player = game.Player;
+
             if (inventory == null || inventory.Count == 0)
                 Console.WriteLine("\nYour inventory is empty.");
             else
             {
                 Console.WriteLine("\nYour inventory contains:");
                 foreach (var i in inventory)
-                    Console.WriteLine(" - " + i.Name);
+                {
+                    string equipped = i.Name == player.EquippedWeapon || i.Name == player.EquippedArmor ? "*" : "";
+                    Console.WriteLine($" - {equipped}\t{i.Name}");
+                }
             }
         }
 

@@ -2,9 +2,8 @@ using AdventureGame.Game;
 
 namespace AdventureGame.Items
 {
-    public class Consumable(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType, int sM) : Item(n, d, uMessage, itW, cPickup, cUse, cC, iType, sType), IEquatable<Consumable?>
+    public class Consumable(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType, int sM) : Item(n, d, uMessage, itW, cPickup, cUse, cC, iType, sType, sM), IEquatable<Consumable?>
     {
-        public int StatusModifier { get; set; } = sM;
 
         public override void UseItem(GameObject game)
         {
@@ -13,8 +12,7 @@ namespace AdventureGame.Items
                 Player.Player player = game.Player;
 
                 Console.WriteLine(UseMessage);
-                Console.WriteLine($"\nYour {StatusModified} increased by {StatusModifier}.");
-                player.UpdatePlayerStatus(StatusModified, StatusModifier);
+                player.UpdatePlayerStatus(StatusModified, StatusModifier, GetStatusModifierDirection());
                 player.RemoveFromInventory(this);
                 player.AddToInventory(game.GetItem("Empty Bottle")!);
             }

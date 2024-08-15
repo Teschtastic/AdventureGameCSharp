@@ -1,6 +1,5 @@
 using AdventureGame.Game;
 using AdventureGame.Items;
-using AdventureGame.NPCs;
 using AdventureGame.Rooms;
 
 namespace AdventureGame.Actions

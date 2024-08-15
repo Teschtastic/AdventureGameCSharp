@@ -13,7 +13,7 @@
             actionsMap.Add(1,  ["i",      "inventory"]);
             actionsMap.Add(2,  ["h",      "help"]);
             actionsMap.Add(3,  ["wh",     "where"]);
-            actionsMap.Add(4,  ["n",      "e",        "s",    "w",    "N",    "E",    "S",    "W"]);
+            actionsMap.Add(4,  ["n",      "e",        "s",    "w"]);
             actionsMap.Add(5,  ["v",      "view",     "l",    "look"]);
             actionsMap.Add(6,  ["p",      "pickup",   "g",    "grab"]);
             actionsMap.Add(7,  ["dr",     "drop",     "to",   "toss"]);
@@ -23,10 +23,8 @@
             actionsMap.Add(11, ["g",      "give"]);
             actionsMap.Add(12, ["ta",     "take"]);
             actionsMap.Add(13, ["ch",     "character"]);
-            actionsMap.Add(14, ["eq",     "equip"]);
-            actionsMap.Add(15, ["une",    "unequip"]);
-            actionsMap.Add(16, ["sa",     "save"]);
-            actionsMap.Add(17, ["b",      "battle"]);
+            actionsMap.Add(14, ["sa",     "save"]);
+            actionsMap.Add(15, ["b",      "battle"]);
             actionsMap.Add(0,  ["q",      "quit"]);
         }
 

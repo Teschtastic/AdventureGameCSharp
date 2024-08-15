@@ -45,7 +45,8 @@
           "CanUse": false,
           "CanCraft": false,
           "KindOfItem": 0,
-          "StatusModified": 0
+          "StatusModified": 0,
+          "StatusModifier": 0
         },
         "Sean's Toothbrush": {
           "Name": "Sean's Toothbrush",
@@ -56,7 +57,8 @@
           "CanUse": false,
           "CanCraft": false,
           "KindOfItem": 0,
-          "StatusModified": 0
+          "StatusModified": 0,
+          "StatusModifier": 0
         },
         "Jeff's Toothbrush": {
           "Name": "Jeff's Toothbrush",
@@ -67,7 +69,8 @@
           "CanUse": false,
           "CanCraft": false,
           "KindOfItem": 0,
-          "StatusModified": 0
+          "StatusModified": 0,
+          "StatusModifier": 0
         },
         "Empty Bottle": {
           "Name": "Empty Bottle",
@@ -78,7 +81,8 @@
           "CanUse": false,
           "CanCraft": false,
           "KindOfItem": 0,
-          "StatusModified": 0
+          "StatusModified": 0,
+          "StatusModifier": 0
         },
         "GFuel Powder": {
           "Name": "GFuel Powder",
@@ -89,10 +93,10 @@
           "CanUse": false,
           "CanCraft": false,
           "KindOfItem": 0,
-          "StatusModified": 0
+          "StatusModified": 0,
+          "StatusModifier": 0
         },
         "Cardboard Armor": {
-          "StatusModifer": 0,
           "Name": "Cardboard Armor",
           "Description": "Protects from pointy sharp things.",
           "UseMessage": "\nYou put on the cardboard armor.\nYou feel more protected.",
@@ -101,10 +105,10 @@
           "CanUse": false,
           "CanCraft": true,
           "KindOfItem": 1,
-          "StatusModified": 4
+          "StatusModified": 4,
+          "StatusModifier": 10
         },
         "Plastic Armor": {
-          "StatusModifer": 0,
           "Name": "Plastic Armor",
           "Description": "Protects from slicy sharp things.",
           "UseMessage": "\nYou put on the plastic armor.\nYou feel more protected.",
@@ -113,10 +117,10 @@
           "CanUse": false,
           "CanCraft": true,
           "KindOfItem": 1,
-          "StatusModified": 4
+          "StatusModified": 4,
+          "StatusModifier": 15
         },
         "Stabby Thingies": {
-          "StatusModifer": 0,
           "Name": "Stabby Thingies",
           "Description": "Pointy and sharp.",
           "UseMessage": "\nOne pointy 'brush' for each hand",
@@ -125,10 +129,10 @@
           "CanUse": false,
           "CanCraft": true,
           "KindOfItem": 2,
-          "StatusModified": 5
+          "StatusModified": 5,
+          "StatusModifier": 10
         },
         "Steak Knife": {
-          "StatusModifer": 0,
           "Name": "Steak Knife",
           "Description": "Sharp for cutting meat.",
           "UseMessage": "\nSlicey slice.",
@@ -137,10 +141,10 @@
           "CanUse": false,
           "CanCraft": false,
           "KindOfItem": 2,
-          "StatusModified": 5
+          "StatusModified": 5,
+          "StatusModifier": 15
         },
         "Dr. Pepper": {
-          "StatusModifier": 5,
           "Name": "Dr. Pepper",
           "Description": "Yummy, delicious nectar of the gods.",
           "UseMessage": "\nYou drink your Dr. Pepper.\nYou feel powerful!",
@@ -149,10 +153,10 @@
           "CanUse": true,
           "CanCraft": false,
           "KindOfItem": 3,
-          "StatusModified": 7
+          "StatusModified": 7,
+          "StatusModifier": 5
         },
         "Water Bottle": {
-          "StatusModifier": 0,
           "Name": "Water Bottle",
           "Description": "Bottle full of water.",
           "UseMessage": "\nYou drink your water.\nYou don't'feel different.",
@@ -161,10 +165,10 @@
           "CanUse": true,
           "CanCraft": true,
           "KindOfItem": 3,
-          "StatusModified": 7
+          "StatusModified": 7,
+          "StatusModifier": 0
         },
         "GFuel": {
-          "StatusModifier": 10,
           "Name": "GFuel",
           "Description": "Made out of raw energy.",
           "UseMessage": "\nYou drink your GFuel.\nYou feel energy course through you!",
@@ -173,10 +177,10 @@
           "CanUse": true,
           "CanCraft": true,
           "KindOfItem": 3,
-          "StatusModified": 7
+          "StatusModified": 7,
+          "StatusModifier": 10
         },
         "Desktop PC": {
-          "StatusModifier": 0,
           "Name": "Desktop PC",
           "Description": "My AMD beast",
           "UseMessage": "\nYou use the PC to play some games.",
@@ -185,7 +189,8 @@
           "CanUse": true,
           "CanCraft": false,
           "KindOfItem": 4,
-          "StatusModified": 5
+          "StatusModified": 5,
+          "StatusModifier": 10
         }
       }
     },

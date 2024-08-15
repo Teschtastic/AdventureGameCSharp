@@ -2,7 +2,7 @@
 
 namespace AdventureGame.Items
 {
-    public class Item(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType) : IEquatable<Item?>
+    public class Item(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType, int sM) : IEquatable<Item?>
     {
         public enum ItemType
         {
@@ -34,6 +34,12 @@ namespace AdventureGame.Items
         public bool CanCraft { get; set; } = cC;
         public ItemType KindOfItem { get; set; } = iType;
         public StatusType StatusModified { get; set; } = sType;
+        public int StatusModifier { get; set; } = sM;
+
+        public virtual string GetStatusModifierDirection()
+        {
+            return StatusModifier >= 0 ? "increased" : "decreased";
+        }
 
         public bool CanUseItem()
         {
@@ -68,7 +74,8 @@ namespace AdventureGame.Items
                    CanUse == other.CanUse &&
                    CanCraft == other.CanCraft &&
                    KindOfItem == other.KindOfItem &&
-                   StatusModified == other.StatusModified;
+                   StatusModified == other.StatusModified &&
+                   StatusModifier == other.StatusModifier;
         }
 
         public override int GetHashCode()
@@ -83,6 +90,7 @@ namespace AdventureGame.Items
             hash.Add(CanCraft);
             hash.Add(KindOfItem);
             hash.Add(StatusModified);
+            hash.Add(StatusModifier);
             return hash.ToHashCode();
         }
     }

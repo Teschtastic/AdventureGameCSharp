@@ -2,21 +2,16 @@
 
 namespace AdventureGame.Items
 {
-    public class Trainer(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType, int sM) : Item(n, d, uMessage, itW, cPickup, cUse, cC, iType, sType), IEquatable<Trainer?>
+    public class Trainer(string n, string d, string uMessage, int itW, bool cPickup, bool cUse, bool cC, Item.ItemType iType, Item.StatusType sType, int sM) : Item(n, d, uMessage, itW, cPickup, cUse, cC, iType, sType, sM), IEquatable<Trainer?>
     {
-        public int StatusModifier { get; set; } = sM;
-
         public override void UseItem(GameObject game)
         {
             Player.Player player = game.Player;
-            string direction = StatusModifier >= 0 ? "increases" : "decreases";
 
             Console.WriteLine(UseMessage);
-            Console.WriteLine(
-                    "\nYou look up fighting techniques\non the internet." +
-                    $"\nYour {StatusModified} {direction} by {StatusModifier}.");
+            Console.WriteLine( "\nYou look up fighting techniques\non the internet.");
 
-            player.UpdatePlayerStatus(StatusModified, StatusModifier);
+            player.UpdatePlayerStatus(StatusModified, StatusModifier, GetStatusModifierDirection());
             CanUse = false;
         }
 
