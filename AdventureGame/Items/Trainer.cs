@@ -9,7 +9,7 @@ namespace AdventureGame.Items
         public override void UseItem(GameObject game)
         {
             Player.Player player = game.Player;
-            string direction = StatusModifier >= 0 ? "increases" : "decreases";
+            string direction = StatusModifier >= 0 ? "increased" : "decreased";
 
             Console.WriteLine(UseMessage);
             Console.WriteLine(

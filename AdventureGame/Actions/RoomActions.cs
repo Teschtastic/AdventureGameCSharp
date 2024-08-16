@@ -11,8 +11,7 @@ namespace AdventureGame.Actions
         public static void PrintLocation(GameObject game)
         {
             Room room = game.GetRoomPlayerIsIn();
-            Console.WriteLine(room.InMessage);
-            Console.WriteLine(room.GetMoves());
+            Console.WriteLine($"{room.InMessage}\n{room.GetMoves()}");
         }
 
         /* Method used to change rooms */
@@ -36,9 +35,7 @@ namespace AdventureGame.Actions
                 {
                     Room newRoom = game.GetRoom(moveRoom);
 
-                    Console.WriteLine("\nYou went " + move + "\n");
-                    Console.WriteLine(currentRoom.LeaveMessage);
-                    Console.WriteLine(newRoom.EnterMessage);
+                    Console.WriteLine($"\nYou went {move}\n{currentRoom.LeaveMessage}\n{newRoom.EnterMessage}");
                     game.SetRoomPlayerIsIn(newRoom.Name);
 
                     if(newRoom.HasAliveEnemy(game))
