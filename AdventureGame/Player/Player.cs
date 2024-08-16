@@ -46,37 +46,66 @@ namespace AdventureGame.Player
 
         public Player DeepCopy()
         {
-             Player other = (Player)MemberwiseClone();
+            Player other = (Player)MemberwiseClone();
             other.Name = Name + "Copy";
             return other;
         }
 
-        public void UpdatePlayerStatus(Item.StatusType sType, object sModifier)
+        public static int Operator(string logic, int x, int y)
         {
+            return logic switch
+            {
+                "+=" => x += y,
+                "-=" => x -= y,
+                "=" => y,
+                _ => throw new Exception("invalid logic"),
+            };
+        }
+
+        public static string Operator(string logic, string y)
+        {
+            return logic switch
+            {
+                "=" => y,
+                _ => throw new Exception("invalid logic"),
+            };
+        }
+
+        public void UpdatePlayerStatus(Item.StatusType sType, object sModifier, string direction)
+        {
+            Dictionary<string, string> op = new()
+            {
+                { "increased", "+=" },
+                { "decreased", "-=" },
+                { "changed",   "=" },
+            };
+
+            Console.WriteLine($"\nYour {sType} {direction} by {sModifier}.");
+
             switch (sType)
             {
                 case Item.StatusType.Default:
                     throw new NotImplementedException();
                 case Item.StatusType.Name:
-                    Name = (string)sModifier;
+                    Name = Operator(op[direction], (string)sModifier);
                     break;
-                case Item.StatusType.CurrentHealth: 
-                    CurrentHealth += (int)sModifier;
+                case Item.StatusType.CurrentHealth:
+                    CurrentHealth = Operator(op[direction], CurrentHealth, (int)sModifier);
                     break;
                 case Item.StatusType.MaximumHealth:
-                    MaximumHealth += (int)sModifier;
+                    MaximumHealth = Operator(op[direction], MaximumHealth, (int)sModifier);
                     break;
                 case Item.StatusType.ArmorClass:
-                    ArmorClass += (int)sModifier;
+                    ArmorClass = Operator(op[direction], ArmorClass, (int)sModifier);
                     break;
                 case Item.StatusType.AttackDamage:
-                    AttackDamage += (int)sModifier;
+                    AttackDamage = Operator(op[direction], AttackDamage, (int)sModifier);
                     break;
                 case Item.StatusType.CurrentCarryWeight:
-                    CurrentCarryWeight += (int)sModifier;
+                    CurrentCarryWeight = Operator(op[direction], CurrentCarryWeight, (int)sModifier);
                     break;
                 case Item.StatusType.MaximumCarryWeight:
-                    MaximumCarryWeight += (int)sModifier;
+                    MaximumCarryWeight = Operator(op[direction], MaximumCarryWeight, (int)sModifier);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -122,74 +151,6 @@ namespace AdventureGame.Player
             RoomIsIn = room.Name;
         }
 
-        public void SetEquippedArmor(string equippedArmorName)
-        {
-            if (equippedArmorName != "Clothes")
-            {
-                EquippedArmor = equippedArmorName;
-                HasEquippedArmor = true;
-            }
-            else
-            {
-                EquippedArmor = "Clothes";
-                HasEquippedArmor = false;
-            }
-        }
-
-        public void SetEquippedWeapon(string equippedWeaponName)
-        {
-
-            if (equippedWeaponName != "Fists")
-            {
-                EquippedWeapon = equippedWeaponName;
-                HasEquippedWeapon = true;
-            }
-            else
-            {
-                EquippedWeapon = "Fists";
-                HasEquippedWeapon = false;
-            }
-        }
-
-        public void EquipArmor(Armor armor)
-        {
-            Console.WriteLine(armor.UseMessage);
-            Console.WriteLine("\nYour armor class increased by " + armor.StatusModifer + ".");
-            EquippedArmor = armor.Name;
-            HasEquippedArmor = true;
-            ArmorClass += armor.StatusModifer;
-            RemoveFromInventory(armor);
-        }
-
-        public void EquipWeapon(Weapon weapon)
-        {
-            Console.WriteLine(weapon.UseMessage);
-            Console.WriteLine("\nYour attack damage increased by " + weapon.StatusModifer + ".");
-            EquippedWeapon = weapon.Name;
-            HasEquippedWeapon = true;
-            AttackDamage += weapon.StatusModifer;
-            RemoveFromInventory(weapon);
-        }
-        public void UnEquipArmor(Armor armor)
-        {
-            Console.WriteLine("\nYou un equip your " + armor.Name);
-            Console.WriteLine("Your armor class decreases by " + armor.StatusModifer + ".");
-            EquippedArmor = "Clothes";
-            HasEquippedArmor = false;
-            ArmorClass -= armor.StatusModifer;
-            AddToInventory(armor);
-        }
-
-        public void UnEquipWeapon(Weapon weapon)
-        {
-            Console.WriteLine("\nYou un equip your " + weapon.Name);
-            Console.WriteLine("Your attack damage decreases by " + weapon.StatusModifer + ".");
-            EquippedWeapon = "Fists";
-            HasEquippedWeapon = false;
-            AttackDamage -= weapon.StatusModifer;
-            AddToInventory(weapon);
-        }
-
         public void AddToRecipes(string recipe)
         {
             KnownRecipes.Add(recipe);
@@ -223,6 +184,10 @@ namespace AdventureGame.Player
             hash.Add(MaximumHealth);
             hash.Add(CurrentCarryWeight);
             hash.Add(MaximumCarryWeight);
+            hash.Add(ArmorClass);
+            hash.Add(AttackDamage);
+            hash.Add(EquippedArmor);
+            hash.Add(EquippedWeapon);
             return hash.ToHashCode();
         }
     }

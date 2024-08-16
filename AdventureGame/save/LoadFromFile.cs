@@ -66,7 +66,8 @@ namespace AdventureGame.save
                             item.Value.CanUse,
                             item.Value.CanCraft,
                             item.Value.KindOfItem,
-                            item.Value.StatusModified
+                            item.Value.StatusModified,
+                            item.Value.StatusModifier
                             ));
                 }
             }
@@ -162,7 +163,7 @@ namespace AdventureGame.save
                             armor.Value.CanCraft,
                             armor.Value.KindOfItem,
                             armor.Value.StatusModified,
-                            armor.Value.StatusModifer
+                            armor.Value.StatusModifier
                             ));
                 }
             }
@@ -194,7 +195,7 @@ namespace AdventureGame.save
                             weapon.Value.CanCraft,
                             weapon.Value.KindOfItem,
                             weapon.Value.StatusModified,
-                            weapon.Value.StatusModifer
+                            weapon.Value.StatusModifier
                             ));
                 }
             }
