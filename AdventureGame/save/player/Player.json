@@ -4,7 +4,7 @@
   "MaximumHealth": 100,
   "ArmorClass": 15,
   "AttackDamage": 20,
-  "CurrentCarryWeight": 14,
+  "CurrentCarryWeight": 20,
   "MaximumCarryWeight": 25,
   "Inventory": [
     "Dr. Pepper",
@@ -18,7 +18,7 @@
     "Plastic Armor",
     "Steak Knife"
   ],
-  "RoomIsIn": "Jeff's bedroom",
+  "RoomIsIn": "Dining room",
   "EquippedArmor": "Plastic Armor",
   "HasEquippedArmor": true,
   "EquippedWeapon": "Steak Knife",

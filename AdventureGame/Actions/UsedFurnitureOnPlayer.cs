@@ -4,6 +4,7 @@ using AdventureGame.Game;
 using AdventureGame.Items;
 using AdventureGame.NPCs;
 using AdventureGame.Rooms;
+using Foundation;
 
 namespace AdventureGame.Actions
 {
@@ -67,7 +68,7 @@ namespace AdventureGame.Actions
             {
                 npc = game.GetNPC(room.NPCInRoom)!;
 
-                if (npc.IsFriendly == true)
+                if (!npc.IsNPCAnEnemy())
                 {
                     // If Claudia is in the room, heals and increases health
                     if (npc.Name.Equals("Claudia"))
@@ -80,19 +81,19 @@ namespace AdventureGame.Actions
                         player.MaximumHealth += 50;
                         player.CurrentHealth = player.MaximumHealth;
                     }
-                    // Or else only increases health
-                    else
-                    {
-                        Console.WriteLine("\nYour max health increases by 25");
-                        player.MaximumHealth += 25;
-                    }
                 }
-                else
+                else if (npc.IsNPCAnEnemy() && npc.IsAlive)
                 {
                     Console.WriteLine(
                             "\n" + npc.Name + " bites your face in your sleep." +
                                         "\nYou lose 25 health.");
                     player.CurrentHealth -= 25;
+                }
+                // Or else only increases health
+                else
+                {
+                    Console.WriteLine("\nYour max health increases by 25");
+                    player.MaximumHealth += 25;
                 }
             }
         }
@@ -109,21 +110,22 @@ namespace AdventureGame.Actions
             if (inventory.Count > 0 && recipes.Count > 0)
             {
                 int i = 1;
+                string question = "\nWhat would you like to craft?\n";
+                List<string> optionNums = ["0"];
+                List<string> optionChoices = ["Exit crafting"];
 
-                // Prints available recipes to craft or to exit
-                Console.WriteLine("\nWhat would you like to craft?\n");
                 foreach (Recipe r in recipes)
                 {
-                    Console.WriteLine(i++ + " - " + r.OutputItem);
+                    optionNums.Insert(i - 1, i.ToString());
+                    optionChoices.Insert(i++ - 1, r.OutputItem);
                 }
-                Console.WriteLine("0 - Exit crafting");
-                Actions.CommandChoice();
 
-                string craftChoice = Console.ReadLine() ?? "";
+                GameGlobals.PresentMenu(question, Globals.EChoiceType.Command, optionNums, optionChoices);
+                /*message.AppendMessageData(*/GameGlobals.ReadInput(optionNums, out int userChoice);
 
-                if (craftChoice != "")
+                if (userChoice > int.MinValue)
                 {
-                    if (craftChoice == "0")
+                    if (userChoice == 0)
                     {
                         Console.WriteLine("\nYou exit crafting");
                     }
@@ -131,7 +133,7 @@ namespace AdventureGame.Actions
                     {
                         // Checks if the players inventory contains the necessary items
                         // to craft the chosen recipe, then crafts
-                        Recipe? recipe = game.GetRecipe(recipes[int.Parse(craftChoice) - 1].OutputItem);
+                        Recipe? recipe = game.GetRecipe(recipes[userChoice - 1].OutputItem);
 
                         if (recipe != null)
                         {
@@ -152,14 +154,10 @@ namespace AdventureGame.Actions
                             else
                             {
                                 Console.WriteLine("\nYou don't have the required materials.");
-                            } 
+                            }
                         }
                     }
                 }
-            }
-            else
-            {
-                Console.WriteLine("\nYou have nothing to craft with.");
             }
         }
 

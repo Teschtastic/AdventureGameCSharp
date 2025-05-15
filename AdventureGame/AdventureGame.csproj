@@ -12,8 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Settings\" />
     <Folder Include="save\flags\" />
     <Folder Include="save\game\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Foundation\Foundation.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>

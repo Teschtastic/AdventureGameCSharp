@@ -1,9 +1,10 @@
 ﻿using AdventureGame.Items;
 using AdventureGame.Rooms;
+using Foundation;
 
 namespace AdventureGame.Player
 {
-    public class Player
+    public class Player : IEntity
     {
         // Constructing the player object
         public Player()
@@ -111,7 +112,15 @@ namespace AdventureGame.Player
                     throw new NotImplementedException();
             };
         }
-            
+        
+        public void OnMessage(Message message)
+        {
+            if (message.Receiver.Name == Name)
+            {
+                Console.Write(message.GetMessageData());
+            }
+            //Console.WriteLine($"\nMessage Output: Sender: {message.Sender.Name} sent Receiver:{message.Receiver.Name}\nmessage of type: {message.GetMessageType()} with data: {message.GetMessageData()}.");
+        }
 
         public void AddToInventory(Item item)
         {

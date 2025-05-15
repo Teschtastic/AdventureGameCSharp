@@ -1,6 +1,10 @@
 using AdventureGame.Game;
 using AdventureGame.Items;
+using AdventureGame.NPCs;
+using AdventureGame.Player;
 using AdventureGame.Rooms;
+using Foundation;
+using static Foundation.Globals;
 
 namespace AdventureGame.Actions
 {
@@ -14,32 +18,35 @@ namespace AdventureGame.Actions
         }
 
         /* Method used to change rooms */
-        public static void Move(GameObject game)
+        public static void Move(GameObject game, GameState state)
         {
             string move = game.GetPlayerMove();
             Room currentRoom = game.GetRoomPlayerIsIn();
 
+            state.CreateNewMessageAndAddToQueue(game.Player, game.Player, "PlayerMove", "");
+
             string moveRoom;
             if (!currentRoom.ConnRooms.TryGetValue(move, out moveRoom!))
             {
-                Console.WriteLine("\nInvalid direction.");
+                state.AppendDataToMessage("\nInvalid direction.\n");
             }
             else
             {
                 if (moveRoom == "")
                 {
-                    Console.WriteLine("\nCouldn't move that way.");
+                    state.AppendDataToMessage("\nCouldn't move that way.\n");
                 }
                 else
                 {
                     Room newRoom = game.GetRoom(moveRoom);
 
-                    Console.WriteLine($"\nYou went {move}\n{currentRoom.LeaveMessage}\n{newRoom.EnterMessage}");
+                    state.AppendDataToMessage($"\nYou went {move}\n{currentRoom.LeaveMessage}\n{newRoom.EnterMessage}\n");
                     game.SetRoomPlayerIsIn(newRoom.Name);
 
                     if(newRoom.HasAliveEnemy(game))
                     {
-                        NPCActions.BattleNPC(game);
+                        state.ProcessQueue();
+                        NPCActions.BattleNPC(game, state, false);
                     }
                 }
             }

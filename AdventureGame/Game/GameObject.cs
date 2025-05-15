@@ -8,6 +8,7 @@ using AdventureGame.Dialogue;
 using AdventureGame.Actions;
 using AdventureGame.LUTs;
 using System.Runtime.Serialization;
+using Foundation;
 
 namespace AdventureGame.Game
 {
@@ -44,9 +45,10 @@ namespace AdventureGame.Game
             set { AllObjects = value; }
         }
 
-        public void GetUserChoice(ref int choice)
+        public void GetUserChoice(GameState state, ref int choice)
         {
-            Actions.Actions.CommandChoice();
+            state.CreateNewMessageAndAddToQueue(Player, Player, "UserChoice", Globals.CommandChoice());
+            state.ProcessQueue();
 
             string action = Console.ReadLine() ?? "";  // Reads the next line into the player's action
 

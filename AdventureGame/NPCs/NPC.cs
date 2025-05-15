@@ -1,11 +1,12 @@
 ﻿using AdventureGame.Actions;
 using AdventureGame.Dialogue;
 using AdventureGame.Game;
+using Foundation;
 using System.Linq;
 
 namespace AdventureGame.NPCs
 {
-    public class NPC(string n, string d, int cH, int mH, int aC, int aD, bool isF, bool isA, string eA, bool hEA, string eW, bool hEW, List<string> inv)
+    public class NPC(string n, string d, int cH, int mH, int aC, int aD, bool isF, bool isA, string eA, bool hEA, string eW, bool hEW, List<string> inv) : IEntity
     {
         public string Name { get; set; } = n;
         public string Dialogue { get; set; } = d;
@@ -26,7 +27,7 @@ namespace AdventureGame.NPCs
             return !IsFriendly;
         }
 
-        public void ProcessDialogue(Player.Player player, DialogueList list)
+        public void ProcessDialogue(GameObject game, DialogueList list)
         {
             if (list != null)
             {
@@ -50,12 +51,12 @@ namespace AdventureGame.NPCs
                         {
                             if (node.Params.Contains("player"))
                             {
-                                GlobalMethods.CallByName(new NPCActions(), node.Method!, [player]);
+                                Globals.CallByName(new NPCActions(), node.Method!, [game.Player]);
                             }
                         }
                         else
                         {
-                            GlobalMethods.CallByName(new NPCActions(), node.Method!, []);
+                            Globals.CallByName(new NPCActions(), node.Method!, []);
                         }
                     }
 
@@ -69,7 +70,7 @@ namespace AdventureGame.NPCs
                     }
                     Console.WriteLine(" >>>>>>>>>>>>>>>>>>>>>>>>>");
 
-                    Actions.Actions.DialogueChoice();
+                    Globals.DialogueChoice();
 
                     string optionString = Console.ReadLine() ?? "";
 
@@ -115,6 +116,14 @@ namespace AdventureGame.NPCs
                     "Attack damage:   " + AttackDamage + "\n" +
                     "Equipped armor:  " + EquippedArmor + "\n" +
                     "Equipped weapon: " + EquippedWeapon;
+        }
+
+        void IEntity.OnMessage(Message message)
+        {
+            if (message.Receiver.Name == Name)
+            {
+                Console.Write(message.GetMessageData());
+            }
         }
     }
 }

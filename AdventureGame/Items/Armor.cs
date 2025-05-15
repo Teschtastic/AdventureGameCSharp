@@ -1,4 +1,5 @@
 ﻿using AdventureGame.Game;
+using Foundation;
 
 namespace AdventureGame.Items
 {
@@ -21,7 +22,7 @@ namespace AdventureGame.Items
                 Console.WriteLine($"\nYou already have equipped armor." +
                     $"\nWould you like to unequip your {player.EquippedArmor}?" +
                     $"\n1 - Yes\n2 - No");
-                Actions.Actions.CommandChoice();
+                Globals.CommandChoice();
 
                 string equipChoice = Console.ReadLine() ?? "";
 

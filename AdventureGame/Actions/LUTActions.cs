@@ -1,6 +1,7 @@
 ﻿using AdventureGame.Furnitures;
 using AdventureGame.Game;
 using AdventureGame.LUTs;
+using Foundation;
 
 namespace AdventureGame.Actions
 {
@@ -31,7 +32,7 @@ namespace AdventureGame.Actions
                     {
                         foreach (var function in entry.Functions)
                         {
-                            GlobalMethods.CallByName(new LUTActions(), function.FunctionFunction, [container, entry.Name, function.Count.Min, function.Count.Max]);
+                            Globals.CallByName(new LUTActions(), function.FunctionFunction, [container, entry.Name, function.Count.Min, function.Count.Max]);
                         }
                     }
                 }

@@ -1,6 +1,9 @@
 ﻿using AdventureGame.Game;
 using AdventureGame.Items;
+using AdventureGame.NPCs;
+using AdventureGame.Rooms;
 using AdventureGame.save;
+using Foundation;
 
 namespace AdventureGame.Actions
 {
@@ -44,86 +47,62 @@ namespace AdventureGame.Actions
         /* Method used to use something, whether it's an item or furniture */
         public static void UseSomething(GameObject game)
         {
-            Console.WriteLine(
-                    "\nWhat would you like to use?\n" +
-                            "\n1 - Item in inventory" +
-                            "\n2 - Item in room" +
-                            "\n3 - Furniture in room" +
-                            "\n0 - Exit using\n");
+            string question = "\nWhat would you like to use?\n";
+            List<string> optionNums = ["1", "2", "3", "0"];
+            List<string> optionChoices = ["Item in inventory", "Item in room", "Furniture in room", "Exit using"];
 
-            Actions.CommandChoice();
+            GameGlobals.PresentMenu(question, Globals.EChoiceType.Command, optionNums, optionChoices);
+            /*message.AppendMessageData(*/GameGlobals.ReadInput(optionNums, out int userChoice);
 
-            string useChoice = Console.ReadLine() ?? "";
-
-            if (useChoice != "")
+            if (userChoice > int.MinValue)
             {
-                if (useChoice == "1")
+                switch (userChoice)
                 {
-                    ItemActions.UseInventoryItem(game);
+                    case 1:
+                        ItemActions.UseInventoryItem(game);
+                        break;
+                    case 2:
+                        RoomActions.UseItemInRoom(game);
+                        break;
+                    case 3:
+                        FurnitureActions.UseFurniture(game);
+                        break;
+                    case 0:
+                        Console.WriteLine("\nYou decide to use nothing.");
+                        break;
+
+
                 }
-                else if (useChoice == "2")
-                {
-                    RoomActions.UseItemInRoom(game);
-                }
-                else if (useChoice == "3")
-                {
-                    FurnitureActions.UseFurniture(game);
-                }
-                else if (useChoice == "0")
-                {
-                    Console.WriteLine("\nYou decide to use nothing.");
-                }
-                else
-                {
-                    Console.WriteLine("\nInvalid choice.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("\nInvalid input.");
             }
         }
 
         /* Method used to use something, whether it's an item or furniture */
         public static void DescribeSomething(GameObject game)
         {
-            Console.WriteLine(
-                    "\nWhat would you like to describe?\n" +
-                    "\n1 - Item" +
-                    "\n2 - Furniture in room" +
-                    "\n3 - NPC in room" +
-                    "\n0 - Exit describing\n");
-            Actions.CommandChoice();
+            string question = "\nWhat would you like to describe?\n";
+            List<string> optionNums = ["1", "2", "3", "0"];
+            List<string> optionChoices = ["Item", "Furniture in room", "NPC in room", "Exit describing"];
 
-            string describeChoice = Console.ReadLine() ?? "";
+            GameGlobals.PresentMenu(question, Globals.EChoiceType.Command, optionNums, optionChoices);
+            /*message.AppendMessageData(*/GameGlobals.ReadInput(optionNums, out int userChoice);
 
-            if (describeChoice != "")
+            if (userChoice > int.MinValue)
             {
-
-                if (describeChoice == "1")
+                switch (userChoice)
                 {
-                    ItemActions.DescribeItem(game);
+                    case 1:
+                        ItemActions.DescribeItem(game);
+                        break;
+                    case 2:
+                        FurnitureActions.DescribeFurniture(game);
+                        break;
+                    case 3:
+                        NPCActions.DescribeNPC(game);
+                        break;
+                    case 0:
+                        Console.WriteLine("\nYou decide to describe nothing.");
+                        break;
                 }
-                else if (describeChoice == "2")
-                {
-                    FurnitureActions.DescribeFurniture(game);
-                }
-                else if (describeChoice == "3")
-                {
-                    NPCActions.DescribeNPC(game);
-                }
-                else if (describeChoice == "0")
-                {
-                    Console.WriteLine("\nYou decide to describe nothing.");
-                }
-                else
-                {
-                    Console.WriteLine("\nInvalid choice.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("\nInvalid input.");
             }
         }
 
@@ -157,7 +136,7 @@ namespace AdventureGame.Actions
 
                 Console.WriteLine(" | 0 - Nothing");
                 Console.WriteLine(" ~~~~~~~~~~~~~~~~~~~~~~~~~");
-                Actions.ItemChoice();
+                Globals.ItemChoice();
 
                 try
                 {
@@ -196,7 +175,7 @@ namespace AdventureGame.Actions
             SaveToFile.SaveNPCsToFile(game.GetNPCDictionary());
             SaveToFile.SaveGameObjectToFile(game);
 
-            Actions.SaveMessage();
+            Globals.SaveMessage();
         }
     }
 }

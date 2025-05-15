@@ -3,6 +3,7 @@ using AdventureGame.Game;
 using AdventureGame.Items;
 using AdventureGame.NPCs;
 using AdventureGame.Rooms;
+using Foundation;
 
 namespace AdventureGame.Actions
 {
@@ -29,7 +30,7 @@ namespace AdventureGame.Actions
                     //Console.WriteLine("\n" + npc.Name + " says \"" + npc.Message + "\"");
                     DialogueList list = game.GetNPCDialogue(npc.Name);
 
-                    npc.ProcessDialogue(game.Player, list);
+                    npc.ProcessDialogue(game, list);
                 }
             }
         }
@@ -145,95 +146,87 @@ namespace AdventureGame.Actions
         }
 
         // TODO: Make NPC do more than just attack, and maybe rework damage calculation
-        public static void NPCBattleDecision(Player.Player player, NPC npc)
+        public static string NPCBattleDecision(Player.Player player, NPC npc)
         {
             int damageDoneToYou = Math.Clamp(npc.AttackDamage - player.ArmorClass, 0, npc.AttackDamage);
 
             player.CurrentHealth -= damageDoneToYou;
 
-            Console.WriteLine("\n " + npc.Name + " attacks you\n for " + damageDoneToYou + " points of damage.");
+            return "\n " + npc.Name + " attacks you\n for " + damageDoneToYou + " points of damage.\n";
 
         }
 
-        public static void BattleNPC(GameObject game)
+        public static void BattleNPC(GameObject game, GameState state, bool playerTriggered = true)
         {
+            state.UpdateState(Globals.EState.Battle);
+            state.ProcessQueue();
+
             Player.Player player = game.Player;
-            Room room = game.GetRoomPlayerIsIn();
+            NPC npc = game.GetNPCInRoom()!;
+            bool battling = true;
+            IEntity sender = playerTriggered ? player : npc;
+            IEntity receiver = playerTriggered ? npc : player;
 
-            if (!room.HasNPC)
+
+            state.CreateNewMessageAndAddToQueue(sender, receiver, "BattleStart", Globals.BattleMessage() + "\nyou are battling with: " + npc.Name);
+
+            do
             {
-                Console.WriteLine("\nThere is nobody to battle with.");
-            }
-            else
-            {
-                NPC npc = game.GetNPCInRoom()!;
-                bool battling = true;
+                // Prints an options menu
+                string question = "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +
+                                    "\n Your health: " + player.CurrentHealth +
+                                    " " + npc.Name + "\'s health: " + npc.CurrentHealth +
+                                    "\n What would you like to do?";
+                List<string> optionNums = ["1", "2", "0"];
+                List<string> options = ["Attack", "Use item", "Exit battle"];
 
-                Actions.BattleMessage();
-                Console.WriteLine("\nyou are battling with: " + npc.Name);
+                state.CreateNewMessageAndAddToQueue(sender, receiver, "BattleMenu", GameGlobals.PresentMenu(question, Globals.EChoiceType.Battle, optionNums, options));
+                state.ProcessQueue();
 
-                do
+                state.CreateNewMessageAndAddToQueue(sender, receiver, "BattleChoice", GameGlobals.ReadInput(optionNums, out int battleChoice));
+
+                if (battleChoice > int.MinValue)
                 {
-                    // Prints an options menu
-                    Console.WriteLine("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                    Console.WriteLine("\n Your health: " + player.CurrentHealth);
-                    Console.WriteLine(" " + npc.Name + "\'s health: " + npc.CurrentHealth);
-                    Console.WriteLine("\n What would you like to do?");
-                    Console.WriteLine(
-                                    "\n 1 - Attack " + npc.Name +
-                                    "\n 2 - Use item" +
-                                    "\n 0 - Exit battle");
-                    Console.WriteLine("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                    Actions.BattleChoice();
+                    int damageYouDealt = Math.Clamp(player.AttackDamage - npc.ArmorClass, 0, player.AttackDamage);
 
-                    string battleChoice = Console.ReadLine() ?? "";
-
-                    // This either shows the container's inventory or that it is empty
-                    if (battleChoice != "")
+                    switch (battleChoice)
                     {
-                        int damageYouDealt = Math.Clamp(player.AttackDamage - npc.ArmorClass, 0, player.AttackDamage);
-
-                        if (battleChoice == "1")
-                        {
-                            Console.WriteLine("\n You attack " + npc.Name + "\n for " + damageYouDealt + " points of damage.");
+                        case 1:
+                            state.CreateNewMessageAndAddToQueue(sender, receiver, "BattleAttack", "\n You attack " + npc.Name + "\n for " + damageYouDealt + " points of damage.");
 
                             npc.CurrentHealth -= damageYouDealt;
 
                             if (npc.CurrentHealth <= 0)
                             {
-                                Console.WriteLine("\n You have slain " + npc.Name);
+                                state.AppendDataToMessage("\n You have slain " + npc.Name);
                                 npc.IsAlive = false;
+                                battling = false;
                                 break;
                             }
 
-                            NPCBattleDecision(player, npc);
+                            state.AppendDataToMessage(NPCBattleDecision(player, npc));
 
                             if (player.CurrentHealth <= 0)
                             {
-                                Console.WriteLine("\n You have been slain by " + npc.Name);
+                                state.AppendDataToMessage("\n You have been slain by " + npc.Name);
                                 battling = false;
                             }
+                            break;
 
-                        }
-                        else if (battleChoice == "2")
-                        {
+                        case 2:
                             ItemActions.UseInventoryItem(game);
 
                             NPCBattleDecision(player, npc);
-                        }
-                        else if (battleChoice == "0")
-                        {
-                            Console.WriteLine("\n You left the battle.");
+                            break;
+
+                        case 0:
+                            state.CreateNewMessageAndAddToQueue(sender, receiver, "BattleQuit", "\n You left the battle.");
                             battling = false;
-                        }
+                            break;
                     }
-                    else
-                    {
-                        Console.WriteLine("\n Invalid choice.");
-                    }
-                } while (battling);
-                Console.WriteLine("\n The battle is now over.");
-            }
+                }
+            } while (battling);
+            state.CreateNewMessageAndAddToQueue(sender, receiver, "BattleEnd", "\n The battle is now over.");
         }
     }
 }

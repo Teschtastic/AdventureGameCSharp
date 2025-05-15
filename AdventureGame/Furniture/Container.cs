@@ -1,6 +1,7 @@
 ﻿using AdventureGame.Actions;
 using AdventureGame.Game;
 using AdventureGame.Items;
+using Foundation;
 
 namespace AdventureGame.Furnitures
 {
@@ -82,7 +83,7 @@ namespace AdventureGame.Furnitures
                             "\n 3 - Put item into" +
                             "\n 0 - Exit furniture");
             Console.WriteLine("\n *************************************");
-            Actions.Actions.ContainerChoice();
+            Globals.ContainerChoice();
 
             List<Item> containerInventory = game.GetItems(container.InventoryNames);
             string containerChoice = Console.ReadLine() ?? "";
@@ -121,7 +122,7 @@ namespace AdventureGame.Furnitures
                     }
                     Console.WriteLine(" 0 - Take all\n -1 - Take nothing");
                     Console.WriteLine("\n *************************************");
-                    Actions.Actions.ContainerChoice();
+                    Globals.ContainerChoice();
 
                     string itemIndex = Console.ReadLine() ?? "";
 
@@ -181,7 +182,7 @@ namespace AdventureGame.Furnitures
                                 "\n 0 - Exit putting item");
 
                     Console.WriteLine("\n *************************************");
-                    Actions.Actions.ContainerChoice();
+                    Globals.ContainerChoice();
 
                     string itemIndex = Console.ReadLine() ?? "";
 

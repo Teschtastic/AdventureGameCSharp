@@ -1,6 +1,7 @@
 using AdventureGame.Items;
 using AdventureGame.Rooms;
 using AdventureGame.Game;
+using Foundation;
 
 namespace AdventureGame.Actions
 {
@@ -105,20 +106,24 @@ namespace AdventureGame.Actions
             }
             else
             {
-                Console.WriteLine("\nThere is already an item in the room.\nWould you like to pick that item up?");
-                Console.WriteLine("\n1 - Yes\n0 - No");
-                Actions.CommandChoice();
+                string question = "\nThere is already an item in the room.\nWould you like to pick that item up?";
+                List<string> optionNums = [ "1", "0" ];
+                List<string> optionChoices = [ "Yes", "No" ];
 
-                string dropChoice = Console.ReadLine() ?? "";
-
-                if (dropChoice == "1")
+                GameGlobals.PresentMenu(question, Globals.EChoiceType.Command, optionNums, optionChoices);
+                /*message.AppendMessageData(*/GameGlobals.ReadInput(optionNums, out int userChoice);
+                if (userChoice > int.MinValue)
                 {
-                    PickupItem(game);
-                    DropItem(game);
-                }
-                else
-                {
-                    Console.WriteLine("\nYou don't pick up the item in the room.\nYou don't drop the item.");
+                    switch (userChoice)
+                    {
+                        case 1:
+                            PickupItem(game);
+                            DropItem(game);
+                            break;
+                        case 0:
+                            Console.WriteLine("\nYou don't pick up the item in the room.\nYou don't drop the item.");
+                            break;
+                    }
                 }
             }
         }

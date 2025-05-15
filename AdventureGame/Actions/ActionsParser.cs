@@ -1,30 +1,26 @@
 ﻿using AdventureGame.Game;
+using AdventureGame.Rooms;
+using Foundation;
+using static Foundation.Globals;
 
 namespace AdventureGame.Actions
 {
     public class ActionsParser
     {
-        public static void GameLoop(GameObject game)
+        public static void GameLoop(GameObject game, GameState state)
         {
-            // Welcome message
-            Actions.WelcomeMessage();
-
-            //bool clearScreen = false;
+            state.CreateNewMessageAndAddToQueue(game.Player, game.Player,"WelcomeMessage", WelcomeMessage());
 
             // Main game loop
             while (game.IsRunning)                           
             {
-                //if (clearScreen)
-                //{
-                //    Console.Clear();
-                //}
-
-                //clearScreen = true;
-
                 // Tells you which room you're in
-                Console.WriteLine($"\nYou are currently in: {game.GetRoomPlayerIsIn().Name}" );
+                state.CreateNewMessageAndAddToQueue(game.Player, game.Player, "CurrentRoom", $"\nYou are currently in: {game.GetRoomPlayerIsIn().Name}");
+                state.UpdateState(EState.Base);
+
                 int choiceIndex = -1;
-                game.GetUserChoice(ref choiceIndex);
+                state.ProcessQueue();
+                game.GetUserChoice(state, ref choiceIndex);
 
                 // If there was no action for the choice given, set to error choice
                 // else use the choice given index above
@@ -48,7 +44,8 @@ namespace AdventureGame.Actions
 
                     case 4:
                         // Moves into a new room
-                        RoomActions.Move(game);
+                        //RoomActions.Move(game);
+                        RoomActions.Move(game, state);
                         break;
 
                     case 5:
@@ -102,31 +99,39 @@ namespace AdventureGame.Actions
                         break;
 
                     case 15:
-                        // Initiates a battle with an NPC
-                        NPCActions.BattleNPC(game);
+                        Room room = game.GetRoomPlayerIsIn();
+                        if (!room.HasNPC)
+                        {
+                            Console.WriteLine("\nThere is nobody to battle with.");
+                        }
+                        else
+                        {
+                            // Initiates a battle with an NPC
+                            NPCActions.BattleNPC(game, state, true);
+                        }
                         break;
 
                     case 0:
                         // Quits the game
-                        Actions.ExitMessage();
+                        ExitMessage();
                         game.IsRunning = false;
                         break;
 
                     case -1:
                         // Input error
-                        Actions.InputError();
+                        InputError();
                         break;
 
                     default:
                         // Outputs a generic error to the user
-                        Actions.GenericError();
+                        GenericError();
                         break;
                 }
 
                 // Checks if player is dead, and ends gam
                 if (game.Player.CurrentHealth <= 0)
                 {
-                    Actions.DeathMessage();
+                    DeathMessage();
                     game.IsRunning = false;
                 }
             }
